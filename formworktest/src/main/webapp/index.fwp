@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?page title="Modelo 250"?>
+<formulario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+			xsi:noNamespaceSchemaLocation="http://www.uoc.edu/2012/fwp/formwork.xsd">
+	<apartado id="ap1" tipo="identificacion" contenido="nif,nombre" />
+	<apartado id="ap2" tipo="devengo" contenido="fecha, ejercicio, periodo{0A}" />
+	<apartado id="ap3" tipo="partidas">
+		<partida etiqueta="P1" tipo="cantidad"/>
+		<partida etiqueta="P2" tipo="cantidadNegativa"/>
+		<partida etiqueta="P3" tipo="cantidadNegativa"/>
+	</apartado>
+	<apartado id="ap4" tipo="pago"/>
+</formulario>
