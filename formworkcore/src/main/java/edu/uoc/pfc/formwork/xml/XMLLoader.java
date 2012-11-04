@@ -1,5 +1,6 @@
 package edu.uoc.pfc.formwork.xml;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
@@ -23,7 +24,7 @@ public class XMLLoader {
 		return doc.getValue();
 	}
 	
-	public static <T> T  parseFwp(Class<T> docClass, URL thePage) {
-		return null;
+	public static <T> T  parseFwp(Class<T> docClass, URL thePage) throws JAXBException, IOException {
+		return parseFwp(docClass, thePage.openStream());
 	}
 }
