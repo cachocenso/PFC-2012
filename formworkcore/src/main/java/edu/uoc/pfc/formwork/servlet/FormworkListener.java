@@ -5,13 +5,13 @@ import javax.servlet.ServletContextListener;
 
 public class FormworkListener implements ServletContextListener {
 
-	public void contextDestroyed(ServletContextEvent arg0) {
-		// TODO Auto-generated method stub
+	public void contextDestroyed(ServletContextEvent event) {
+		
 
 	}
 
-	public void contextInitialized(ServletContextEvent arg0) {
-		// TODO Auto-generated method stub
+	public void contextInitialized(ServletContextEvent event) {
+		
 
 	}
 

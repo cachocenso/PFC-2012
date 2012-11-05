@@ -28,8 +28,13 @@
     <dependency>
     	<groupId>javax.servlet</groupId>
     	<artifactId>javax.servlet-api</artifactId>
-    	<version>3.1-b02</version>
+    	<version>3.0.1</version>
     	<scope>provided</scope>
+    </dependency>
+    <dependency>
+    	<groupId>org.drools</groupId>
+    	<artifactId>drools-compiler</artifactId>
+    	<version>5.4.0.Final</version>
     </dependency>
   </dependencies>
 </project>
