@@ -21,4 +21,10 @@ public class Apartado extends Componente {
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
+
+	@Override
+	public void render(IRenderer renderer) {
+		// TODO Auto-generated method stub
+		
+	}
 }

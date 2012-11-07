@@ -1,6 +1,6 @@
 package edu.uoc.pfc.formwork.ui;
 
-public class Componente {
+public abstract class Componente {
 	private String id;
 
 	public String getId() {
@@ -10,4 +10,6 @@ public class Componente {
 	public void setId(String id) {
 		this.id = id;
 	}
+	
+	public abstract void render(IRenderer renderer);
 }
