@@ -11,7 +11,15 @@ public class FormworkListener implements ServletContextListener {
 	}
 
 	public void contextInitialized(ServletContextEvent event) {
+		// Crear contexto
 		
+		// Cargar fichero de reglas.
+		
+		// Crear KnowledgeBase.
+		
+		// Almacenar KnowledgeBase en contexto.
+		
+		// Almacenar contexto en ServletContext.
 
 	}
 
