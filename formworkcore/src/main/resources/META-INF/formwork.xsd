@@ -1,49 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
-				<xs:annotation>
-								<xs:documentation>Created with EditiX (http://www.editix.com) at Wed Aug 22 20:19:50 CEST 2012</xs:documentation>
-				</xs:annotation>
-				
-				<xs:element name="formulario" type="TipoFormulario"/>
-				
-				<xs:element name="apartado" type="TipoApartado"/>
-				
-				<xs:element name="partida" type="TipoPartida"/>
-				
-				<xs:complexType name="TipoFormulario">
-								<xs:sequence maxOccurs="unbounded">
-												<xs:element ref="apartado"/>
-								</xs:sequence>
-				</xs:complexType>
-				
-				<xs:complexType name="TipoApartado">
-								<xs:sequence maxOccurs="unbounded" minOccurs="0">
-												<xs:element ref="partida"/>
-								</xs:sequence>
-								<xs:attribute name="contenido" use="optional"/>
-								<xs:attribute name="tipo" type="TipoTipoApartado" use="optional"/>
-								<xs:attribute name="id" use="required"/>
-				</xs:complexType>
-				
-				<xs:complexType name="TipoPartida">
-								<xs:attribute name="etiqueta"/>
-								<xs:attribute name="tipo" type="TipoTipoPartida"/>
-				</xs:complexType>
 
-    <xs:simpleType name="TipoTipoApartado">
+	<xs:element name="formulario" type="TipoFormulario" />
+
+	<xs:element name="apartado" type="TipoApartado" />
+
+	<xs:element name="partida" type="TipoPartida" />
+
+	<xs:complexType name="TipoFormulario">
+		<xs:sequence maxOccurs="unbounded">
+			<xs:element ref="apartado" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="TipoApartado">
+		<xs:sequence maxOccurs="unbounded" minOccurs="0">
+			<xs:element ref="partida" />
+		</xs:sequence>
+		<xs:attribute name="contenido" use="optional" />
+		<xs:attribute name="tipo" type="TipoTipoApartado" use="optional" />
+		<xs:attribute name="id" use="required" />
+	</xs:complexType>
+
+	<xs:complexType name="TipoPartida">
+		<xs:attribute name="etiqueta" />
+		<xs:attribute name="tipo" type="TipoTipoPartida" />
+	</xs:complexType>
+
+	<xs:simpleType name="TipoTipoApartado">
 		<xs:restriction base="xs:string">
-			<xs:enumeration value="identificacion"/>
-			<xs:enumeration value="devengo"/>
-			<xs:enumeration value="partidas"/>
-			<xs:enumeration value="pago"/>
-		</xs:restriction>    	
-    </xs:simpleType>
-    
-    <xs:simpleType name="TipoTipoPartida">
-    	<xs:restriction base="xs:string">
-    		<xs:enumeration value="cantidad"/>
-    		<xs:enumeration value="cantidadNegativa"/>
-    	</xs:restriction>
-    </xs:simpleType>
+			<xs:enumeration value="identificacion" />
+			<xs:enumeration value="devengo" />
+			<xs:enumeration value="partidas" />
+			<xs:enumeration value="pago" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="TipoTipoPartida">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="cantidad" />
+			<xs:enumeration value="cantidadNegativa" />
+		</xs:restriction>
+	</xs:simpleType>
 </xs:schema>
