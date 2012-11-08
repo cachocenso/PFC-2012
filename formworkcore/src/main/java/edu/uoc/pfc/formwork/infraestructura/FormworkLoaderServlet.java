@@ -1,4 +1,4 @@
-package edu.uoc.pfc.formwork.servlet;
+package edu.uoc.pfc.formwork.infraestructura;
 
 import java.io.IOException;
 import java.io.InputStream;
