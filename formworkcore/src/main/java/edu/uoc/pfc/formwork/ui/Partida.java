@@ -1,11 +1,15 @@
 package edu.uoc.pfc.formwork.ui;
 
-public class Partida extends Componente {
+public abstract class Partida<T> extends Componente {
+	private T value;
+	
+	
+	public T getValue() {
+		return value;
+	}
 
-	@Override
-	public void render(IRenderer renderer) {
-		// TODO Auto-generated method stub
-		
+	public void setValue(T value) {
+		this.value = value;
 	}
 
 }

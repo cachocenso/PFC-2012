@@ -2,7 +2,7 @@ package edu.uoc.pfc.formwork.ui;
 
 public abstract class Componente {
 	private String id;
-
+	
 	public String getId() {
 		return id;
 	}
@@ -12,4 +12,5 @@ public abstract class Componente {
 	}
 	
 	public abstract void render(IRenderer renderer);
+
 }
