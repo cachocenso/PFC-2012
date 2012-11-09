@@ -14,6 +14,10 @@ public class FormworkListener implements ServletContextListener {
 	}
 
 	public void contextInitialized(ServletContextEvent event) {
+		// Cargar la configurción del framework.
+		loadFrameWorkConfig();
+		
+		// Obtener el ServletContext
 		ServletContext servletContext = event.getServletContext();
 		
 		// Crear contexto
@@ -27,6 +31,12 @@ public class FormworkListener implements ServletContextListener {
 		
 		// Almacenar contexto en ServletContext.
 		servletContext.setAttribute(Attributes.FWCONTEXT, formworkContext);
+	}
+
+	private void loadFrameWorkConfig() {
+		// Cargar el fichero XML de configuración.
+		
+		
 	}
 
 	private KnowledgeBase createKnowledgeBase() {
