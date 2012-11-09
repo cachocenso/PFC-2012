@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<fw>
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<fw xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:noNamespaceSchemaLocation="http://www.uoc.edu/2012/fwp/formwork.xsd">
+    
 	<rules>
-		<rule-file>/WEB-INF/reglas.drl</rule-file>
+		<rules-file>/WEB-INF/reglas.drl</rules-file>
 	</rules>
 </fw>

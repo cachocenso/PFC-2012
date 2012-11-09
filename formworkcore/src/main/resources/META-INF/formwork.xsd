@@ -2,6 +2,7 @@
 
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
+	<!-- LENGUAJE FWML -->
 	<xs:element name="formulario" type="TipoFormulario" />
 
 	<xs:element name="apartado" type="TipoApartado" />
@@ -43,4 +44,26 @@
 			<xs:enumeration value="cantidadNegativa" />
 		</xs:restriction>
 	</xs:simpleType>
+	
+	<!-- CONFIGURACIÓN DEL FRAMEWORK-->
+	<xs:element name="fw" type="TipoFW" />
+
+	<xs:element name="rules" type="TipoRules" />
+
+
+	<xs:complexType name="TipoFW">
+		<xs:sequence>
+			<xs:element ref="rules" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="TipoRules">
+		<xs:sequence maxOccurs="1" minOccurs="1">
+			<xs:element name="rules-file" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	
+	
+	
+	
 </xs:schema>
