@@ -26,7 +26,7 @@ public class FormworkLoaderServlet extends HttpServlet {
 		InputStream resource = getServletContext().getResourceAsStream("/index.fwp");
 		
 		try {
-			TipoFormulario formulario = XMLLoader.parseFwp(TipoFormulario.class, resource);
+			TipoFormulario formulario = XMLLoader.parseFile(TipoFormulario.class, resource);
 			System.out.println("formulario: " + formulario);
 		} catch (JAXBException e) {
 			// TODO Auto-generated catch block

@@ -15,7 +15,7 @@ public class XMLLoader {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static <T> T parseFwp(Class<T> docClass, InputStream thePage) 
+	public static <T> T parseFile(Class<T> docClass, InputStream thePage) 
 				throws JAXBException {
 		String packageName = docClass.getPackage().getName();
 		JAXBContext context = JAXBContext.newInstance(packageName);
@@ -24,7 +24,7 @@ public class XMLLoader {
 		return doc.getValue();
 	}
 	
-	public static <T> T  parseFwp(Class<T> docClass, URL thePage) throws JAXBException, IOException {
-		return parseFwp(docClass, thePage.openStream());
+	public static <T> T  parseFile(Class<T> docClass, URL thePage) throws JAXBException, IOException {
+		return parseFile(docClass, thePage.openStream());
 	}
 }
