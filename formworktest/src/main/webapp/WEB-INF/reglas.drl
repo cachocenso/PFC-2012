@@ -1,6 +1,7 @@
 //created on: 09-nov-2012
 package formworktest.rules
 
+import edu.uoc.pfc.formwork.ui.Partida
 //list any import classes here.
 
 
@@ -10,7 +11,7 @@ package formworktest.rules
 
 
 
-rule "Your First Rule"
+rule "nif"
 
     when
         //conditions
@@ -19,11 +20,11 @@ rule "Your First Rule"
 
 end
 
-rule "Your Second Rule"
-    //include attributes such as "salience" here...
+rule "p01 changed"
+    
     when
-        //conditions
+	    $p:Partida(id == "p01")
     then
-        //actions
+        System.out.println("p01 cambió");
 
 end

@@ -5,9 +5,9 @@
 	<apartado id="ap1" tipo="identificacion" contenido="nif,nombre" />
 	<apartado id="ap2" tipo="devengo" contenido="fecha, ejercicio, periodo{0A}" />
 	<apartado id="ap3" tipo="partidas">
-		<partida etiqueta="P1" tipo="cantidad"/>
-		<partida etiqueta="P2" tipo="cantidadNegativa"/>
-		<partida etiqueta="P3" tipo="cantidadNegativa"/>
+		<partida etiqueta="P01" tipo="cantidad"/>
+		<partida etiqueta="P02" tipo="cantidadNegativa"/>
+		<partida etiqueta="P03" tipo="cantidadNegativa"/>
 	</apartado>
 	<apartado id="ap4" tipo="pago"/>
 </formulario>
