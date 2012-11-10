@@ -10,23 +10,35 @@
 	<xs:element name="partida" type="TipoPartida" />
 
 	<xs:complexType name="TipoFormulario">
-		<xs:sequence maxOccurs="unbounded">
-			<xs:element ref="apartado" />
-		</xs:sequence>
+		<xs:complexContent>
+			<xs:extension base="TipoComponente">
+				<xs:sequence maxOccurs="unbounded">
+					<xs:element ref="apartado" />
+				</xs:sequence>
+				<xs:attribute name="controlador" type="xs:string" use="required" />
+			</xs:extension>
+		</xs:complexContent>
 	</xs:complexType>
 
 	<xs:complexType name="TipoApartado">
-		<xs:sequence maxOccurs="unbounded" minOccurs="0">
-			<xs:element ref="partida" />
-		</xs:sequence>
-		<xs:attribute name="contenido" use="optional" />
-		<xs:attribute name="tipo" type="TipoTipoApartado" use="optional" />
-		<xs:attribute name="id" use="required" />
+		<xs:complexContent>
+			<xs:extension base="TipoComponente">
+				<xs:sequence maxOccurs="unbounded" minOccurs="0">
+					<xs:element ref="partida" />
+				</xs:sequence>
+				<xs:attribute name="contenido" use="optional" />
+				<xs:attribute name="tipo" type="TipoTipoApartado" use="optional" />
+			</xs:extension>
+		</xs:complexContent>
 	</xs:complexType>
 
 	<xs:complexType name="TipoPartida">
-		<xs:attribute name="etiqueta" />
-		<xs:attribute name="tipo" type="TipoTipoPartida" />
+		<xs:complexContent>
+		<xs:extension base="TipoComponente">
+			<xs:attribute name="etiqueta" type="xs:string" use="required"/>
+			<xs:attribute name="tipo" type="TipoTipoPartida" use="optional"/>
+		</xs:extension>
+		</xs:complexContent>
 	</xs:complexType>
 
 	<xs:simpleType name="TipoTipoApartado">
@@ -44,8 +56,12 @@
 			<xs:enumeration value="cantidadNegativa" />
 		</xs:restriction>
 	</xs:simpleType>
-	
-	<!-- CONFIGURACIÓN DEL FRAMEWORK-->
+
+	<xs:complexType name="TipoComponente">
+		<xs:attribute name="id" type="xs:string" use="required" />
+	</xs:complexType>
+
+	<!-- CONFIGURACIÓN DEL FRAMEWORK -->
 	<xs:element name="fw" type="TipoFW" />
 
 	<xs:element name="rules" type="TipoRules" />
@@ -59,11 +75,7 @@
 
 	<xs:complexType name="TipoRules">
 		<xs:sequence maxOccurs="1" minOccurs="1">
-			<xs:element name="rules-file" type="xs:string"/>
+			<xs:element name="rules-file" type="xs:string" />
 		</xs:sequence>
 	</xs:complexType>
-	
-	
-	
-	
 </xs:schema>

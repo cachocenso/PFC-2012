@@ -2,6 +2,10 @@ package edu.uoc.pfc.formwork.infraestructura;
 
 import org.drools.KnowledgeBase;
 
+/**
+ * @author cachocenso
+ *
+ */
 public class FormworkContext {
 
 	private KnowledgeBase knowledgeBase;

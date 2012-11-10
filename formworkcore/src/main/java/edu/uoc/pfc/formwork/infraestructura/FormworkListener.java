@@ -17,11 +17,16 @@ import org.drools.builder.KnowledgeBuilderFactory;
 import org.drools.builder.ResourceType;
 import org.drools.io.ResourceFactory;
 import org.drools.runtime.StatefulKnowledgeSession;
+import org.xml.sax.SAXException;
 
 import edu.uoc.pfc.formwork.xml.TipoFW;
 import edu.uoc.pfc.formwork.xml.XMLLoader;
 
 
+/**
+ * @author cachocenso
+ *
+ */
 public class FormworkListener implements ServletContextListener {
 	static {
 		BasicConfigurator.configure();
@@ -71,6 +76,8 @@ public class FormworkListener implements ServletContextListener {
 			servletContext.setAttribute(Attributes.FWCONFIG, config);
 			logger.info(">>> Configuración cagada");
 		} catch (JAXBException e) {
+			logger.error("Error cargando configuración", e);
+		} catch (SAXException e) {
 			logger.error("Error cargando configuración", e);
 		}
 	}

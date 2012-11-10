@@ -11,16 +11,16 @@
 	</welcome-file-list>
 	<servlet>
 		<description></description>
-		<display-name>FormworkLoaderServlet</display-name>
-		<servlet-name>FormworkLoaderServlet</servlet-name>
-		<servlet-class>edu.uoc.pfc.formwork.infraestructura.FormworkLoaderServlet</servlet-class>
+		<display-name>FormworkServlet</display-name>
+		<servlet-name>FormworkServlet</servlet-name>
+		<servlet-class>edu.uoc.pfc.formwork.infraestructura.FormworkServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>FormworkLoaderServlet</servlet-name>
+		<servlet-name>FormworkServlet</servlet-name>
 		<url-pattern>*.fwp</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>FormworkLoaderServlet</servlet-name>
+		<servlet-name>FormworkServlet</servlet-name>
 		<url-pattern>/au/*</url-pattern>
 	</servlet-mapping>
 	<listener>

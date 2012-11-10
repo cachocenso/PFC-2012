@@ -30,6 +30,10 @@
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
+				<configuration>
+					<contextPath>/formworktest</contextPath>
+					<scanIntervalSeconds>20</scanIntervalSeconds>
+				</configuration>
 			</plugin>
 		</plugins>
 		<finalName>formworktest</finalName>
