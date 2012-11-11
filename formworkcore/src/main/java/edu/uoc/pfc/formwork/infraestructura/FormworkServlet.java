@@ -38,7 +38,7 @@ public class FormworkServlet extends HttpServlet {
 		
 		try {
 			TipoFormulario formulario = XMLLoader.parseFile(TipoFormulario.class, resource);
-			Formulario theForm = createComponentsTree(formulario);
+			Formulario theForm = ComponentTreeFactory.createComponentsTree(formulario);
 			req.getSession(true).setAttribute(Attributes.FWCOMPONENTS, theForm);
 			logger.info("Árbol de componentes cargado.");
 		} catch (JAXBException e) {
@@ -51,27 +51,5 @@ public class FormworkServlet extends HttpServlet {
 
 	}
 
-	private Formulario createComponentsTree(TipoFormulario formulario) {
-		Formulario theForm = new Formulario();
-		
-		theForm.setId(formulario.getId());
-		
-		for (TipoApartado apartado : formulario.getApartado()) {
-			Apartado ap = new Apartado();
-			ap.setId(apartado.getId());
-			ap.setTipo(apartado.getTipo().name());
-			if (apartado.getContenido() != null) {
-				ap.setContenido(Arrays.asList(apartado.getContenido().split(",")));
-			}
-			createPartidas(ap, apartado);
-			theForm.addApartado(ap);
-		}
-		
-		return theForm;
-	}
 
-	private void createPartidas(Apartado ap, TipoApartado apartado) {
-		// TODO Auto-generated method stub
-		
-	}
 }

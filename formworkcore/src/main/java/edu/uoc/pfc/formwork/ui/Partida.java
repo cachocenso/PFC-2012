@@ -12,4 +12,12 @@ public abstract class Partida<T> extends Componente {
 		this.value = value;
 	}
 
+	/**
+	 * @param string
+	 */
+	public void setEtiqueta(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
