@@ -1,7 +1,9 @@
 package edu.uoc.pfc.formwork.infraestructura;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,8 +14,9 @@ import javax.xml.bind.JAXBException;
 import org.apache.log4j.Logger;
 import org.xml.sax.SAXException;
 
-
+import edu.uoc.pfc.formwork.ui.Apartado;
 import edu.uoc.pfc.formwork.ui.Formulario;
+import edu.uoc.pfc.formwork.xml.TipoApartado;
 import edu.uoc.pfc.formwork.xml.TipoFormulario;
 import edu.uoc.pfc.formwork.xml.XMLLoader;
 
@@ -27,25 +30,48 @@ public class FormworkServlet extends HttpServlet {
 		load(req, resp);
 	}
 	
-	private void load(HttpServletRequest req, HttpServletResponse resp) {
+	private void load(HttpServletRequest req, HttpServletResponse resp) throws FileNotFoundException {
 		logger.info("inicio de la carga de la página");
 		
-		InputStream resource = getServletContext().getResourceAsStream("/index.fwp");
+		String uri = req.getRequestURI();
+		InputStream resource = getServletContext().getResourceAsStream(uri.substring(uri.lastIndexOf('/')));
 		
 		try {
 			TipoFormulario formulario = XMLLoader.parseFile(TipoFormulario.class, resource);
-			createComponentsTree(formulario);
+			Formulario theForm = createComponentsTree(formulario);
+			req.getSession(true).setAttribute(Attributes.FWCOMPONENTS, theForm);
+			logger.info("Árbol de componentes cargado.");
 		} catch (JAXBException e) {
 			logger.error("Error cargando página.", e);
 		} catch (SAXException e) {
 			logger.error("Error cargando página.", e);
 		}
+		
+		
 
 	}
 
-	private void createComponentsTree(TipoFormulario formulario) {
+	private Formulario createComponentsTree(TipoFormulario formulario) {
 		Formulario theForm = new Formulario();
 		
+		theForm.setId(formulario.getId());
+		
+		for (TipoApartado apartado : formulario.getApartado()) {
+			Apartado ap = new Apartado();
+			ap.setId(apartado.getId());
+			ap.setTipo(apartado.getTipo().name());
+			if (apartado.getContenido() != null) {
+				ap.setContenido(Arrays.asList(apartado.getContenido().split(",")));
+			}
+			createPartidas(ap, apartado);
+			theForm.addApartado(ap);
+		}
+		
+		return theForm;
+	}
+
+	private void createPartidas(Apartado ap, TipoApartado apartado) {
+		// TODO Auto-generated method stub
 		
 	}
 }
