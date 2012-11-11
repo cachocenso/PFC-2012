@@ -8,9 +8,12 @@ import javax.xml.bind.JAXBException;
 import edu.uoc.pfc.formwork.ui.Apartado;
 import edu.uoc.pfc.formwork.ui.Formulario;
 import edu.uoc.pfc.formwork.ui.PartidaCadena;
+import edu.uoc.pfc.formwork.ui.PartidaCantidad;
 import edu.uoc.pfc.formwork.ui.PartidaPeriodo;
 import edu.uoc.pfc.formwork.ui.TipoApartado;
 import edu.uoc.pfc.formwork.xml.TipoFormulario;
+import edu.uoc.pfc.formwork.xml.TipoPartida;
+import edu.uoc.pfc.formwork.xml.TipoTipoPartida;
 
 /**
  * Factoría de objetos Component.
@@ -57,8 +60,34 @@ public class ComponentTreeFactory {
 			break;
 		case devengo:
 			createPartidasDevengo(apartado, jaxbApartado);
+		case partidas:
+			createPartidasPartidas(apartado, jaxbApartado);
+			break;
 		default:
 			break;
+		}
+	}
+
+	/**
+	 * @param apartado
+	 * @param jaxbApartado
+	 */
+	private static void createPartidasPartidas(Apartado apartado,
+			edu.uoc.pfc.formwork.xml.TipoApartado jaxbApartado) {
+		if (apartado.getTipo() != TipoApartado.partidas) {
+			throw new IllegalArgumentException(apartado.getTipo().name());
+		}
+		
+		apartado.setId(jaxbApartado.getId());
+		
+		List<TipoPartida> jaxbPartidas = jaxbApartado.getPartida();
+		
+		for (TipoPartida tipoPartida : jaxbPartidas) {
+			PartidaCantidad cantidad = new PartidaCantidad();
+			
+			cantidad.setId(tipoPartida.getId());
+			cantidad.setAdmiteNegativos(tipoPartida.getTipo() == TipoTipoPartida.CANTIDAD_NEGATIVA);
+			apartado.addPartida(cantidad);
 		}
 	}
 
