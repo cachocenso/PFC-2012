@@ -1,6 +1,7 @@
 package edu.uoc.pfc.formwork.infraestructura;
 
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.bind.JAXBException;
@@ -9,6 +10,7 @@ import edu.uoc.pfc.formwork.ui.Apartado;
 import edu.uoc.pfc.formwork.ui.Formulario;
 import edu.uoc.pfc.formwork.ui.Partida;
 import edu.uoc.pfc.formwork.ui.PartidaCadena;
+import edu.uoc.pfc.formwork.ui.PartidaPeriodo;
 import edu.uoc.pfc.formwork.ui.TipoApartado;
 import edu.uoc.pfc.formwork.xml.TipoFormulario;
 
@@ -48,14 +50,66 @@ public class ComponentTreeFactory {
 	 * @param apartado
 	 * @throws JAXBException 
 	 */
-	public static void createPartidas(Apartado apartado, edu.uoc.pfc.formwork.xml.TipoApartado jaxbApartado) throws JAXBException {
+	public static void createPartidas(Apartado apartado, 
+			edu.uoc.pfc.formwork.xml.TipoApartado jaxbApartado) throws JAXBException {
 		
 		switch (apartado.getTipo()) {
 		case identificacion:
 			createPartidasIdentificacion(apartado, jaxbApartado);
 			break;
+		case devengo:
+			createPartidasDevengo(apartado, jaxbApartado);
 		default:
 			break;
+		}
+	}
+
+	/**
+	 * Creación de las partidas del apartado de devengo.
+	 * 
+	 * @param apartado
+	 * @param jaxbApartado
+	 * @throws JAXBException 
+	 */
+	private static void createPartidasDevengo(Apartado apartado,
+			edu.uoc.pfc.formwork.xml.TipoApartado jaxbApartado) throws JAXBException {
+		
+		if (apartado.getTipo() != TipoApartado.devengo) {
+			throw new IllegalArgumentException(apartado.getTipo().name());
+		}
+		
+		String contenido = jaxbApartado.getContenido();
+		
+		if (contenido == null) {
+			throw new IllegalArgumentException("Falta contenido: " + jaxbApartado.getTipo());
+		}
+		
+		List<String> contenidos = Arrays.asList(contenido.split(","));
+		
+		for (String c : contenidos) {
+			
+			if ("ejercicio".equals(c.trim())) {
+				PartidaCadena ej = new PartidaCadena();
+				ej.setId(c);
+				
+				apartado.addPartida(ej);
+			}
+			else if ("fecha".equals(c.trim())) {
+				PartidaCadena fech = new PartidaCadena();
+				fech.setId(c);
+				apartado.addPartida(fech);
+			}
+			else if (c.trim().matches("periodo(.+)")) {
+				String periodo = c.substring(c.indexOf('(') + 1, c.indexOf(')'));
+				
+				PartidaPeriodo per = new PartidaPeriodo();
+				per.setId("periodo");
+				per.setPeriodos(Arrays.asList(periodo.split(" ")));
+				apartado.addPartida(per);
+			}
+			else {
+				throw new JAXBException("Contenido incorrecto: " + c);
+			}
 		}
 	}
 
@@ -78,7 +132,7 @@ public class ComponentTreeFactory {
 			List<String> contenidoSplit = Arrays.asList(contenido.split(","));
 			
 			for (String c: contenidoSplit) {
-				if (Apartado.CONTENIDOS_VALIDOS.contains(c)) {
+				if (Apartado.CONTENIDOS_VALIDOS_IDENTIFICACION.contains(c)) {
 					if ("representante".equals(c)) {
 						nifRep = true;
 					}

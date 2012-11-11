@@ -3,7 +3,6 @@ package edu.uoc.pfc.formwork.infraestructura;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Arrays;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,9 +13,7 @@ import javax.xml.bind.JAXBException;
 import org.apache.log4j.Logger;
 import org.xml.sax.SAXException;
 
-import edu.uoc.pfc.formwork.ui.Apartado;
 import edu.uoc.pfc.formwork.ui.Formulario;
-import edu.uoc.pfc.formwork.xml.TipoApartado;
 import edu.uoc.pfc.formwork.xml.TipoFormulario;
 import edu.uoc.pfc.formwork.xml.XMLLoader;
 

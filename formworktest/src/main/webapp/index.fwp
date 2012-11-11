@@ -4,7 +4,7 @@
 			xsi:noNamespaceSchemaLocation="http://www.uoc.edu/2012/fwp/formwork.xsd"
 			id="m250" controlador="edu.kk">
 	<apartado id="ap1" tipo="identificacion" contenido="nif,nombre" />
-	<apartado id="ap2" tipo="devengo" contenido="fecha, ejercicio, periodo{0A}" />
+	<apartado id="ap2" tipo="devengo" contenido="fecha, ejercicio, periodo(0A 1T 2T 3T 4T)" />
 	<apartado id="ap3" tipo="partidas">
 		<partida id="p02" etiqueta="P01" tipo="cantidad"/>
 		<partida id="p02" etiqueta="P02" tipo="cantidadNegativa"/>
