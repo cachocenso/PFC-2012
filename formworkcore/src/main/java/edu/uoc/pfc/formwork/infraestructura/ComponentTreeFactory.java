@@ -1,14 +1,12 @@
 package edu.uoc.pfc.formwork.infraestructura;
 
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.bind.JAXBException;
 
 import edu.uoc.pfc.formwork.ui.Apartado;
 import edu.uoc.pfc.formwork.ui.Formulario;
-import edu.uoc.pfc.formwork.ui.Partida;
 import edu.uoc.pfc.formwork.ui.PartidaCadena;
 import edu.uoc.pfc.formwork.ui.PartidaPeriodo;
 import edu.uoc.pfc.formwork.ui.TipoApartado;
