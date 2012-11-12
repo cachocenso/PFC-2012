@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 public class PartidaCantidad extends Partida<BigDecimal> {
 	private boolean admiteNegativos;
-	private String etiqueta;
+
 
 	public boolean isAdmiteNegativos() {
 		return admiteNegativos;
