@@ -1,0 +1,13 @@
+@CHARSET "UTF-8";
+
+div.apartado {
+	border: 1px solid;
+	width:  80%;
+	
+}
+
+	
+div.caption {
+	background: #83c2c8;
+}
+
