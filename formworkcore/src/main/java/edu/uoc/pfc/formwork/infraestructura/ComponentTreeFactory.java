@@ -60,6 +60,7 @@ public class ComponentTreeFactory {
 			break;
 		case devengo:
 			createPartidasDevengo(apartado, jaxbApartado);
+			break;
 		case partidas:
 			createPartidasPartidas(apartado, jaxbApartado);
 			break;
