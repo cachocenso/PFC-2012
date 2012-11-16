@@ -74,7 +74,7 @@ public class FormworkListener implements ServletContextListener {
 		try {
 			TipoFW config = XMLLoader.parseFile(TipoFW.class, thePage);
 			servletContext.setAttribute(Attributes.FWCONFIG, config);
-			logger.info(">>> Configuración cagada");
+			logger.info("Configuración cargada");
 		} catch (JAXBException e) {
 			logger.error("Error cargando configuración", e);
 		} catch (SAXException e) {
