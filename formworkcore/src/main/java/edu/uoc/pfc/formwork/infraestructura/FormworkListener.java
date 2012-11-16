@@ -19,6 +19,7 @@ import org.drools.io.ResourceFactory;
 import org.drools.runtime.StatefulKnowledgeSession;
 import org.xml.sax.SAXException;
 
+import edu.uoc.pfc.formwork.ui.HTMLRenderer;
 import edu.uoc.pfc.formwork.xml.TipoFW;
 import edu.uoc.pfc.formwork.xml.XMLLoader;
 
@@ -60,6 +61,9 @@ public class FormworkListener implements ServletContextListener {
 		// Almacenar KnowledgeBase en contexto.
 		formworkContext.setKnowledgeBase(base);
 
+		// Almacenar el renderer en el contexto.
+		formworkContext.setRenderer(new HTMLRenderer());
+		
 		// Almacenar contexto en ServletContext.
 		servletContext.setAttribute(Attributes.FWCONTEXT, formworkContext);
 		
