@@ -32,7 +32,7 @@
 				<artifactId>jetty-maven-plugin</artifactId>
 				<configuration>
 					<contextPath>/formworktest</contextPath>
-					<scanIntervalSeconds>20</scanIntervalSeconds>
+					<scanIntervalSeconds>10</scanIntervalSeconds>
 				</configuration>
 			</plugin>
 		</plugins>

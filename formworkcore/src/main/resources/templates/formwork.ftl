@@ -1,11 +1,54 @@
 <!DOCTYPE html>
 <head>
   <title>Modelo 250</title>
-  <link rel="stylesheet" type="text/css" href="formwork.css"/>
+ <!-- <link rel="stylesheet" type="text/css" href="formwork.css"/>  -->
+ <style>
+ .contenido {
+	font-family: Arial, Helvetica, sans-serif;
+	width: 80%;
+	margin: 0 auto;
+	font-size: 1em;
+}
+
+.titulo {
+	color: #0066CC;
+	font-size: 14px;	
+	font-weight: bold;
+	margin-bottom: 5px
+}
+
+.apartado {
+  border: 1px solid black;
+}
+
+.caption {
+  background: #2ab0ed none repeat scroll 0% 50%;
+  border: 1px solid;
+  color: #0000ae;
+  font-variant: small-caps;
+}
+
+table  {
+		width: 100%;
+		border: 0;
+		padding: 0;
+}
+
+td.etiqueta {
+	width: 60%;
+}
+
+td.partida {
+	width: 40%
+}
+ </style>
+ </head>
+ 
     <body>
       <div class="contenido">
 		<div class="titulo">
-			Gravamen Especial sobre Dividendos y Rentas de Fuente Extranjera Derivados de la Transmisión de los Valores representativos de los Fondos Propios de Entidades no Residentes en Territorio Español. Modelo 250
+			Gravamen Especial sobre Dividendos y Rentas de Fuente Extranjera Derivados de la TransmisiÃ³n de los Valores representativos 
+			de los Fondos Propios de Entidades no Residentes en Territorio EspaÃ±ol. Modelo 250
 		</div>
         <div id="identificacion" class="apartado">
           <div class="caption">Identificaci&#243;n</div>
@@ -53,7 +96,7 @@
               <div>Fecha devengo</div>
               <div>
                 <input id="fecha" type="text" maxlength="10"
-                size="10" value="PACO EL PULPO" />
+                size="10" value="10/10/2012" />
               </div>
             </div>
             <div style="float: none;">&#160;</div>
@@ -64,7 +107,7 @@
 		  <table>
 				<tr>
 					<td colspan="2">
-						A) Dividendos o participaciones en beneficios de entidades no residentes en territorio español.
+						A) Dividendos o participaciones en beneficios de entidades no residentes en territorio espaÃ±ol.
 					</td>
 				</tr>
 				<tr>
@@ -85,12 +128,12 @@
 				</tr>
 				<tr>
 					<td colspan="2">
-						B) Transmisión de valores o participaciones de entidades no residentes en territorio español.
+						B) TransmisiÃ³n de valores o participaciones de entidades no residentes en territorio espaÃ±ol.
 					</td>
 				</tr>
 				<tr>
 					<td class="etiqueta">
-						B.1) Renta obtenida en la transmisión (con exclusión de la cuantía que deba declararse en la casilla [05]).
+						B.1) Renta obtenida en la transmisiÃ³n (con exclusiÃ³n de la cuantÃ­a que deba declararse en la casilla [05]).
 					</td>
 					<td class="partida">
 						<input type="text" maxlength="18" size="18"/>
@@ -101,12 +144,12 @@
 						Tipo gravamen (8% o 10%)
 					</td>
 					<td class="partida">
-						<input type="text" maxlength="5" size="5S"/>
+						<input type="text" maxlength="5" size="5"/>
 					</td>
 				</tr>
 				<tr>
 					<td class="etiqueta">
-						B.2) Reversión de cualquier corrección de valor sobre la participación transmitida que hubiera sido fiscalmente deducible durante el tiempo de tenencia de la participación.
+						B.2) ReversiÃ³n de cualquier correcciÃ³n de valor sobre la participaciÃ³n transmitida que hubiera sido fiscalmente deducible durante el tiempo de tenencia de la participaciÃ³n.
 					</td>
 					<td class="partida">
 						<input type="text" maxlength="18" size="18"/>
@@ -117,7 +160,7 @@
 						Tipo gravamen (8% o 10%)
 					</td>
 					<td class="partida">
-						<input type="text" maxlength="5" size="5S"/>
+						<input type="text" maxlength="5" size="5"/>
 					</td>
 				</tr>
 				<tr>
@@ -137,7 +180,7 @@
 			<table>
 				<tr>
 					<td class="etiqueta">
-						Si esta autoliquidación es complementaria de otra autoliquidación anterior correspondiente al mismo concepto, ejercicio y fecha de devengo señálelo marcando esta casilla.
+						Si esta autoliquidaciÃ³n es complementaria de otra autoliquidaciÃ³n anterior correspondiente al mismo concepto, ejercicio y fecha de devengo seÃ±Ã¡lelo marcando esta casilla.
 					</td>
 					<td class="partida">
 						<input type="checkbox"/>
@@ -145,7 +188,7 @@
 				</tr>
 				<tr>
 					<td class="etiqueta">
-						En este caso, indique a continuación el número de justificante de la declaración anterior
+						En este caso, indique a continuaciÃ³n el nÃºmero de justificante de la declaraciÃ³n anterior
 					</td>
 					<td class="partida">
 						<input type="text" maxlength="13" size="13"/>
@@ -167,7 +210,7 @@
 				</tr>
 				<tr>
 					<td class="etiqueta">
-						Número de referencia completo (NRC).
+						NÃºmero de referencia completo (NRC).
 					</td>
 					<td class="partida">
 						<input type="text" maxlength="13" size="13"/>
@@ -183,4 +226,4 @@
 		</div>
       </div>
     </body>
- </head>
+ 

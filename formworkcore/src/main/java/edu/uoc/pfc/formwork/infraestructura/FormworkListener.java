@@ -22,6 +22,7 @@ import org.xml.sax.SAXException;
 import edu.uoc.pfc.formwork.ui.HTMLRenderer;
 import edu.uoc.pfc.formwork.xml.TipoFW;
 import edu.uoc.pfc.formwork.xml.XMLLoader;
+import freemarker.template.Configuration;
 
 
 /**
@@ -52,22 +53,33 @@ public class FormworkListener implements ServletContextListener {
 		// Cargar la configurción del framework.
 		loadFrameWorkConfig(servletContext);
 
-		// Crear contexto
-		FormworkContext formworkContext = new FormworkContext();
-
 		// Cargar fichero de reglas.
 		KnowledgeBase base = createKnowledgeBase(servletContext);
 
 		// Almacenar KnowledgeBase en contexto.
-		formworkContext.setKnowledgeBase(base);
+		FormworkContext.setKnowledgeBase(base);
 
 		// Almacenar el renderer en el contexto.
-		formworkContext.setRenderer(new HTMLRenderer());
+		FormworkContext.setRenderer(new HTMLRenderer());
+		
+		//Crear y almacenar la configuración de Freemarker.
+		createFreeMarkerConfig();
 		
 		// Almacenar contexto en ServletContext.
-		servletContext.setAttribute(Attributes.FWCONTEXT, formworkContext);
+//		servletContext.setAttribute(Attributes.FWCONTEXT, formworkContext);
 		
 		logger.info("Aplicación iniciada correctamente");
+	}
+
+	/**
+	 */
+	private void createFreeMarkerConfig() {
+		final Configuration configuration = new Configuration();
+		
+		configuration.setClassForTemplateLoading(getClass(), "/");
+		
+		FormworkContext.setTemplateConfig(configuration);
+		
 	}
 
 	private void loadFrameWorkConfig(ServletContext servletContext) {
