@@ -30,7 +30,8 @@ public class ComponentTreeFactory {
 		Formulario theForm = new Formulario();
 
 		theForm.setId(jaxbFormulario.getId());
-
+		theForm.setTitulo(jaxbFormulario.getTitulo());
+		theForm.setDescripcion(jaxbFormulario.getDescripcion());
 		for (edu.uoc.pfc.formwork.xml.TipoApartado jaxbApartado : jaxbFormulario
 				.getApartado()) {
 			Apartado apartado = new Apartado();

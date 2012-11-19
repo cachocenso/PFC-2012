@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-  <title>Modelo 250</title>
+  <title>${form.titulo}</title>
  <!-- <link rel="stylesheet" type="text/css" href="formwork.css"/>  -->
  <style>
  .contenido {
@@ -46,10 +46,7 @@ td.partida {
  
     <body>
       <div class="contenido">
-		<div class="titulo">
-			Gravamen Especial sobre Dividendos y Rentas de Fuente Extranjera Derivados de la Transmisión de los Valores representativos 
-			de los Fondos Propios de Entidades no Residentes en Territorio Español. Modelo 250
-		</div>
+		<div class="titulo">${form.descripcion}</div>
         <div id="identificacion" class="apartado">
           <div class="caption">Identificaci&#243;n</div>
             <div style="float: left; width: 25%;">

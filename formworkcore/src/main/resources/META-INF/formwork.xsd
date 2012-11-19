@@ -2,7 +2,7 @@
 
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
-	<!-- LENGUAJE FWML -->
+
 	<xs:element name="formulario" type="TipoFormulario" />
 
 	<xs:element name="apartado" type="TipoApartado" />
@@ -12,8 +12,12 @@
 	<xs:complexType name="TipoFormulario">
 		<xs:complexContent>
 			<xs:extension base="TipoComponente">
-				<xs:sequence maxOccurs="unbounded">
-					<xs:element ref="apartado" />
+				<xs:sequence>
+					<xs:element name="titulo" type="xs:string" />
+					<xs:element name="descripcion" type="xs:string" />
+					<xs:sequence maxOccurs="unbounded">
+						<xs:element ref="apartado" />
+					</xs:sequence>
 				</xs:sequence>
 				<xs:attribute name="controlador" type="xs:string" use="required" />
 			</xs:extension>
@@ -34,10 +38,10 @@
 
 	<xs:complexType name="TipoPartida">
 		<xs:complexContent>
-		<xs:extension base="TipoComponente">
-			<xs:attribute name="etiqueta" type="xs:string" use="required"/>
-			<xs:attribute name="tipo" type="TipoTipoPartida" use="optional"/>
-		</xs:extension>
+			<xs:extension base="TipoComponente">
+				<xs:attribute name="etiqueta" type="xs:string" use="required" />
+				<xs:attribute name="tipo" type="TipoTipoPartida" use="optional" />
+			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
 

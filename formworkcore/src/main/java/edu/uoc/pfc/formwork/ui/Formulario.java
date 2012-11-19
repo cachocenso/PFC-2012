@@ -6,6 +6,8 @@ import java.util.List;
 public class Formulario extends Componente {
 
 	private List<Apartado> apartados = new ArrayList<Apartado>();
+	private String titulo;
+	private String descripcion;
 	
 	@Override
 	public void render(IRenderer renderer) {
@@ -17,6 +19,38 @@ public class Formulario extends Componente {
 		if (!apartados.contains(apartado)) {
 			apartados.add(apartado);
 		}
+	}
+
+	/**
+	 * @param titulo
+	 */
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+		
+	}
+
+	public List<Apartado> getApartados() {
+		return apartados;
+	}
+
+	public void setApartados(List<Apartado> apartados) {
+		this.apartados = apartados;
+	}
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+	/**
+	 * @param descripcion
+	 */
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+		
+	}
+
+	public String getDescripcion() {
+		return descripcion;
 	}
 	
 }

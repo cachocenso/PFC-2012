@@ -3,6 +3,7 @@ package edu.uoc.pfc.formwork.ui;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 
@@ -28,8 +29,11 @@ public class HTMLRenderer implements IRenderer {
 		
 		try {
 			Template template = configuration.getTemplate("templates/formwork.ftl");
+		
+			Map<String, Componente> dataModel = new HashMap<String, Componente>();
 			
-			template.process(new HashMap(),	 out);
+			dataModel.put("form", root);
+			template.process(dataModel,	 out);
 		} catch (IOException e) {
 			logger.fatal("No se encuentra la plantilla", e);
 		} catch (TemplateException e) {
