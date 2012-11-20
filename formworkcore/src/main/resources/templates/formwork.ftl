@@ -47,6 +47,9 @@ td.partida {
     <body>
       <div class="contenido">
 		<div class="titulo">${form.descripcion}</div>
+		<#list form.apartados as ap>
+			${ap.render(null)}
+		</#list>
         <div id="identificacion" class="apartado">
           <div class="caption">Identificaci&#243;n</div>
             <div style="float: left; width: 25%;">
@@ -223,4 +226,5 @@ td.partida {
 		</div>
       </div>
     </body>
+ 
  

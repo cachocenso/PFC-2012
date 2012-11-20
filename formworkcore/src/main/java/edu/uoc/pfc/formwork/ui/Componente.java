@@ -11,6 +11,6 @@ public abstract class Componente {
 		this.id = id;
 	}
 	
-	public abstract void render(IRenderer renderer);
+	public abstract String render(IRenderer renderer);
 
 }

@@ -10,9 +10,9 @@ public class PartidaLista extends Partida<String> {
 	private List<String> values;
 	
 	@Override
-	public void render(IRenderer renderer) {
-		// TODO Auto-generated method stub
-
+	public String render(IRenderer renderer) {
+		return "Soy la partida" + getId();
+		
 	}
 
 	public int getIndexSeleccionado() {

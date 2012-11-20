@@ -10,8 +10,9 @@ public class Formulario extends Componente {
 	private String descripcion;
 	
 	@Override
-	public void render(IRenderer renderer) {
-		// TODO Auto-generated method stub
+	public String render(IRenderer renderer) {
+		return "Soy el formulario";
+		
 		
 	}
 
