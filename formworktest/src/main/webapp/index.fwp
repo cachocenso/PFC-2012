@@ -14,6 +14,7 @@
 	<apartado id="ap2" tipo="devengo"
 		contenido="fecha, ejercicio, periodo(0A 1T 2T 3T 4T)" />
 	<apartado id="ap3" tipo="partidas">
+		<etiqueta valor="A) Dividendos o participaciones en beneficios de entidades no residentes en territorio"/>
 		<partida id="p02" etiqueta="P01" tipo="cantidad" />
 		<partida id="p02" etiqueta="P02" tipo="cantidadNegativa" />
 		<partida id="p03" etiqueta="P03" tipo="cantidadNegativa" />
