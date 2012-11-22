@@ -1,11 +1,29 @@
 		<div id="${ap.id}" class="apartado">
           <div class="caption">${ap.titulo}</div>
 		  <table>
-				<tr>
-					<td colspan="2">
-						A) Dividendos o participaciones en beneficios de entidades no residentes en territorio español.
-					</td>
-				</tr>
+		  		<#list ap.contenido as comp>
+		  			<#if comp.class.simpleName == "Etiqueta">
+							<tr>
+								<td colspan="2">
+									${comp.valor}
+								</td>
+							</tr>
+					<#else>
+						<tr>
+							<td class="etiqueta">
+								${comp.etiqueta}
+							</td>
+							<td class="partida">
+								<input id="${comp.id}" type="text" maxlength="18" size="18"/>
+							</td>
+						</tr>
+		  			</#if>
+		  		</#list>
+		  </table>
+          <div style="float: none;">&#160;</div>
+		</div>
+		  		
+		  		<#-- COMMENTARIO
 				<tr>
 					<td class="etiqueta">
 						Base imponible (importe &iacute;ntegro).
@@ -19,7 +37,7 @@
 						Tipo gravamen (8% o 10%)
 					</td>
 					<td class="partida">
-						<input type="text" maxlength="5" size="5S"/>
+						<input type="text" maxlength="5" size="5"/>
 					</td>
 				</tr>
 				<tr>
@@ -70,3 +88,4 @@
 		  </table>
           <div style="float: none;">&#160;</div>
         </div>
+	-->

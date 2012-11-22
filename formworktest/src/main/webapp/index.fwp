@@ -13,11 +13,18 @@
 	<apartado id="ap1" tipo="identificacion" contenido="nif,nombre" />
 	<apartado id="ap2" tipo="devengo"
 		contenido="fecha, ejercicio, periodo(0A 1T 2T 3T 4T)" />
-	<apartado id="ap3" tipo="partidas">
-		<etiqueta valor="A) Dividendos o participaciones en beneficios de entidades no residentes en territorio"/>
-		<partida id="p02" etiqueta="P01" tipo="cantidad" />
-		<partida id="p02" etiqueta="P02" tipo="cantidadNegativa" />
-		<partida id="p03" etiqueta="P03" tipo="cantidadNegativa" />
+	<apartado id="ap3" tipo="partidas" titulo="Autoliquidación">
+		<etiqueta
+			valor="A) Dividendos o participaciones en beneficios de entidades no residentes en territorio" />
+		<partida id="p01" etiqueta="Base imponible (importe íntegro)"
+			tipo="cantidad" />
+		<partida id="p02" etiqueta="Tipo gravamen (8% o 10%)" tipo="cantidadNegativa" />
+		<etiqueta
+			valor="B) Transmisión de valores o participaciones de entidades no residentes en territorio español." />
+		<partida id="p03"
+			etiqueta="	B.1) Renta obtenida en la transmisión (con exclusión de la cuantía que deba declararse en la casilla [05])."
+			tipo="cantidadNegativa" />
+		<partida id="p04" etiqueta="Tipo gravamen (8% o 10%)" tipo="cantidadNegativa" />
 	</apartado>
 	<apartado id="ap4" tipo="pago" />
 </formulario>

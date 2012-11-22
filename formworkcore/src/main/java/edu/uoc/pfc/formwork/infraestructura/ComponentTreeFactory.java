@@ -6,11 +6,14 @@ import java.util.List;
 import javax.xml.bind.JAXBException;
 
 import edu.uoc.pfc.formwork.ui.Apartado;
+import edu.uoc.pfc.formwork.ui.Etiqueta;
 import edu.uoc.pfc.formwork.ui.Formulario;
 import edu.uoc.pfc.formwork.ui.PartidaCadena;
 import edu.uoc.pfc.formwork.ui.PartidaCantidad;
 import edu.uoc.pfc.formwork.ui.PartidaPeriodo;
 import edu.uoc.pfc.formwork.ui.TipoApartado;
+import edu.uoc.pfc.formwork.xml.TipoComponente;
+import edu.uoc.pfc.formwork.xml.TipoEtiqueta;
 import edu.uoc.pfc.formwork.xml.TipoFormulario;
 import edu.uoc.pfc.formwork.xml.TipoPartida;
 import edu.uoc.pfc.formwork.xml.TipoTipoPartida;
@@ -82,14 +85,30 @@ public class ComponentTreeFactory {
 		
 		apartado.setId(jaxbApartado.getId());
 		
-		List<TipoPartida> jaxbPartidas = jaxbApartado.getPartida();
+		// El título del apartado solo se tiene en cuenta en los apartados de tipo
+		// partidas
+		apartado.setTitulo(jaxbApartado.getTitulo());
 		
-		for (TipoPartida tipoPartida : jaxbPartidas) {
-			PartidaCantidad cantidad = new PartidaCantidad();
+		List<TipoComponente> jaxbPartidas = jaxbApartado.getEtiquetaOrPartida();
+		
+		for (TipoComponente tipoComponente : jaxbPartidas) {
 			
-			cantidad.setId(tipoPartida.getId());
-			cantidad.setAdmiteNegativos(tipoPartida.getTipo() == TipoTipoPartida.CANTIDAD_NEGATIVA);
-			apartado.addPartida(cantidad);
+			if (tipoComponente instanceof TipoEtiqueta) {
+				TipoEtiqueta tipoEtiqueta = (TipoEtiqueta) tipoComponente;
+				 Etiqueta etiqueta = new Etiqueta();
+				 etiqueta.setId(tipoEtiqueta.getId());
+				 etiqueta.setValor(tipoEtiqueta.getValor());
+				 apartado.addComponente(etiqueta);
+			}
+			else {
+				PartidaCantidad cantidad = new PartidaCantidad();
+				
+				TipoPartida tipoPartida = (TipoPartida)tipoComponente;
+				cantidad.setId(tipoPartida.getId());
+				cantidad.setEtiqueta(tipoPartida.getEtiqueta());
+				cantidad.setAdmiteNegativos(tipoPartida.getTipo() == TipoTipoPartida.CANTIDAD_NEGATIVA);
+				apartado.addComponente(cantidad);
+			}
 		}
 	}
 
@@ -121,12 +140,12 @@ public class ComponentTreeFactory {
 				PartidaCadena ej = new PartidaCadena();
 				ej.setId(c);
 				
-				apartado.addPartida(ej);
+				apartado.addComponente(ej);
 			}
 			else if ("fecha".equals(c.trim())) {
 				PartidaCadena fech = new PartidaCadena();
 				fech.setId(c);
-				apartado.addPartida(fech);
+				apartado.addComponente(fech);
 			}
 			else if (c.trim().matches("periodo(.+)")) {
 				String periodo = c.substring(c.indexOf('(') + 1, c.indexOf(')'));
@@ -134,7 +153,7 @@ public class ComponentTreeFactory {
 				PartidaPeriodo per = new PartidaPeriodo();
 				per.setId("periodo");
 				per.setPeriodos(Arrays.asList(periodo.split(" ")));
-				apartado.addPartida(per);
+				apartado.addComponente(per);
 			}
 			else {
 				throw new JAXBException("Contenido incorrecto: " + c);
@@ -153,6 +172,7 @@ public class ComponentTreeFactory {
 		}
 		
 		boolean nifRep = false, nombre = false;
+		
 		
 		// análisis de contenido
 		String contenido = jaxbApartado.getContenido();
@@ -184,19 +204,19 @@ public class ComponentTreeFactory {
 		// El NIF siempre va sea cual sea el valor de contenido.
 		PartidaCadena partida = new PartidaCadena();
 		partida.setEtiqueta("NIF");
-		apartado.addPartida(partida);
+		apartado.addComponente(partida);
 		
 		if (nifRep) {
 			partida = new PartidaCadena();
 			partida.setEtiqueta("NIF Representante");
-			apartado.addPartida(partida);
+			apartado.addComponente(partida);
 			
 		}
 		
 		if (nombre) {
 			partida = new PartidaCadena();
 			partida.setEtiqueta("Apellidos y nombre o razón social");
-			apartado.addPartida(partida);
+			apartado.addComponente(partida);
 		}
 	}
 

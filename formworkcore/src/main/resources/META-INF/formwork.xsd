@@ -35,8 +35,9 @@
 						<xs:element ref="partida" />
 					</xs:choice>
 				</xs:sequence>
-				<xs:attribute name="contenido" use="optional" />
+				<xs:attribute name="contenido" type="xs:string" use="optional" />
 				<xs:attribute name="tipo" type="TipoTipoApartado" use="optional" />
+				<xs:attribute name="titulo" type="xs:string" use="optional" />
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
