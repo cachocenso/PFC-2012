@@ -20,6 +20,16 @@ public class XMLLoader {
 	
 	}
 	
+	/**
+	 * Hace el parse de la página principal de la aplicación
+	 * y devuelve una colección de objetos JAXB.
+	 * 
+	 * @param docClass
+	 * @param thePage
+	 * @return
+	 * @throws JAXBException
+	 * @throws SAXException
+	 */
 	@SuppressWarnings("unchecked")
 	public static <T> T parseFile(Class<T> docClass, InputStream thePage) 
 				throws JAXBException, SAXException {
@@ -29,9 +39,6 @@ public class XMLLoader {
 		SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 		Schema schema = schemaFactory.newSchema(XMLLoader.class.getResource("/META-INF/formwork.xsd")); 
 
-//		Marshaller marshaller = jaxbContext.createMarshaller();
-//		marshaller.setSchema(schema);
-//		marshaller.marshal(objectToMarshal, new DefaultHandler());		
 		Unmarshaller unmarshaller = context.createUnmarshaller();
 		unmarshaller.setSchema(schema);
 		JAXBElement<T> doc = (JAXBElement<T>) unmarshaller.unmarshal(thePage);

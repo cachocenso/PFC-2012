@@ -27,13 +27,13 @@ public class Apartado extends Componente {
 	private Logger logger = Logger.getLogger(Apartado.class);
 
 	private TipoApartado tipo;
-	private List<Partida<?>> contenido = new ArrayList<Partida<?>>();
+	private List<Componente> contenido = new ArrayList<Componente>();
 
-	public List<Partida<?>> getContenido() {
+	public List<Componente> getContenido() {
 		return contenido;
 	}
 
-	public void setContenido(List<Partida<?>> contenido) {
+	public void setContenido(List<Componente> contenido) {
 		this.contenido = contenido;
 	}
 
@@ -45,9 +45,9 @@ public class Apartado extends Componente {
 		this.tipo = tp;
 	}
 
-	public void addPartida(Partida<?> partida) {
-		if (!contenido.contains(partida)) {
-			contenido.add(partida);
+	public void addComponente(Componente componente) {
+		if (!contenido.contains(componente)) {
+			contenido.add(componente);
 		}
 	}
 
@@ -59,6 +59,7 @@ public class Apartado extends Componente {
 
 		try {
 			Template template = null;
+			HashMap<Object, Object> dataModel = new HashMap<Object, Object>();
 			
 			switch (tipo) {
 			case identificacion:
@@ -67,13 +68,14 @@ public class Apartado extends Componente {
 			case devengo:
 				template = configuration.getTemplate("templates/devengo.ftl");
 				break;
-
+			case partidas:
+				break;
 			default:
 				return "Soy el apartado " + getId();
 			}
 			
 			if (template != null) {
-				template.process(new HashMap<Object, Object>(), stringWriter);
+				template.process(dataModel, stringWriter);
 			}
 		} catch (IOException e) {
 			logger.error("Plantilla no encontrada.", e);

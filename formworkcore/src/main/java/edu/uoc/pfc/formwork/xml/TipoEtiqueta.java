@@ -10,23 +10,21 @@ package edu.uoc.pfc.formwork.xml;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for TipoRules complex type.
+ * <p>Java class for TipoEtiqueta complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="TipoRules">
+ * &lt;complexType name="TipoEtiqueta">
  *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="rules-file" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *       &lt;/sequence>
- *     &lt;/restriction>
+ *     &lt;extension base="{}TipoComponente">
+ *       &lt;attribute name="valor" use="required" type="{http://www.w3.org/2001/XMLSchema}string" />
+ *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
@@ -34,36 +32,36 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TipoRules", propOrder = {
-    "rulesFile"
-})
-public class TipoRules {
+@XmlType(name = "TipoEtiqueta")
+public class TipoEtiqueta
+    extends TipoComponente
+{
 
-    @XmlElement(name = "rules-file", required = true)
-    protected String rulesFile;
+    @XmlAttribute(name = "valor", required = true)
+    protected String valor;
 
     /**
-     * Gets the value of the rulesFile property.
+     * Gets the value of the valor property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getRulesFile() {
-        return rulesFile;
+    public String getValor() {
+        return valor;
     }
 
     /**
-     * Sets the value of the rulesFile property.
+     * Sets the value of the valor property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setRulesFile(String value) {
-        this.rulesFile = value;
+    public void setValor(String value) {
+        this.valor = value;
     }
 
 }
