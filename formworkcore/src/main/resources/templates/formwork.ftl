@@ -4,6 +4,11 @@
  <!-- <link rel="stylesheet" type="text/css" href="formwork.css"/>  -->
  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
  
+ <script>
+ $(document).ready(function() {
+ 	alert("Esto es jQuery");
+ });
+ </script>
  <style>
  .contenido {
 	font-family: Arial, Helvetica, sans-serif;
