@@ -88,6 +88,12 @@ public class Apartado extends Componente {
 				template = configuration.getTemplate("templates/partidas.ftl");
 				dataModel.put("ap", this);
 				break;
+			case complementaria:
+				template = configuration.getTemplate("templates/complementaria.ftl");
+				break;
+			case pago:
+				template = configuration.getTemplate("templates/pago.ftl");
+				break;
 			default:
 				return "Soy el apartado " + getId();
 			}

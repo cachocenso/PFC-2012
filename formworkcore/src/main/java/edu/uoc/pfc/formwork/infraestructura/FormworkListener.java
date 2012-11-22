@@ -37,11 +37,8 @@ public class FormworkListener implements ServletContextListener {
 	private static Logger logger = Logger.getLogger(FormworkListener.class);
 	
 	public void contextDestroyed(ServletContextEvent event) {
-		ServletContext servletContext = event.getServletContext();
-		
-		FormworkContext fwCtx = (FormworkContext) servletContext.getAttribute(Attributes.FWCONTEXT);
 		for (StatefulKnowledgeSession session:
-							fwCtx.getKnowledgeBase().getStatefulKnowledgeSessions()) {
+							FormworkContext.getKnowledgeBase().getStatefulKnowledgeSessions()) {
 			session.dispose();
 		}
 	}

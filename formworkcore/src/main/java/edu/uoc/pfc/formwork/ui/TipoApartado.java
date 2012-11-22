@@ -9,7 +9,7 @@ import edu.uoc.pfc.formwork.xml.TipoTipoApartado;
  * @author Alberto Díaz en 11/11/2012
  */
 public enum TipoApartado {
-	identificacion, devengo, partidas, pago;
+	identificacion, devengo, partidas, complementaria, pago;
 	
 	/**
 	 * Transforma un objeto TipoTipoApartado que proviene del parse de

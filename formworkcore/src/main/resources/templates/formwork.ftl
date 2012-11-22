@@ -52,50 +52,6 @@ td.partida {
 		</#list>
         
 		<p/>
-		<div id="complementaria" class="apartado">
-            <div class="caption">Declaraci&#243;n complementaria.</div>
-			<table>
-				<tr>
-					<td class="etiqueta">
-						Si esta autoliquidación es complementaria de otra autoliquidación anterior correspondiente al mismo concepto, ejercicio y fecha de devengo señálelo marcando esta casilla.
-					</td>
-					<td class="partida">
-						<input type="checkbox"/>
-					</td>
-				</tr>
-				<tr>
-					<td class="etiqueta">
-						En este caso, indique a continuación el número de justificante de la declaración anterior
-					</td>
-					<td class="partida">
-						<input type="text" maxlength="13" size="13"/>
-					</td>
-				</tr>
-			</table>
-		</div>
-		<p/>
-		<div id="ingreso" class="apartado">
-            <div class="caption">Ingreso</div>
-			<table>
-				<tr>
-					<td class="etiqueta">
-						Importe (casilla [09]).
-					</td>
-					<td class="partida">
-						<input type="text" maxlength="18" size="18"/>
-					</td>
-				</tr>
-				<tr>
-					<td class="etiqueta">
-						Número de referencia completo (NRC).
-					</td>
-					<td class="partida">
-						<input type="text" maxlength="13" size="13"/>
-					</td>
-				</tr>
-			</table>
-		</div>
-		<p/>
 		<div id="envio" class="apartado">
 			<div style ="margin: 5px">
 				<center><button>Firmar y enviar</button></center>

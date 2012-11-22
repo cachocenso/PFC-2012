@@ -26,5 +26,6 @@
 			tipo="cantidadNegativa" />
 		<partida id="p04" etiqueta="Tipo gravamen (8% o 10%)" tipo="cantidadNegativa" />
 	</apartado>
-	<apartado id="ap4" tipo="pago" />
+	<apartado id="ap4" tipo="complementaria"/>
+	<apartado id="ap5" tipo="pago" />
 </formulario>

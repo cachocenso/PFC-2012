@@ -64,6 +64,7 @@
 			<xs:enumeration value="identificacion" />
 			<xs:enumeration value="devengo" />
 			<xs:enumeration value="partidas" />
+			<xs:enumeration value="complementaria" />
 			<xs:enumeration value="pago" />
 		</xs:restriction>
 	</xs:simpleType>
