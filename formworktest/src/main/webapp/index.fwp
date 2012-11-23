@@ -3,7 +3,9 @@
 
 <formulario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="http://www.uoc.edu/2012/fwp/formwork.xsd"
-	id="m250" controlador="edu.kk">
+	id="m250" 
+	controlador="edu.uoc.pfc.formworktest.controller.TestController">
+	
 	<titulo>Modelo 250</titulo>
 	<descripcion> Gravamen Especial sobre Dividendos y Rentas de Fuente
 		Extranjera Derivados de la Transmisión de los Valores representativos

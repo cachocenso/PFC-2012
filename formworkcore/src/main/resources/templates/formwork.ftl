@@ -6,7 +6,9 @@
  
  <script>
  $(document).ready(function() {
- 	alert("Esto es jQuery");
+ 	$("input").change(function() {
+ 		alert("onChange " + this.id);
+ 	});
  });
  </script>
  <style>

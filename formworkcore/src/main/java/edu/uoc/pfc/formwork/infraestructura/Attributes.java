@@ -5,6 +5,7 @@ public class Attributes {
 	public static final String FWCONTEXT = "fwcontext";
 	public static final String FWCONFIG = "fwconfig";
 	public static final String FWCOMPONENTS = "fwcomponents";
+	public static final String FWCONTROLLER = "fwcontroller";
 
 	private Attributes() {
 	}

@@ -8,12 +8,11 @@ public class Formulario extends Componente {
 	private List<Apartado> apartados = new ArrayList<Apartado>();
 	private String titulo;
 	private String descripcion;
+	private String nombreControlador;
 	
 	@Override
 	public String render(IRenderer renderer) {
 		return "Soy el formulario";
-		
-		
 	}
 
 	public void addApartado(Apartado apartado) {
@@ -52,6 +51,14 @@ public class Formulario extends Componente {
 
 	public String getDescripcion() {
 		return descripcion;
+	}
+
+	public String getNombreControlador() {
+		return nombreControlador;
+	}
+
+	public void setNombreControlador(String nombreControlador) {
+		this.nombreControlador = nombreControlador;
 	}
 	
 }
