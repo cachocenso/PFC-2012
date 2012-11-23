@@ -40,7 +40,10 @@ public class FormworkListener implements ServletContextListener {
 		for (StatefulKnowledgeSession session:
 							FormworkContext.getKnowledgeBase().getStatefulKnowledgeSessions()) {
 			session.dispose();
+			logger.info("KnoledgSession " + session.getId() + " cerrada");
 		}
+		
+		logger.info("Aplicación cerrada con éxito");
 	}
 
 	public void contextInitialized(ServletContextEvent event) {
