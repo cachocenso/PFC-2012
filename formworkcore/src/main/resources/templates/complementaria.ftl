@@ -3,7 +3,7 @@
 	<table>
 		<tr>
 			<td class="etiqueta">
-				Si esta autoliquidación es complementaria de otra autoliquidación anterior correspondiente al mismo concepto, ejercicio y fecha de devengo señálelo marcando esta casilla.
+				Si esta autoliquidaci&oacute:n es complementaria de otra autoliquidaci&oacute;n anterior correspondiente al mismo concepto, ejercicio y fecha de devengo se&ntilde;&aacute;lelo marcando esta casilla.
 			</td>
 			<td class="partida">
 				<input id="complementaria" type="checkbox"/>
@@ -11,7 +11,7 @@
 		</tr>
 		<tr>
 			<td class="etiqueta">
-				En este caso, indique a continuación el número de justificante de la declaración anterior
+				En este caso, indique a continuaci&oacute;n el n&uacute;mero de justificante de la declaraci&oacute;n anterior
 			</td>
 			<td class="partida">
 				<input id="justificante" type="text" maxlength="13" size="13"/>

@@ -10,8 +10,10 @@
   	<module>formworkcore</module>
   	<module>formworktest</module>
   </modules>
- 
-  <dependencies>
+   <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+   <dependencies>
   	<dependency>
   		<groupId>org.slf4j</groupId>
   		<artifactId>slf4j-log4j12</artifactId>

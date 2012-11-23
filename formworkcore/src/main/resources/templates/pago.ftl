@@ -3,7 +3,7 @@
 	<table>
 		<tr>
 			<td class="etiqueta">
-				Importe (casilla [09]).
+				Importe.
 			</td>
 			<td class="partida">
 				<input id="importe" type="text" maxlength="18" size="18"/>
@@ -11,7 +11,7 @@
 		</tr>
 		<tr>
 			<td class="etiqueta">
-				Número de referencia completo (NRC).
+				N&uacute;mero de referencia completo (NRC).
 			</td>
 			<td class="partida">
 				<input id="nrc" type="text" maxlength="13" size="13"/>
