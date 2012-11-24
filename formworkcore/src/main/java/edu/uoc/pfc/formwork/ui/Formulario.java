@@ -60,5 +60,22 @@ public class Formulario extends Componente {
 	public void setNombreControlador(String nombreControlador) {
 		this.nombreControlador = nombreControlador;
 	}
+
+	/**
+	 * @param string
+	 */
+	public Partida<?> getPartida(String id) {
+		
+		for (Apartado ap : getApartados()) {
+			
+			for (Componente com : ap.getContenido()) {
+				if (com.getId().equals(id) && com instanceof Partida<?>) {
+					return (Partida<?>) com;
+				}
+			}
+		}
+		
+		return null;
+	}
 	
 }

@@ -11,7 +11,7 @@ import org.drools.runtime.StatefulKnowledgeSession;
 import edu.uoc.pfc.formwork.infraestructura.FormworkContext;
 import edu.uoc.pfc.formwork.infraestructura.Session;
 import edu.uoc.pfc.formwork.ui.Componente;
-import edu.uoc.pfc.formwork.ui.GenericController;
+import edu.uoc.pfc.formwork.ui.IController;
 import edu.uoc.pfc.formwork.ui.event.FormworkEvent;
 
 /**
@@ -20,7 +20,7 @@ import edu.uoc.pfc.formwork.ui.event.FormworkEvent;
  * 
  * @author Alberto Díaz en 23/11/2012
  */
-public class TestController extends GenericController {
+public class TestController implements IController {
 	
 	@Session
 	private HttpSession session;
@@ -28,7 +28,6 @@ public class TestController extends GenericController {
 	/* (non-Javadoc)
 	 * @see edu.uoc.pfc.formwork.ui.GenericController#onEvent(edu.uoc.pfc.formwork.ui.event.FormworkEvent)
 	 */
-	@Override
 	public void onEvent(FormworkEvent evt) {
 		Componente componente = evt.getTarget();
 

@@ -6,8 +6,11 @@
   <script>
 	 $(document).ready(function() {
 	 	$("input").change(function() {
-	 		alert("onChange " + this.id);
-	 	});
+	 		$.ajax({url:"/au/kk",success:function(result){
+	 			alert(result);
+				$("#nif").value(result);
+			  }});	 	
+		});
 	 });
   </script>
  </head>

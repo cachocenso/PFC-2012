@@ -205,18 +205,21 @@ public class ComponentTreeFactory {
 		
 		// El NIF siempre va sea cual sea el valor de contenido.
 		PartidaCadena partida = new PartidaCadena();
+		partida.setId("nif");
 		partida.setEtiqueta("NIF");
 		apartado.addComponente(partida);
 		
 		if (nifRep) {
 			partida = new PartidaCadena();
 			partida.setEtiqueta("NIF Representante");
+			partida.setId("nifr");
 			apartado.addComponente(partida);
 			
 		}
 		
 		if (nombre) {
 			partida = new PartidaCadena();
+			partida.setId("nomrasoc");
 			partida.setEtiqueta("Apellidos y nombre o razón social");
 			apartado.addComponente(partida);
 		}

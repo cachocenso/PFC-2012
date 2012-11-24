@@ -2,7 +2,6 @@ package edu.uoc.pfc.formwork.infraestructura;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PipedReader;
 import java.io.Writer;
 import java.lang.reflect.Field;
 
@@ -12,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.sound.midi.ControllerEventListener;
 import javax.xml.bind.JAXBException;
 
 import org.apache.commons.io.IOUtils;
@@ -22,6 +22,8 @@ import edu.uoc.pfc.formwork.ui.Formulario;
 import edu.uoc.pfc.formwork.ui.HTMLRenderer;
 import edu.uoc.pfc.formwork.ui.IController;
 import edu.uoc.pfc.formwork.ui.IRenderer;
+import edu.uoc.pfc.formwork.ui.Partida;
+import edu.uoc.pfc.formwork.ui.event.FormworkEvent;
 import edu.uoc.pfc.formwork.xml.TipoFormulario;
 import edu.uoc.pfc.formwork.xml.XMLLoader;
 
@@ -72,10 +74,27 @@ public class FormworkServlet extends HttpServlet {
 	/**
 	 * @param req
 	 * @param resp
+	 * @throws IOException 
 	 */
 	private void processAjaxRequests(HttpServletRequest req,
-			HttpServletResponse resp) {
+			HttpServletResponse resp) throws IOException {
 
+		HttpSession session = req.getSession();
+		IController controller = (IController) session.getAttribute(
+				Attributes.FWCONTROLLER);
+		
+		if (controller != null) {
+			FormworkEvent event = new FormworkEvent();
+			Formulario formulario = (Formulario) session.getAttribute(Attributes.FWCOMPONENTS);
+			
+			Partida<?> partida = formulario.getPartida("nif");
+			
+			if (partida !=  null) {
+				event.setTarget(partida);
+				controller.onEvent(event);
+				resp.getWriter().print("00000101D");
+			}
+		}
 	}
 
 	/**
@@ -86,10 +105,10 @@ public class FormworkServlet extends HttpServlet {
 	private void processResourceRequest(String uri, HttpServletResponse resp)
 			throws IOException {
 		logger.info("Recurso solicitado: " + uri);
-		InputStream resourceStream = getClass().getClassLoader().getResourceAsStream(uri);
+		InputStream resourceStream = getClass().getClassLoader()
+				.getResourceAsStream(uri);
 		ServletOutputStream respStream = resp.getOutputStream();
-		IOUtils.copy(resourceStream,
-				respStream);
+		IOUtils.copy(resourceStream, respStream);
 
 	}
 
@@ -120,11 +139,10 @@ public class FormworkServlet extends HttpServlet {
 			session.setAttribute(Attributes.FWCOMPONENTS, theForm);
 
 			logger.info("Árbol de componentes cargado.");
-			
 
 			setupController(theForm, session);
-			logger.info("Controlador iniciado:" + theForm.getNombreControlador());
-
+			logger.info("Controlador iniciado:"
+					+ theForm.getNombreControlador());
 
 			IRenderer renderer = new HTMLRenderer();
 			Writer writer = resp.getWriter();
