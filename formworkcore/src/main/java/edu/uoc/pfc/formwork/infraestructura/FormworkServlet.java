@@ -28,15 +28,34 @@ public class FormworkServlet extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException {
-		try {
-			load(req, resp);
-		} catch (Exception e) {
-			throw new ServletException(e);
+		
+		String uri = req.getRequestURI();
+		
+		if (uri.indexOf("/au/") != -1) {
+			processAuRequest(req, resp);
+		}
+		else {
+			try {
+				load(req, resp);
+			} catch (Exception e) {
+				throw new ServletException(e);
+			}
 		}
 	}
 
 	/**
-	 * Realiza la varga de la página fwp de la aplicación, la analiza y
+	 * Procesa las peticiones AJAX.
+	 * @param req
+	 * @param resp
+	 */
+	private void processAuRequest(HttpServletRequest req,
+			HttpServletResponse resp) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/**
+	 * Realiza la carga de la página fwp de la aplicación, la analiza y
 	 * construye el árbol de componentes. Después se renderiza a HTML y se
 	 * devuelve al cliente.
 	 * 
@@ -59,11 +78,11 @@ public class FormworkServlet extends HttpServlet {
 					.createComponentsTree(formulario);
 
 			HttpSession session = req.getSession(true);
-			
+
 			setupController(theForm, session);
-			
+
 			session.setAttribute(Attributes.FWCOMPONENTS, theForm);
-			
+
 			IRenderer renderer = new HTMLRenderer();
 			Writer writer = resp.getWriter();
 
@@ -79,9 +98,8 @@ public class FormworkServlet extends HttpServlet {
 	}
 
 	/**
-	 * Instancia el objeto controlador definida en la página
-	 * de la aplicación, inyecta el objeto sesión y lo almacena
-	 * en la misma sesión.
+	 * Instancia el objeto controlador definida en la página de la aplicación,
+	 * inyecta el objeto sesión y lo almacena en la misma sesión.
 	 * 
 	 * @param theForm
 	 * @param session
@@ -92,18 +110,25 @@ public class FormworkServlet extends HttpServlet {
 	private void setupController(Formulario theForm, HttpSession session)
 			throws InstantiationException, IllegalAccessException,
 			ClassNotFoundException {
-		IController controller = (IController) Class.forName(theForm.getNombreControlador()).newInstance();
 		
+		// Instancio un objeto de la clase controladora indicada
+		// en la página principal de la aplicación.
+		IController controller = (IController) Class.forName(
+				theForm.getNombreControlador()).newInstance();
+
+		// Busco en el objeto controller un atributo de tipo HttpSession
+		// que esté anotado con Session y le inyecto la sesión.
 		Field[] fields = controller.getClass().getDeclaredFields();
-		
+
 		for (Field field : fields) {
-			if (field.isAnnotationPresent(Session.class) &&
-					field.getType().isAssignableFrom(session.getClass())) {
+			if (field.isAnnotationPresent(Session.class)
+					&& field.getType().isAssignableFrom(session.getClass())) {
 				field.setAccessible(true);
 				field.set(controller, session);
 			}
 		}
-		
+
+		// Guardo el controlador en la sesión.
 		session.setAttribute(Attributes.FWCONTROLLER, controller);
 	}
 
