@@ -1,16 +1,20 @@
 package edu.uoc.pfc.formwork.infraestructura;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.PipedReader;
 import java.io.Writer;
 import java.lang.reflect.Field;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.xml.bind.JAXBException;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.xml.sax.SAXException;
 
@@ -28,30 +32,65 @@ public class FormworkServlet extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException {
-		
+
 		String uri = req.getRequestURI();
-		
-		if (uri.indexOf("/au/") != -1) {
-			processAuRequest(req, resp);
-		}
-		else {
-			try {
+
+		try {
+			if (uri.indexOf("/au/") != -1) {
+				processAuRequest(req, resp);
+			} else {
 				load(req, resp);
-			} catch (Exception e) {
-				throw new ServletException(e);
 			}
+		} catch (Exception e) {
+			throw new ServletException(e);
 		}
 	}
 
 	/**
 	 * Procesa las peticiones AJAX.
+	 * 
+	 * @param req
+	 * @param resp
+	 * @throws IOException
+	 */
+	private void processAuRequest(HttpServletRequest req,
+			HttpServletResponse resp) throws IOException {
+
+		String uri = req.getRequestURI();
+
+		int index = uri.indexOf("~/");
+		if (index != -1) {
+			// Se está solicitando un recurso
+			processResourceRequest(uri.substring(index + 1), resp);
+		} else {
+			// Se trata de una petición de actualización AJAX de la aplicación.
+			processAjaxRequests(req, resp);
+		}
+
+	}
+
+	/**
 	 * @param req
 	 * @param resp
 	 */
-	private void processAuRequest(HttpServletRequest req,
+	private void processAjaxRequests(HttpServletRequest req,
 			HttpServletResponse resp) {
-		// TODO Auto-generated method stub
-		
+
+	}
+
+	/**
+	 * @param uri
+	 * @param resp
+	 * @throws IOException
+	 */
+	private void processResourceRequest(String uri, HttpServletResponse resp)
+			throws IOException {
+		logger.info("Recurso solicitado: " + uri);
+		InputStream resourceStream = getClass().getClassLoader().getResourceAsStream(uri);
+		ServletOutputStream respStream = resp.getOutputStream();
+		IOUtils.copy(resourceStream,
+				respStream);
+
 	}
 
 	/**
@@ -78,17 +117,22 @@ public class FormworkServlet extends HttpServlet {
 					.createComponentsTree(formulario);
 
 			HttpSession session = req.getSession(true);
+			session.setAttribute(Attributes.FWCOMPONENTS, theForm);
+
+			logger.info("Árbol de componentes cargado.");
+			
 
 			setupController(theForm, session);
+			logger.info("Controlador iniciado:" + theForm.getNombreControlador());
 
-			session.setAttribute(Attributes.FWCOMPONENTS, theForm);
 
 			IRenderer renderer = new HTMLRenderer();
 			Writer writer = resp.getWriter();
 
 			renderer.render(theForm, writer);
 
-			logger.info("Árbol de componentes cargado.");
+			logger.info("Pagina renderizada.");
+
 		} catch (JAXBException e) {
 			logger.error("Error cargando página.", e);
 		} catch (SAXException e) {
@@ -110,7 +154,7 @@ public class FormworkServlet extends HttpServlet {
 	private void setupController(Formulario theForm, HttpSession session)
 			throws InstantiationException, IllegalAccessException,
 			ClassNotFoundException {
-		
+
 		// Instancio un objeto de la clase controladora indicada
 		// en la página principal de la aplicación.
 		IController controller = (IController) Class.forName(
