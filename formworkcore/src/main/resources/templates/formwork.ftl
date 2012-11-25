@@ -3,15 +3,7 @@
   <title>${form.titulo}</title>
   <link rel="stylesheet" type="text/css" href="/au/~/css/formwork.css"/>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
-  <script>
-	 $(document).ready(function() {
-	 	$("input").change(function() {
-	 		$.ajax({url:"/au/kk",success:function(result){
-	 			alert(result);
-				$("#nif").value(result);
-			  }});	 	
-		});
-	 });
+  <script src="/au/~/js/formwork.js">
   </script>
  </head>
  
