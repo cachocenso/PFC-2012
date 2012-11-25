@@ -11,12 +11,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.sound.midi.ControllerEventListener;
 import javax.xml.bind.JAXBException;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.xml.sax.SAXException;
+
+import com.google.gson.Gson;
 
 import edu.uoc.pfc.formwork.ui.Formulario;
 import edu.uoc.pfc.formwork.ui.HTMLRenderer;
@@ -87,12 +88,16 @@ public class FormworkServlet extends HttpServlet {
 			FormworkEvent event = new FormworkEvent();
 			Formulario formulario = (Formulario) session.getAttribute(Attributes.FWCOMPONENTS);
 			
-			Partida<?> partida = formulario.getPartida("nif");
+			Partida<?> partida = formulario.getPartida(req.getParameter("id"));
 			
 			if (partida !=  null) {
 				event.setTarget(partida);
+				event.setValue(req.getParameter("value"));
 				controller.onEvent(event);
-				resp.getWriter().print("00000101D");
+				Gson gson = new Gson();
+				String jsonResponse = gson.toJson(partida);
+				resp.setContentType("application/json");
+				resp.getWriter().print(jsonResponse);
 			}
 		}
 	}

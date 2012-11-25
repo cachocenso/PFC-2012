@@ -12,6 +12,7 @@ import edu.uoc.pfc.formwork.infraestructura.FormworkContext;
 import edu.uoc.pfc.formwork.infraestructura.Session;
 import edu.uoc.pfc.formwork.ui.Componente;
 import edu.uoc.pfc.formwork.ui.IController;
+import edu.uoc.pfc.formwork.ui.Partida;
 import edu.uoc.pfc.formwork.ui.event.FormworkEvent;
 
 /**
@@ -37,6 +38,8 @@ public class TestController implements IController {
 		
 		session.insert(componente);
 		session.fireAllRules();
+		
+		((Partida)componente).setValue("00000101D");
 	}
 
 }
