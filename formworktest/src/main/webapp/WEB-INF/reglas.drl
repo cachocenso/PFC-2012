@@ -1,8 +1,10 @@
 //created on: 09-nov-2012
 package formworktest.rules
 
-import edu.uoc.pfc.formwork.ui.Partida
+
 //list any import classes here.
+import edu.uoc.pfc.formwork.ui.Partida
+import function edu.uoc.pfc.formworktest.helper.Validaciones.isNifNie;
 
 
 
@@ -12,12 +14,13 @@ import edu.uoc.pfc.formwork.ui.Partida
 
 
 rule "nif"
-
+	no-loop
     when
-        //conditions
+        $p : Partida((id == "nif" || id == "nifr") && isNifNie(value));
     then
         //actions
-
+		modify($p) {setValue("00000101D")};
+		System.out.println(">>>>>>>>> Valor cambiado." + $p.getValue());
 end
 
 rule "p01 changed"
