@@ -69,7 +69,7 @@ public class Formulario extends Componente {
 		for (Apartado ap : getApartados()) {
 			
 			for (Componente com : ap.getContenido()) {
-				if (com.getId().equals(id) && com instanceof Partida<?>) {
+				if (com instanceof Partida<?> && com.getId().equals(id)) {
 					return (Partida<?>) com;
 				}
 			}

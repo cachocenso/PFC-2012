@@ -5,6 +5,12 @@ import java.math.BigDecimal;
 public class PartidaCantidad extends Partida<BigDecimal> {
 	private boolean admiteNegativos;
 
+	/**
+	 * 
+	 */
+	public PartidaCantidad() {
+		setValue(BigDecimal.ZERO);
+	}
 
 	public boolean isAdmiteNegativos() {
 		return admiteNegativos;

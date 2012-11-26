@@ -4,30 +4,43 @@ package formworktest.rules
 
 //list any import classes here.
 import edu.uoc.pfc.formwork.ui.Partida
+import edu.uoc.pfc.formwork.ui.PartidaCantidad
+import edu.uoc.pfc.formwork.ui.Formulario;
+import java.math.BigDecimal;
 import function edu.uoc.pfc.formworktest.helper.Validaciones.isNifNie;
 
 
 
 //declare any global variables here
-
+global Formulario theForm;
 
 
 
 rule "nif"
 	no-loop
     when
-        $p : Partida((id == "nif" || id == "nifr") && isNifNie(value));
+        $p : Partida(id == "nif", isNifNie(value))
     then
         //actions
 		modify($p) {setValue("00000101D")};
 		System.out.println(">>>>>>>>> Valor cambiado." + $p.getValue());
 end
 
-rule "p01 changed"
+rule "p01"
     
     when
 	    $p:Partida(id == "p01")
     then
-        System.out.println("p01 cambió");
+	    BigDecimal $val1 = new BigDecimal($p.getValue().toString());
+	    
+    	BigDecimal $val2 = new BigDecimal(theForm.getPartida("p02").getValue().toString());
+    	
+    	PartidaCantidad $p5 = (PartidaCantidad) theForm.getPartida("p05");
+    	BigDecimal $cien =  new BigDecimal("100");
+
+        System.out.println(">>>>>>>>>>>>>>> val1: " + $val1 );
+        System.out.println(">>>>>>>>>>>>>>> val2 " + $val2 );
+    	$p5.setValue( $val1.multiply($val2).divide($cien) );
+        System.out.println(">>>>>>>>>>>>>>> p05 cambió: " + $p5.getValue() );
 
 end

@@ -20,13 +20,14 @@
 			valor="A) Dividendos o participaciones en beneficios de entidades no residentes en territorio" />
 		<partida id="p01" etiqueta="Base imponible (importe íntegro)"
 			tipo="cantidad" />
-		<partida id="p02" etiqueta="Tipo gravamen (8% o 10%)" tipo="cantidadNegativa" />
+		<partida id="p02" etiqueta="Tipo gravamen (8% o 10%)" tipo="cantidad" />
 		<etiqueta
 			valor="B) Transmisión de valores o participaciones de entidades no residentes en territorio español." />
 		<partida id="p03"
 			etiqueta="	B.1) Renta obtenida en la transmisión (con exclusión de la cuantía que deba declararse en la casilla [05])."
 			tipo="cantidadNegativa" />
-		<partida id="p04" etiqueta="Tipo gravamen (8% o 10%)" tipo="cantidadNegativa" />
+		<partida id="p04" etiqueta="Tipo gravamen (8% o 10%)" tipo="cantidad" />
+		<partida id="p05" etiqueta="Cuota" tipo="cantidad"/>
 	</apartado>
 	<apartado id="ap4" tipo="complementaria"/>
 	<apartado id="ap5" tipo="pago" />

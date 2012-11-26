@@ -8,7 +8,9 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.drools.KnowledgeBase;
 import org.drools.runtime.StatefulKnowledgeSession;
+import org.drools.runtime.StatelessKnowledgeSession;
 
+import edu.uoc.pfc.formwork.infraestructura.Attributes;
 import edu.uoc.pfc.formwork.infraestructura.FormworkContext;
 import edu.uoc.pfc.formwork.infraestructura.Session;
 import edu.uoc.pfc.formwork.ui.IController;
@@ -30,20 +32,23 @@ public class TestController implements IController {
 	/* (non-Javadoc)
 	 * @see edu.uoc.pfc.formwork.ui.GenericController#onEvent(edu.uoc.pfc.formwork.ui.event.FormworkEvent)
 	 */
+	@SuppressWarnings({"rawtypes", "unchecked"})
 	public void onEvent(FormworkEvent evt) {
 		Partida componente = (Partida) evt.getTarget();
 		
 		componente.setValue( evt.getValue());
 		KnowledgeBase knowledgeBase = FormworkContext.getKnowledgeBase();
 		
-		StatefulKnowledgeSession ksession = knowledgeBase.newStatefulKnowledgeSession();
-//		StatelessKnowledgeSession session = knowledgeBase.newStatelessKnowledgeSession();
 		
+//		StatefulKnowledgeSession ksession = knowledgeBase.newStatefulKnowledgeSession();
+		StatelessKnowledgeSession ksession = knowledgeBase.newStatelessKnowledgeSession();
+		ksession.setGlobal("theForm", session.getAttribute(Attributes.FWCOMPONENTS));
 		
 		logger.info("Antes de aplicar las reglas: " + componente.getValue());
 		
-		ksession.insert(componente);
-		ksession.fireAllRules();
+		ksession.execute(componente);
+//		ksession.insert(componente);
+//		ksession.fireAllRules();
 		logger.info("Después de aplicar las reglas: " + componente.getValue());
 	}
 
