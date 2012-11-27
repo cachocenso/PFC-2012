@@ -1,23 +1,38 @@
-		<div id="devengo" class="apartado">
-          <div class="caption">Devengo</div>
-            <div style="float: left; width: 33%;">
-              <div>Ejercicio</div>
-              <div>
-                <input id="ejercicio" type="text" maxlength="4" size="4"/>
-              </div>
-            </div>
-            <div style="float: left; width: 33%">
-              <div>Periodo</div>
-              <div>
-                <input id="periodo" type="text" maxlength="2" size="2"/>
-              </div>
-            </div>
-            <div style="float: left; width: 34%">
-              <div>Fecha devengo</div>
-              <div>
-                <input id="fecha" type="text" maxlength="10" size="10"/>
-              </div>
-            </div>
-            <div style="float: none;">&#160;</div>
-        </div>
-        <div style="float: none;">&#160;</div>
+<#assign s = ap.contenido?size>
+<div id="devengo" class="apartado">
+	<div class="caption">Devengo</div>
+	<#list ap.contenido as comp >
+			<#if comp.id == "ejercicio">
+			    <div style="float: left; width: 33%;">
+				      <div style="margin-left: 2px">${comp.etiqueta}</div>
+				      <div style="margin-left: 2px">
+				        <input id="${comp.id}" type="text" maxlength="4" size="4"/>
+				      </div>
+			    </div>
+			<#elseif comp.id == "periodo">
+ 			      <div style="float: left; width: 33%">
+				      <div style="margin-left: 2px">${comp.etiqueta}</div>
+				      <div style="margin-left: 2px">
+				        <select id="${comp.id}">
+				        	<#list comp.periodos as per>
+				        		<option value="${per}">${per}</option>
+				        	</#list>
+				        </select>
+				      </div>
+			    </div>
+			<#else>
+			    <div style="float: left; width: 33%">
+				      <div style="margin-left: 2px">${comp.etiqueta}</div>
+				      <div style="margin-left: 2px">
+				        <input id="${comp.id}" type="text" maxlength="10" size="10"/>
+				      </div>
+			    </div>
+	    	</#if>
+	</#list>	
+    <div style="float: none;">&#160;</div>
+    <div style="float: none;">&#160;</div>
+    <div style="float: none;">&#160;</div>
+</div>
+<div style="float: none;">&#160;</div>
+
+  

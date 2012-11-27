@@ -19,7 +19,7 @@ global Formulario theForm;
 rule "nif"
 	no-loop
     when
-        $p : Partida(id == "nif", $v:value, isNifNie(value))
+        $p : Partida((id == "nif" || id == "nifr"), $v:value, isNifNie(value))
     then
         //actions
 		modify($p) { setValue(formatNif((String)$v)) };

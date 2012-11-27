@@ -14,40 +14,31 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for TipoTipoApartado.
+ * <p>Java class for TipoCalculado.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * <p>
  * <pre>
- * &lt;simpleType name="TipoTipoApartado">
+ * &lt;simpleType name="TipoCalculado">
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *     &lt;enumeration value="identificacion"/>
- *     &lt;enumeration value="devengo"/>
- *     &lt;enumeration value="partidas"/>
- *     &lt;enumeration value="complementaria"/>
- *     &lt;enumeration value="pago"/>
+ *     &lt;enumeration value="si"/>
+ *     &lt;enumeration value="no"/>
  *   &lt;/restriction>
  * &lt;/simpleType>
  * </pre>
  * 
  */
-@XmlType(name = "TipoTipoApartado")
+@XmlType(name = "TipoCalculado")
 @XmlEnum
-public enum TipoTipoApartado {
+public enum TipoCalculado {
 
-    @XmlEnumValue("identificacion")
-    IDENTIFICACION("identificacion"),
-    @XmlEnumValue("devengo")
-    DEVENGO("devengo"),
-    @XmlEnumValue("partidas")
-    PARTIDAS("partidas"),
-    @XmlEnumValue("complementaria")
-    COMPLEMENTARIA("complementaria"),
-    @XmlEnumValue("pago")
-    PAGO("pago");
+    @XmlEnumValue("si")
+    SI("si"),
+    @XmlEnumValue("no")
+    NO("no");
     private final String value;
 
-    TipoTipoApartado(String v) {
+    TipoCalculado(String v) {
         value = v;
     }
 
@@ -55,8 +46,8 @@ public enum TipoTipoApartado {
         return value;
     }
 
-    public static TipoTipoApartado fromValue(String v) {
-        for (TipoTipoApartado c: TipoTipoApartado.values()) {
+    public static TipoCalculado fromValue(String v) {
+        for (TipoCalculado c: TipoCalculado.values()) {
             if (c.value.equals(v)) {
                 return c;
             }

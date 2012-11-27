@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <head>
   <title>${form.titulo}</title>
-  <link rel="stylesheet" type="text/css" href="/au/~/css/formwork.css"/>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
-  <script src="/au/~/js/formwork.js">
-  </script>
+  <script src="/au/~/js/formwork.js"></script>
+  <link rel="stylesheet" type="text/css" href="/au/~/css/formwork.css"/>
  </head>
  
 <body>

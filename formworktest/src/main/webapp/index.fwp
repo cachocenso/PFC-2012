@@ -11,7 +11,7 @@
 	</descripcion>
 	<apartado id="ap1" tipo="identificacion" contenido="nif,representante,nombre" />
 	<apartado id="ap2" tipo="devengo"
-		contenido="fecha, ejercicio, periodo(0A 1T 2T 3T 4T)" />
+		contenido="ejercicio, periodo(0A 1T 2T 3T 4T), fecha" />
 	<apartado id="ap3" tipo="partidas" titulo="Autoliquidación">
 		<etiqueta
 			valor="A) Concepto tributario inventado nº 1" />
@@ -24,7 +24,7 @@
 			etiqueta="Base imponible (importe íntegro)"
 			tipo="cantidadNegativa" />
 		<partida id="p04" etiqueta="Tipo gravamen (8% o 10%)" tipo="cantidad" />
-		<partida id="p05" etiqueta="Cuota" tipo="cantidad"/>
+		<partida id="p05" etiqueta="Cuota" tipo="cantidad" calculado="si"/>
 	</apartado>
 	<apartado id="ap4" tipo="complementaria"/>
 	<apartado id="ap5" tipo="pago" />

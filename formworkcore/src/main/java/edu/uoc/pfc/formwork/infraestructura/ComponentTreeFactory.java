@@ -12,6 +12,7 @@ import edu.uoc.pfc.formwork.ui.PartidaCadena;
 import edu.uoc.pfc.formwork.ui.PartidaCantidad;
 import edu.uoc.pfc.formwork.ui.PartidaPeriodo;
 import edu.uoc.pfc.formwork.ui.TipoApartado;
+import edu.uoc.pfc.formwork.xml.TipoCalculado;
 import edu.uoc.pfc.formwork.xml.TipoComponente;
 import edu.uoc.pfc.formwork.xml.TipoEtiqueta;
 import edu.uoc.pfc.formwork.xml.TipoFormulario;
@@ -109,6 +110,7 @@ public class ComponentTreeFactory {
 				cantidad.setId(tipoPartida.getId());
 				cantidad.setEtiqueta(tipoPartida.getEtiqueta());
 				cantidad.setAdmiteNegativos(tipoPartida.getTipo() == TipoTipoPartida.CANTIDAD_NEGATIVA);
+				cantidad.setCalculado(tipoPartida.getCalculado() == TipoCalculado.SI);
 				apartado.addComponente(cantidad);
 			}
 		}
@@ -141,12 +143,13 @@ public class ComponentTreeFactory {
 			if ("ejercicio".equals(c.trim())) {
 				PartidaCadena ej = new PartidaCadena();
 				ej.setId(c);
-				
+				ej.setEtiqueta("Ejercicio");
 				apartado.addComponente(ej);
 			}
 			else if ("fecha".equals(c.trim())) {
 				PartidaCadena fech = new PartidaCadena();
 				fech.setId(c);
+				fech.setEtiqueta("Fecha");
 				apartado.addComponente(fech);
 			}
 			else if (c.trim().matches("periodo(.+)")) {
@@ -154,6 +157,7 @@ public class ComponentTreeFactory {
 				
 				PartidaPeriodo per = new PartidaPeriodo();
 				per.setId("periodo");
+				per.setEtiqueta("Periodo");
 				per.setPeriodos(Arrays.asList(periodo.split(" ")));
 				apartado.addComponente(per);
 			}

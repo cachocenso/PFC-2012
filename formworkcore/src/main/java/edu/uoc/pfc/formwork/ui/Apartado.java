@@ -77,17 +77,17 @@ public class Apartado extends Componente {
 			Template template = null;
 			Map<Object, Object> dataModel = new HashMap<Object, Object>();
 			
+			dataModel.put("ap", this);
+
 			switch (tipo) {
 			case identificacion:
 				template = configuration.getTemplate("templates/identificacion.ftl");
-				dataModel.put("ap", this);
 				break;
 			case devengo:
 				template = configuration.getTemplate("templates/devengo.ftl");
 				break;
 			case partidas:
 				template = configuration.getTemplate("templates/partidas.ftl");
-				dataModel.put("ap", this);
 				break;
 			case complementaria:
 				template = configuration.getTemplate("templates/complementaria.ftl");

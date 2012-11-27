@@ -7,7 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.drools.KnowledgeBase;
-import org.drools.runtime.StatefulKnowledgeSession;
+//import org.drools.runtime.StatefulKnowledgeSession;
 import org.drools.runtime.StatelessKnowledgeSession;
 
 import edu.uoc.pfc.formwork.infraestructura.Attributes;
