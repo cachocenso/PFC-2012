@@ -3,28 +3,25 @@
 
 <formulario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="http://www.uoc.edu/2012/fwp/formwork.xsd"
-	id="m250" 
+	id="mXXX" 
 	controlador="edu.uoc.pfc.formworktest.controller.TestController">
 	
-	<titulo>Modelo 250</titulo>
-	<descripcion> Gravamen Especial sobre Dividendos y Rentas de Fuente
-		Extranjera Derivados de la Transmisión de los Valores representativos
-		de los Fondos Propios de Entidades no Residentes en Territorio
-		Español. Modelo 250
+	<titulo>Modelo XXX</titulo>
+	<descripcion> Gravamen Especial Sobre Dos Conceptos Tributarios Que Me Acabo De Inventar. Modelo XXX
 	</descripcion>
-	<apartado id="ap1" tipo="identificacion" contenido="nif,nombre" />
+	<apartado id="ap1" tipo="identificacion" contenido="nif,representante,nombre" />
 	<apartado id="ap2" tipo="devengo"
 		contenido="fecha, ejercicio, periodo(0A 1T 2T 3T 4T)" />
 	<apartado id="ap3" tipo="partidas" titulo="Autoliquidación">
 		<etiqueta
-			valor="A) Dividendos o participaciones en beneficios de entidades no residentes en territorio" />
+			valor="A) Concepto tributario inventado nº 1" />
 		<partida id="p01" etiqueta="Base imponible (importe íntegro)"
 			tipo="cantidad" />
 		<partida id="p02" etiqueta="Tipo gravamen (8% o 10%)" tipo="cantidad" />
 		<etiqueta
-			valor="B) Transmisión de valores o participaciones de entidades no residentes en territorio español." />
+			valor="B) Concepto tributario inventado nº 2." />
 		<partida id="p03"
-			etiqueta="	B.1) Renta obtenida en la transmisión (con exclusión de la cuantía que deba declararse en la casilla [05])."
+			etiqueta="Base imponible (importe íntegro)"
 			tipo="cantidadNegativa" />
 		<partida id="p04" etiqueta="Tipo gravamen (8% o 10%)" tipo="cantidad" />
 		<partida id="p05" etiqueta="Cuota" tipo="cantidad"/>

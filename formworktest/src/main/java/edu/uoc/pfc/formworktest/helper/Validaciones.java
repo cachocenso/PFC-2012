@@ -57,4 +57,27 @@ public class Validaciones {
 		} else
 			return false;
 	}
+	
+	public static String formatNif(String nif) {
+		
+		if (nif.length() >= 9) {
+			return nif.substring(0, 9);
+		}
+		
+		
+		StringBuffer sb = new StringBuffer();
+		if (Character.isLetter(nif.charAt(0))) {
+			sb.append(nif.charAt(0));
+			nif = nif.substring(1);
+		}
+		
+		int cuantosCeros = 9 - sb.length() - nif.length();
+		
+		for (int i = 0; i < cuantosCeros; i++) {
+			sb.append('0');
+		}
+		sb.append(nif);
+		
+		return sb.toString().toUpperCase();
+	}
 }

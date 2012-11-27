@@ -9,7 +9,7 @@ import edu.uoc.pfc.formwork.ui.Formulario;
 import java.math.BigDecimal;
 import function edu.uoc.pfc.formworktest.helper.Validaciones.isNifNie;
 
-
+import function edu.uoc.pfc.formworktest.helper.Validaciones.formatNif;
 
 //declare any global variables here
 global Formulario theForm;
@@ -19,28 +19,33 @@ global Formulario theForm;
 rule "nif"
 	no-loop
     when
-        $p : Partida(id == "nif", isNifNie(value))
+        $p : Partida(id == "nif", $v:value, isNifNie(value))
     then
         //actions
-		modify($p) {setValue("00000101D")};
+		modify($p) { setValue(formatNif((String)$v)) };
 		System.out.println(">>>>>>>>> Valor cambiado." + $p.getValue());
 end
 
 rule "p01"
     
     when
-	    $p:Partida(id == "p01")
+	    Partida(id == "p01" || id == "p02" || id == "p03" || id == "p04")
     then
-	    BigDecimal $val1 = new BigDecimal($p.getValue().toString());
-	    
+	    BigDecimal $val1 = new BigDecimal(theForm.getPartida("p01").getValue().toString());
     	BigDecimal $val2 = new BigDecimal(theForm.getPartida("p02").getValue().toString());
+    	BigDecimal $val3 = new BigDecimal(theForm.getPartida("p03").getValue().toString());
+    	BigDecimal $val4 = new BigDecimal(theForm.getPartida("p04").getValue().toString());
     	
     	PartidaCantidad $p5 = (PartidaCantidad) theForm.getPartida("p05");
-    	BigDecimal $cien =  new BigDecimal("100");
+    	
+    	BigDecimal $porcentaje =  new BigDecimal("0.01");
 
         System.out.println(">>>>>>>>>>>>>>> val1: " + $val1 );
         System.out.println(">>>>>>>>>>>>>>> val2 " + $val2 );
-    	$p5.setValue( $val1.multiply($val2).divide($cien) );
-        System.out.println(">>>>>>>>>>>>>>> p05 cambió: " + $p5.getValue() );
+        System.out.println(">>>>>>>>>>>>>>> val3: " + $val3 );
+        System.out.println(">>>>>>>>>>>>>>> val4 " + $val4 );
+        
+    	$p5.setValue( $val1.multiply($val2).multiply($porcentaje).add($val3.multiply($val4).multiply($porcentaje)));
+        System.out.println(">>>>>>>>>>>>>>> p05 valor: " + $p5.getValue() );
 
 end

@@ -22,7 +22,7 @@
 		  </table>
           <div style="float: none;">&#160;</div>
 		</div>
-		  		
+		<div style="float: none;">&#160;</div>	
 		  		<#-- COMMENTARIO
 				<tr>
 					<td class="etiqueta">

@@ -6,7 +6,6 @@
 	id="WebApp_ID" version="3.0">
 	<display-name>formworktest</display-name>
 	<welcome-file-list>
-		<welcome-file>index.fwp</welcome-file>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
 	<servlet>

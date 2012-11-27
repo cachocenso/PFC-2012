@@ -80,6 +80,7 @@ public class Apartado extends Componente {
 			switch (tipo) {
 			case identificacion:
 				template = configuration.getTemplate("templates/identificacion.ftl");
+				dataModel.put("ap", this);
 				break;
 			case devengo:
 				template = configuration.getTemplate("templates/devengo.ftl");
