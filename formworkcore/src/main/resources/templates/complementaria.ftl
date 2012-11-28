@@ -3,7 +3,7 @@
 	<table>
 		<tr>
 			<td class="etiqueta">
-				Si esta autoliquidaci&oacute:n es complementaria de otra autoliquidaci&oacute;n anterior correspondiente al mismo concepto, ejercicio y fecha de devengo se&ntilde;&aacute;lelo marcando esta casilla.
+				Si esta autoliquidaci&oacute;n es complementaria de otra autoliquidaci&oacute;n anterior se&ntilde;&aacute;lelo marcando esta casilla.
 			</td>
 			<td class="partida">
 				<input id="complementaria" type="checkbox"/>

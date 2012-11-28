@@ -3,6 +3,9 @@
  */
 package edu.uoc.pfc.formworktest.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -40,15 +43,22 @@ public class TestController implements IController {
 		KnowledgeBase knowledgeBase = FormworkContext.getKnowledgeBase();
 		
 		
-//		StatefulKnowledgeSession ksession = knowledgeBase.newStatefulKnowledgeSession();
 		StatelessKnowledgeSession ksession = knowledgeBase.newStatelessKnowledgeSession();
-		ksession.setGlobal("theForm", session.getAttribute(Attributes.FWCOMPONENTS));
 		
+		ksession.setGlobal("theForm", session.getAttribute(Attributes.FWCOMPONENTS));
+
+		List partidasAfectadas = (List) session.getAttribute(Attributes.FWLISTAPARTIDAS);
+		
+		if (partidasAfectadas == null) {
+			partidasAfectadas = new ArrayList<String>();
+			session.setAttribute(Attributes.FWLISTAPARTIDAS, partidasAfectadas);
+		}
+		
+		partidasAfectadas.clear();
+		ksession.setGlobal("partidasAfectadas", partidasAfectadas);
 		logger.info("Antes de aplicar las reglas: " + componente.getValue());
 		
 		ksession.execute(componente);
-//		ksession.insert(componente);
-//		ksession.fireAllRules();
 		logger.info("Después de aplicar las reglas: " + componente.getValue());
 	}
 

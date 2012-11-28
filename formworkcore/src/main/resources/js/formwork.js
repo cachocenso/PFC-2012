@@ -5,7 +5,10 @@
 	 			dataType: "json",
 	 			data: {"id": this.id, "value":this.value},
 	 			success:function(result){
-	 				$("#"+result.id).val(result.value);
+	 				$.each(result, function(i, object){
+	 					$("#"+object.id).val(object.value);
+	 				})
+	 				
 			  }});	 	
 		});
 	 });

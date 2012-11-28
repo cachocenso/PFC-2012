@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Writer;
 import java.lang.reflect.Field;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -92,10 +93,14 @@ public class FormworkServlet extends HttpServlet {
 			
 			if (partida !=  null) {
 				event.setTarget(partida);
-				event.setValue(req.getParameter("value"));
+				event.setNewValue(req.getParameter("value"));
 				controller.onEvent(event);
+				// Recojo la lista de partidas afectadas.
+				List<?> partidasAfectadas = (List<?>) session.getAttribute(Attributes.FWLISTAPARTIDAS);
+				
 				Gson gson = new Gson();
-				String jsonResponse = gson.toJson(partida);
+				
+				String jsonResponse = gson.toJson(partidasAfectadas);
 				resp.setContentType("application/json");
 				resp.getWriter().print(jsonResponse);
 			}

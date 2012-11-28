@@ -34,7 +34,7 @@ public class FormworkEvent {
 	/**
 	 * @param parameter
 	 */
-	public void setValue(String value) {
+	public void setNewValue(String value) {
 		this.value = value;
 	}
 
