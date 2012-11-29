@@ -8,6 +8,7 @@ import javax.xml.bind.JAXBException;
 import edu.uoc.pfc.formwork.ui.Apartado;
 import edu.uoc.pfc.formwork.ui.Etiqueta;
 import edu.uoc.pfc.formwork.ui.Formulario;
+import edu.uoc.pfc.formwork.ui.PartidaBoolean;
 import edu.uoc.pfc.formwork.ui.PartidaCadena;
 import edu.uoc.pfc.formwork.ui.PartidaCantidad;
 import edu.uoc.pfc.formwork.ui.PartidaPeriodo;
@@ -71,9 +72,69 @@ public class ComponentTreeFactory {
 		case partidas:
 			createPartidasPartidas(apartado, jaxbApartado);
 			break;
+		case complementaria:
+			createPartidasComplementarias(apartado, jaxbApartado);
+			break;
+		case pago:
+			createPartidasPago(apartado, jaxbApartado);
+			break;
 		default:
 			break;
 		}
+	}
+
+	/**
+	 * @param apartado
+	 * @param jaxbApartado
+	 */
+	private static void createPartidasPago(Apartado apartado,
+			edu.uoc.pfc.formwork.xml.TipoApartado jaxbApartado) {
+		if (apartado.getTipo() != TipoApartado.pago) {
+			throw new IllegalArgumentException(apartado.getTipo().name());
+		}
+		
+		apartado.setId(jaxbApartado.getId());
+		apartado.setTitulo(jaxbApartado.getTitulo());
+		
+		PartidaCantidad partidaCantidad = new PartidaCantidad();
+		partidaCantidad.setId("imp");
+		partidaCantidad.setEtiqueta("Importe.");
+		apartado.addComponente(partidaCantidad);
+		
+		PartidaCadena nrc = new PartidaCadena();
+		nrc.setId("nrc");
+		nrc.setEtiqueta("Número de referencia completo (NRC).");
+		apartado.addComponente(nrc);
+		
+		
+	}
+
+	/**
+	 * @param apartado
+	 * @param jaxbApartado
+	 */
+	private static void createPartidasComplementarias(Apartado apartado,
+			edu.uoc.pfc.formwork.xml.TipoApartado jaxbApartado) {
+		
+		if (apartado.getTipo() != TipoApartado.complementaria) {
+			throw new IllegalArgumentException(apartado.getTipo().name());
+		}
+		
+		apartado.setId(jaxbApartado.getId());
+		apartado.setTitulo(jaxbApartado.getTitulo());
+		
+		PartidaBoolean partidaBoolean = new PartidaBoolean();
+		partidaBoolean.setId("comple");
+		partidaBoolean.setEtiqueta("Si esta autoliquidación es complementaria de otra " +
+									"autoliquidación anterior señálelo marcando esta casilla.");
+		apartado.addComponente(partidaBoolean);
+		
+		PartidaCadena justificante = new PartidaCadena();
+		justificante.setId("njust");
+		justificante.setEtiqueta("Indique a continuación el número de justificante " +
+								"de la declaración anterior");
+		apartado.addComponente(justificante);
+		
 	}
 
 	/**

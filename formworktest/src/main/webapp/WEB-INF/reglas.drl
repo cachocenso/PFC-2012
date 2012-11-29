@@ -39,6 +39,7 @@ rule "p01"
     	BigDecimal $val4 = new BigDecimal(theForm.getPartida("p04").getValue().toString());
     	
     	PartidaCantidad $p5 = (PartidaCantidad) theForm.getPartida("p05");
+    	PartidaCantidad $i = (PartidaCantidad) theForm.getPartida("imp");
     	
     	BigDecimal $porcentaje =  new BigDecimal("0.01");
 
@@ -48,8 +49,11 @@ rule "p01"
         System.out.println(">>>>>>>>>>>>>>> val4 " + $val4 );
         
     	$p5.setValue( $val1.multiply($val2).multiply($porcentaje).add($val3.multiply($val4).multiply($porcentaje)));
+    	$i.setValue($p5.getValue());
     	partidasAfectadas.add($p);
         partidasAfectadas.add($p5);
+        partidasAfectadas.add($i);
         System.out.println(">>>>>>>>>>>>>>> p05 valor: " + $p5.getValue() );
+        System.out.println(">>>>>>>>>>>>>>> i valor: " + $i.getValue() );
 
 end

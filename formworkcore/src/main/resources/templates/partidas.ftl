@@ -3,8 +3,8 @@
 		  <table>
 		  		<#list ap.contenido as comp>
 		  			<#if comp.class.simpleName == "Etiqueta">
-							<tr>
-								<td colspan="2">
+							<tr>  
+								<td colspan="2" class="subtitulo">
 									${comp.valor}
 								</td>
 							</tr>
@@ -15,9 +15,9 @@
 							</td>
 							<td class="partida">
 								<#if comp.calculado>
-									<input id="${comp.id}" type="text" maxlength="18" size="18" disabled />
+									<input id="${comp.id}" class="numberAlign" type="text" maxlength="18" size="18" disabled />
 								<#else>
-									<input id="${comp.id}" type="text" maxlength="18" size="18" />
+									<input id="${comp.id}" class="numberAlign" type="text" maxlength="18" size="18" />
 								</#if>
 							</td>
 						</tr>

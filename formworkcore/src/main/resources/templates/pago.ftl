@@ -3,18 +3,18 @@
 	<table>
 		<tr>
 			<td class="etiqueta">
-				Importe.
+				${ap.contenido[0].etiqueta}
 			</td>
 			<td class="partida">
-				<input id="importe" type="text" maxlength="18" size="18"/>
+				<input id="${ap.contenido[0].id}" class="numberAlign" type="text" disabled="disabled" maxlength="18" size="18"/>
 			</td>
 		</tr>
 		<tr>
 			<td class="etiqueta">
-				N&uacute;mero de referencia completo (NRC).
+				${ap.contenido[1].etiqueta}
 			</td>
 			<td class="partida">
-				<input id="nrc" type="text" maxlength="13" size="13"/>
+				<input id="${ap.contenido[1].id}" type="text" maxlength="13" size="13"/>
 			</td>
 		</tr>
 	</table>

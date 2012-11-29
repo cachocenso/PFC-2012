@@ -3,18 +3,18 @@
 	<table>
 		<tr>
 			<td class="etiqueta">
-				Si esta autoliquidaci&oacute;n es complementaria de otra autoliquidaci&oacute;n anterior se&ntilde;&aacute;lelo marcando esta casilla.
+				${ap.contenido[0].etiqueta}				
 			</td>
 			<td class="partida">
-				<input id="complementaria" type="checkbox"/>
+				<input id="${ap.contenido[0].id}" type="checkbox"/>
 			</td>
 		</tr>
 		<tr>
 			<td class="etiqueta">
-				En este caso, indique a continuaci&oacute;n el n&uacute;mero de justificante de la declaraci&oacute;n anterior
+				${ap.contenido[1].etiqueta}				
 			</td>
 			<td class="partida">
-				<input id="justificante" type="text" maxlength="13" size="13"/>
+				<input id="${ap.contenido[1].id}" type="text" maxlength="13" size="13"/>
 			</td>
 		</tr>
 	</table>
