@@ -31,6 +31,7 @@ table  {
 
 td.etiqueta {
 	width: 60%;
+	font-weight: bold;
 }
 
 td.partida {
