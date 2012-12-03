@@ -7,7 +7,13 @@
 	 			success:function(result){
 	 				$.each(result, function(i, object){
 	 					if (object.tipoMensaje != null) {
-	 						alert("¡Oh!, que error");
+	 						alert(object.idPartida + " " + object.mensaje);
+	 						$("#"+object.idPartida).tooltip({
+	 							content: object.mensaje,
+	 							item: "input"
+	 						});
+	 						
+	 						tooltips.tooltip("open");
 	 					} else {
 	 						$("#"+object.id).val(object.value);
 	 					}

@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <head>
   <title>${form.titulo}</title>
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
-  <script src="/au/~/js/formwork.js"></script>
   <link rel="stylesheet" type="text/css" href="/au/~/css/formwork.css"/>
+  <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css"/>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+  <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>	
+  <script src="/au/~/js/formwork.js"></script>
  </head>
  
 <body>

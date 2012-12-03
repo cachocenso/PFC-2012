@@ -48,7 +48,8 @@ rule "nif-ok"
         $p : Partida((id == "nif" || id == "nifr"), $v:value, isNifNie(value))
     then
         //actions
-		modify($p) { setValue(formatNif((String)$v)) };
+		// modify($p) { setValue(formatNif((String)$v)) };
+		$p.setValue(formatNif((String)$v));
 		partidasAfectadas.add($p);
 		System.out.println(">>>>>>>>> Valor cambiado." + $p.getValue());
 end
