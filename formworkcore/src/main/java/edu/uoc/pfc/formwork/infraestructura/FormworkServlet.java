@@ -76,31 +76,45 @@ public class FormworkServlet extends HttpServlet {
 	/**
 	 * @param req
 	 * @param resp
-	 * @throws IOException 
+	 * @throws IOException
 	 */
+	@SuppressWarnings("unchecked")
 	private void processAjaxRequests(HttpServletRequest req,
 			HttpServletResponse resp) throws IOException {
 
 		HttpSession session = req.getSession();
-		IController controller = (IController) session.getAttribute(
-				Attributes.FWCONTROLLER);
-		
+		IController controller = (IController) session
+				.getAttribute(Attributes.FWCONTROLLER);
+
 		if (controller != null) {
 			FormworkEvent event = new FormworkEvent();
-			Formulario formulario = (Formulario) session.getAttribute(Attributes.FWCOMPONENTS);
-			
+			Formulario formulario = (Formulario) session
+					.getAttribute(Attributes.FWCOMPONENTS);
+
 			Partida<?> partida = formulario.getPartida(req.getParameter("id"));
-			
-			if (partida !=  null) {
+
+			if (partida != null) {
 				event.setTarget(partida);
 				event.setNewValue(req.getParameter("value"));
 				controller.onEvent(event);
-				// Recojo la lista de partidas afectadas.
-				List<?> partidasAfectadas = (List<?>) session.getAttribute(Attributes.FWLISTAPARTIDAS);
-				
+
+				// Recojo la lista de los posibles errores.
+				List<Mensaje> errores = (List<Mensaje>) session
+						.getAttribute(Attributes.FWLISTAERRORES);
+
 				Gson gson = new Gson();
-				
-				String jsonResponse = gson.toJson(partidasAfectadas);
+				String jsonResponse;
+
+				if (errores.size() > 0) {
+					jsonResponse = gson.toJson(errores);
+				} else {
+					// No hubo errores. Recojo la lista de partidas afectadas.
+					List<?> partidasAfectadas = (List<?>) session
+							.getAttribute(Attributes.FWLISTAPARTIDAS);
+
+					jsonResponse = gson.toJson(partidasAfectadas);
+				}
+
 				resp.setContentType("application/json");
 				resp.getWriter().print(jsonResponse);
 			}

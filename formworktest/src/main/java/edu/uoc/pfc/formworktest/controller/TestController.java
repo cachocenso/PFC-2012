@@ -15,6 +15,7 @@ import org.drools.runtime.StatelessKnowledgeSession;
 
 import edu.uoc.pfc.formwork.infraestructura.Attributes;
 import edu.uoc.pfc.formwork.infraestructura.FormworkContext;
+import edu.uoc.pfc.formwork.infraestructura.Mensaje;
 import edu.uoc.pfc.formwork.infraestructura.Session;
 import edu.uoc.pfc.formwork.ui.IController;
 import edu.uoc.pfc.formwork.ui.Partida;
@@ -50,12 +51,19 @@ public class TestController implements IController {
 		List partidasAfectadas = (List) session.getAttribute(Attributes.FWLISTAPARTIDAS);
 		
 		if (partidasAfectadas == null) {
-			partidasAfectadas = new ArrayList<String>();
+			partidasAfectadas = new ArrayList<Object>();
 			session.setAttribute(Attributes.FWLISTAPARTIDAS, partidasAfectadas);
 		}
 		
-		partidasAfectadas.clear();
+		List<Mensaje> listaErrores = (List<Mensaje>)session.getAttribute(Attributes.FWLISTAERRORES);
+		if (listaErrores == null) {
+			listaErrores = new ArrayList<Mensaje>();
+			session.setAttribute(Attributes.FWLISTAERRORES, listaErrores);
+		}
+		
 		ksession.setGlobal("partidasAfectadas", partidasAfectadas);
+		ksession.setGlobal("errores", listaErrores);
+		
 		logger.info("Antes de aplicar las reglas: " + componente.getValue());
 		
 		ksession.execute(componente);
