@@ -39,7 +39,7 @@ public class FormworkServlet extends HttpServlet {
 			throws ServletException {
 
 		String uri = req.getRequestURI();
-
+		logger.info("URI recibida: " + uri);
 		try {
 			if (uri.indexOf("/au/") != -1) {
 				processAuRequest(req, resp);
@@ -135,8 +135,8 @@ public class FormworkServlet extends HttpServlet {
 	private void processResourceRequest(String uri, HttpServletResponse resp)
 			throws IOException {
 		logger.info("Recurso solicitado: " + uri);
-		InputStream resourceStream = getClass().getClassLoader()
-				.getResourceAsStream(uri);
+		InputStream resourceStream = getClass().getResourceAsStream(uri);
+		logger.info("Input stream " + resourceStream);
 		ServletOutputStream respStream = resp.getOutputStream();
 		IOUtils.copy(resourceStream, respStream);
 

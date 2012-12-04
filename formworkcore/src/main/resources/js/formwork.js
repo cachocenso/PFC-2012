@@ -33,7 +33,7 @@ $(document).ready(function() {
 
 	$("input").change(function() {
 		$.ajax({
-			url : "/au/update",
+			url : "au/update",
 			type : "post",
 			dataType : "json",
 			data : {
@@ -58,7 +58,7 @@ $(document).ready(function() {
 				} else if (result.resultado == "SUCCESS") {
 					$.each(result.responseObjects, function(j, partida) {
 						$("#" + partida.id).val(partida.value);
-						$("#" + partida.id).tooltip("destroy");
+						//$("#" + partida.id).tooltip("destroy");
 					});
 				}
 			}
