@@ -1,7 +1,8 @@
 /* Inicialización en español para la extensión 'UI date picker' para jQuery. */
 /* Traducido por Vester (xvester@gmail.com). */
-jQuery(function($){
-$.datepicker.regional['es'] = {		closeText : 'Cerrar',
+jQuery(function($) {
+	$.datepicker.regional['es'] = {
+		closeText : 'Cerrar',
 		prevText : '&#x3C;Ant',
 		nextText : 'Sig&#x3E;',
 		currentText : 'Hoy',
@@ -40,22 +41,25 @@ $(document).ready(function() {
 				"value" : this.value
 			},
 			success : function(result) {
-				$.each(result, function(i, object) {
-					if (object.tipoMensaje != null) {
-						var partida = "#" + object.idPartida;
+				if (result.resultado == "ERROR") {
+					$.each(result.responseObjects, function(j, error) {
+						var partida = "#" + error.idPartida;
 
 						$(partida).tooltip({
-							content : object.mensaje,
+							content : error.mensaje,
 							items : "input",
+							tooltipClass : "ui-state-error",
 							show : true
 						});
 
 						$(partida).tooltip("open");
-					} else {
-						$("#" + object.id).val(object.value);
-					}
-				})
 
+					});
+				} else if (result.resultado == "SUCCESS") {
+					$.each(result.responseObjects, function(j, partida) {
+						$("#" + partida.id).val(partida.value);
+					});
+				}
 			}
 		});
 	});

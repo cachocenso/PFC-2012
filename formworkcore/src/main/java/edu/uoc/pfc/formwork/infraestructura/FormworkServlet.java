@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Writer;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -21,6 +20,7 @@ import org.xml.sax.SAXException;
 
 import com.google.gson.Gson;
 
+import edu.uoc.pfc.formwork.infraestructura.ResponseJson.Resultado;
 import edu.uoc.pfc.formwork.ui.Formulario;
 import edu.uoc.pfc.formwork.ui.HTMLRenderer;
 import edu.uoc.pfc.formwork.ui.IController;
@@ -104,23 +104,25 @@ public class FormworkServlet extends HttpServlet {
 						.getAttribute(Attributes.FWLISTAERRORES);
 
 				Gson gson = new Gson();
-				String jsonResponse;
+				String serializedResponse;
 
-				List<Object> responseList = new ArrayList<Object>();
+				ResponseJson responseJson = new ResponseJson();
 				
 				if (errores.size() > 0) {
-					
-					jsonResponse = gson.toJson(errores);
+					responseJson.setResultado(Resultado.ERROR);
+					responseJson.setResponseObjects(errores);
 				} else {
 					// No hubo errores. Recojo la lista de partidas afectadas.
 					List<?> partidasAfectadas = (List<?>) session
 							.getAttribute(Attributes.FWLISTAPARTIDAS);
-
-					jsonResponse = gson.toJson(partidasAfectadas);
+					responseJson.setResultado(Resultado.SUCCESS);
+					responseJson.setResponseObjects(partidasAfectadas);
 				}
-
+				
+				// Devolvemos la respuesta.
+				serializedResponse = gson.toJson(responseJson);
 				resp.setContentType("application/json");
-				resp.getWriter().print(jsonResponse);
+				resp.getWriter().print(serializedResponse);
 			}
 		}
 	}
