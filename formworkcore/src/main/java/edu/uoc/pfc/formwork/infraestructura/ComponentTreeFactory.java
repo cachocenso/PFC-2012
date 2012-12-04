@@ -209,7 +209,7 @@ public class ComponentTreeFactory {
 			}
 			else if ("fecha".equals(c.trim())) {
 				PartidaCadena fech = new PartidaCadena();
-				fech.setId(c);
+				fech.setId(c.trim());
 				fech.setEtiqueta("Fecha");
 				apartado.addComponente(fech);
 			}

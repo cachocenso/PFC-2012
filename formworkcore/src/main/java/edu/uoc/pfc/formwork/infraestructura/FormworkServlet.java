@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Writer;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -105,7 +106,10 @@ public class FormworkServlet extends HttpServlet {
 				Gson gson = new Gson();
 				String jsonResponse;
 
+				List<Object> responseList = new ArrayList<Object>();
+				
 				if (errores.size() > 0) {
+					
 					jsonResponse = gson.toJson(errores);
 				} else {
 					// No hubo errores. Recojo la lista de partidas afectadas.

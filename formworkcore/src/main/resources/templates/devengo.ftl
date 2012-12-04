@@ -24,7 +24,7 @@
 			    <div style="float: left; width: 33%">
 				      <div style="margin-left: 2px">${comp.etiqueta}</div>
 				      <div style="margin-left: 2px">
-				        <input id="${comp.id}" type="text" maxlength="10" size="10"/>
+				        <input id="${comp.id}" type="text" maxlength="10" size="10" fecha="fecha"/>
 				      </div>
 			    </div>
 	    	</#if>
