@@ -25,13 +25,21 @@ jQuery(function($) {
 	$.datepicker.setDefaults($.datepicker.regional['es']);
 });
 
+
+// Establezco un manejador para el evento onReady del documento
+// mediante jQuery
 $(document).ready(function() {
 
+	// Inicializo los campos fecha con jQuery UI datepicker
 	$(function() {
 		$("[fecha]").datepicker();
 	});
 
+	// Establezco un manejador para los eventos 
+	// onChange de los elementos input
 	$("input").change(function() {
+		// Cada vez que un input cambie su valor
+		// se hace una llamada AJAX al servidor.
 		$.ajax({
 			url : "au/update",
 			type : "post",
@@ -58,7 +66,14 @@ $(document).ready(function() {
 				} else if (result.resultado == "SUCCESS") {
 					$.each(result.responseObjects, function(j, partida) {
 						$("#" + partida.id).val(partida.value);
-						//$("#" + partida.id).tooltip("destroy");
+						try {
+							$("#" + partida.id).tooltip("destroy");
+						} catch (e) {
+							// Si el elemento $("#" + partida.id)
+							// no tenia un tooltip asignado por un erro
+							// un ejecución anterior se produce una excepción
+							// que puedo ignorar.
+						}
 					});
 				}
 			}
