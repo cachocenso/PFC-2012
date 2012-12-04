@@ -58,6 +58,7 @@ $(document).ready(function() {
 				} else if (result.resultado == "SUCCESS") {
 					$.each(result.responseObjects, function(j, partida) {
 						$("#" + partida.id).val(partida.value);
+						$("#" + partida.id).tooltip("destroy");
 					});
 				}
 			}

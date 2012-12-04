@@ -3,11 +3,11 @@
 
 <formulario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="http://www.uoc.edu/2012/fwp/formwork.xsd"
-	id="mXXX" 
+	id="m666" 
 	controlador="edu.uoc.pfc.formworktest.controller.TestController">
 	
-	<titulo>Modelo XXX</titulo>
-	<descripcion> Gravamen Especial Sobre Dos Conceptos Tributarios Que Me Acabo De Inventar. Modelo XXX
+	<titulo>Modelo 666</titulo>
+	<descripcion> Gravamen Especial Sobre Dos Conceptos Tributarios Que Me Acabo De Inventar. Modelo 666
 	</descripcion>
 	<apartado id="ap1" tipo="identificacion" contenido="nif,representante,nombre" />
 	<apartado id="ap2" tipo="devengo"
