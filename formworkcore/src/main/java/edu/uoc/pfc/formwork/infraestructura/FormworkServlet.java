@@ -30,6 +30,14 @@ import edu.uoc.pfc.formwork.ui.event.FormworkEvent;
 import edu.uoc.pfc.formwork.xml.TipoFormulario;
 import edu.uoc.pfc.formwork.xml.XMLLoader;
 
+/**
+ * Servlet central del framework. Recibe y trata todas las peticiones,
+ * AJAX o de carga de recursos, que se le hagan desde el cliente.
+ * 
+ * 
+ * @author Alberto Díaz en 05/12/2012
+ *
+ */
 @SuppressWarnings("serial")
 public class FormworkServlet extends HttpServlet {
 	private static Logger logger = Logger.getLogger(FormworkServlet.class);
