@@ -137,6 +137,14 @@ public class FormworkServlet extends HttpServlet {
 		logger.info("Recurso solicitado: " + uri);
 		InputStream resourceStream = getClass().getResourceAsStream(uri);
 		logger.info("Input stream " + resourceStream);
+		// El navegador Opera no interpreta bien los recursos
+		// si la respuesta no lleva el tipO MIME adecuado.
+		if (uri.endsWith(".css")) {
+			resp.setContentType("text/css");
+		}
+		else if (uri.endsWith(".js")){
+			resp.setContentType("text/javascript");
+		}
 		ServletOutputStream respStream = resp.getOutputStream();
 		IOUtils.copy(resourceStream, respStream);
 
