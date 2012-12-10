@@ -10,7 +10,7 @@ public class PartidaLista extends Partida<String> {
 	private List<String> values;
 	
 	@Override
-	public String render(IRenderer renderer) {
+	public String render() {
 		return "Soy la partida" + getId();
 		
 	}

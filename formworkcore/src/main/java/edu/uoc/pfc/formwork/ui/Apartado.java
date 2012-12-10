@@ -10,7 +10,6 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import edu.uoc.pfc.formwork.infraestructura.FormworkContext;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -68,10 +67,11 @@ public class Apartado extends Componente {
 	}
 
 	@Override
-	public String render(IRenderer renderer) {
+	public String render() {
 		StringWriter stringWriter = new StringWriter();
 
-		Configuration configuration = FormworkContext.getTemplateConfig();
+		Configuration configuration = new Configuration();
+		configuration.setClassForTemplateLoading(getClass(), "/");
 
 		try {
 			Template template = null;

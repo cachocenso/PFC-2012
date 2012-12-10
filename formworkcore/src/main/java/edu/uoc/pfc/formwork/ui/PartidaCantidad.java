@@ -21,7 +21,7 @@ public class PartidaCantidad extends Partida<BigDecimal> {
 	}
 
 	@Override
-	public String render(IRenderer renderer) {
+	public String render() {
 		return "Soy la partida" + getId();
 		
 	}

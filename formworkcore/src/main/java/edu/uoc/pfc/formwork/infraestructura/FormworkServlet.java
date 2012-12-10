@@ -21,6 +21,7 @@ import org.xml.sax.SAXException;
 import com.google.gson.Gson;
 
 import edu.uoc.pfc.formwork.infraestructura.ResponseJson.Resultado;
+import edu.uoc.pfc.formwork.infraestructura.annotation.Session;
 import edu.uoc.pfc.formwork.ui.Formulario;
 import edu.uoc.pfc.formwork.ui.HTMLRenderer;
 import edu.uoc.pfc.formwork.ui.IController;
@@ -176,10 +177,10 @@ public class FormworkServlet extends HttpServlet {
 				uri.substring(uri.lastIndexOf('/')));
 
 		try {
-			TipoFormulario formulario = XMLLoader.parseFile(
+			TipoFormulario tipoFormulario = XMLLoader.parseFile(
 					TipoFormulario.class, resource);
 			Formulario theForm = ComponentTreeFactory
-					.createComponentsTree(formulario);
+					.createComponentsTree(tipoFormulario);
 
 			HttpSession session = req.getSession(true);
 			session.setAttribute(Attributes.FWCOMPONENTS, theForm);

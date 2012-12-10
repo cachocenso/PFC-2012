@@ -19,36 +19,30 @@ public class FormworkContext {
 	/**
 	 * Base de conocimiento de DROOLS
 	 */
-	private static KnowledgeBase knowledgeBase;
+	private KnowledgeBase knowledgeBase;
 	/**
 	 * Renderer de la página de la aplicación
 	 */
-	private static IRenderer renderer;
-	private static Configuration configuration;
+	private IRenderer renderer;
+	private Configuration configuration;
 
 
-	/**
-	 * Contructor privado para una utility class
-	 */
-	private FormworkContext() {
-		// TODO Auto-generated constructor stub
-	}
 	
 	/*-- GETTERS AND SETTERS --*/
-	public static KnowledgeBase getKnowledgeBase() {
+	public KnowledgeBase getKnowledgeBase() {
 		return knowledgeBase;
 	}
 
-	public static void setKnowledgeBase(KnowledgeBase knowledgeBase) {
-		FormworkContext.knowledgeBase = knowledgeBase;
+	public void setKnowledgeBase(KnowledgeBase knowledgeBase) {
+		this.knowledgeBase = knowledgeBase;
 	}
 
 	public IRenderer getRenderer() {
 		return renderer;
 	}
 	
-	public static void setRenderer(IRenderer renderer) {
-		FormworkContext.renderer = renderer;
+	public void setRenderer(IRenderer renderer) {
+		this.renderer = renderer;
 		
 		
 	}
@@ -57,15 +51,15 @@ public class FormworkContext {
 	 * setter para el objeto Configuration de freemarker
 	 * @param configuration
 	 */
-	public static void setTemplateConfig(Configuration configuration) {
-		FormworkContext.configuration = configuration;
+	public void setTemplateConfig(Configuration configuration) {
+		this.configuration = configuration;
 
 	}
 
 	/**
 	 * @return the configuration
 	 */
-	public static Configuration getTemplateConfig() {
+	public Configuration getTemplateConfig() {
 		return configuration;
 	}
 

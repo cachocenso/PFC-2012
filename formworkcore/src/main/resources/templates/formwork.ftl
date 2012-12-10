@@ -13,7 +13,7 @@
   <div class="contenido">
 	<div class="titulo">${form.descripcion}</div>
 	<#list form.apartados as ap>
-		${ap.render(null)}
+		${ap.render()}
 	</#list>
     
 	<p/>

@@ -19,10 +19,8 @@ import org.drools.io.ResourceFactory;
 import org.drools.runtime.StatefulKnowledgeSession;
 import org.xml.sax.SAXException;
 
-import edu.uoc.pfc.formwork.ui.HTMLRenderer;
 import edu.uoc.pfc.formwork.xml.TipoFW;
 import edu.uoc.pfc.formwork.xml.XMLLoader;
-import freemarker.template.Configuration;
 
 
 /**
@@ -37,8 +35,9 @@ public class FormworkListener implements ServletContextListener {
 	private static Logger logger = Logger.getLogger(FormworkListener.class);
 	
 	public void contextDestroyed(ServletContextEvent event) {
+		FormworkContext fwctx = (FormworkContext) event.getServletContext().getAttribute(Attributes.FWCONTEXT);
 		for (StatefulKnowledgeSession session:
-							FormworkContext.getKnowledgeBase().getStatefulKnowledgeSessions()) {
+							fwctx.getKnowledgeBase().getStatefulKnowledgeSessions()) {
 			session.dispose();
 			logger.info("KnoledgSession " + session.getId() + " cerrada");
 		}
@@ -49,7 +48,8 @@ public class FormworkListener implements ServletContextListener {
 	public void contextInitialized(ServletContextEvent event) {
 		// Obtener el ServletContext
 		ServletContext servletContext = event.getServletContext();
-
+		
+		
 		// Cargar la configurción del framework.
 		loadFrameWorkConfig(servletContext);
 
@@ -57,30 +57,15 @@ public class FormworkListener implements ServletContextListener {
 		KnowledgeBase base = createKnowledgeBase(servletContext);
 
 		// Almacenar KnowledgeBase en contexto.
-		FormworkContext.setKnowledgeBase(base);
+		FormworkContext fwctx = new FormworkContext();
+		fwctx.setKnowledgeBase(base);
 
-		// Almacenar el renderer en el contexto.
-		FormworkContext.setRenderer(new HTMLRenderer());
-		
-		//Crear y almacenar la configuración de Freemarker.
-		createFreeMarkerConfig();
-		
 		// Almacenar contexto en ServletContext.
-//		servletContext.setAttribute(Attributes.FWCONTEXT, formworkContext);
+		servletContext.setAttribute(Attributes.FWCONTEXT, fwctx);
 		
 		logger.info("Aplicación iniciada correctamente");
 	}
 
-	/**
-	 */
-	private void createFreeMarkerConfig() {
-		final Configuration configuration = new Configuration();
-		
-		configuration.setClassForTemplateLoading(getClass(), "/");
-		
-		FormworkContext.setTemplateConfig(configuration);
-		
-	}
 
 	private void loadFrameWorkConfig(ServletContext servletContext) {
 		InputStream thePage = servletContext

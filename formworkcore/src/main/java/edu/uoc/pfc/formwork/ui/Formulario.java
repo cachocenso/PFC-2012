@@ -11,8 +11,8 @@ public class Formulario extends Componente {
 	private String nombreControlador;
 	
 	@Override
-	public String render(IRenderer renderer) {
-		return "Soy el formulario";
+	public String render() {
+		return null;
 	}
 
 	public void addApartado(Apartado apartado) {

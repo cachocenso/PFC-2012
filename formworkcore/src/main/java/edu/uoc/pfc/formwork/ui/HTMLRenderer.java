@@ -7,7 +7,6 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import edu.uoc.pfc.formwork.infraestructura.FormworkContext;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -15,6 +14,8 @@ import freemarker.template.TemplateException;
 public class HTMLRenderer implements IRenderer {
 
 	private static Logger logger = Logger.getLogger(HTMLRenderer.class);
+	
+	
 	
 	/* (non-Javadoc)
 	 * @see edu.uoc.pfc.formwork.ui.IRenderer#render(edu.uoc.pfc.formwork.ui.Componente)
@@ -25,7 +26,8 @@ public class HTMLRenderer implements IRenderer {
 			throw new IllegalArgumentException("Se esperaba un objeto Formulario");
 		}
 		
-		Configuration configuration = FormworkContext.getTemplateConfig();
+		Configuration configuration = new Configuration();
+		configuration.setClassForTemplateLoading(getClass(), "/");
 		
 		try {
 			Template template = configuration.getTemplate("templates/formwork.ftl");

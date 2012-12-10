@@ -13,7 +13,7 @@ public class Etiqueta extends Componente {
 	}
 
 	@Override
-	public String render(IRenderer renderer) {
+	public String render() {
 		// TODO Auto-generated method stub
 		return null;
 	}

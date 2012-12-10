@@ -12,7 +12,7 @@ public class PartidaBoolean extends Partida<Boolean> {
 	 * @see edu.uoc.pfc.formwork.ui.Componente#render(edu.uoc.pfc.formwork.ui.IRenderer)
 	 */
 	@Override
-	public String render(IRenderer renderer) {
+	public String render() {
 		// TODO Auto-generated method stub
 		return null;
 	}
