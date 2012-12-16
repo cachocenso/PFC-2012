@@ -3,18 +3,44 @@ package edu.uoc.pfc.formwork.ui;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Componente que representa el formulario completo
+ * de la aplicación. Es el objeto raíz del árbol de componntes
+ * y contiene a todos los demás.
+ * 
+ * @author Alberto Díaz en 16/12/2012
+ */
 public class Formulario extends Componente {
 
+	/**
+	 * Aparatados del formulario.
+	 */
 	private List<Apartado> apartados = new ArrayList<Apartado>();
+	/**
+	 * Titulo del formulario.
+	 */
 	private String titulo;
+	/**
+	 * Desripción.
+	 */
 	private String descripcion;
+	/**
+	 * Nombre de la clase controladora de la aplicación
+	 */
 	private String nombreControlador;
 	
+	/* (non-Javadoc)
+	 * @see edu.uoc.pfc.formwork.ui.Componente#render()
+	 */
 	@Override
 	public String render() {
 		return null;
 	}
 
+	/**
+	 * Añadir un objeto Apartado al formulario.
+	 * @param apartado
+	 */
 	public void addApartado(Apartado apartado) {
 		if (!apartados.contains(apartado)) {
 			apartados.add(apartado);
@@ -22,7 +48,28 @@ public class Formulario extends Componente {
 	}
 
 	/**
-	 * @param titulo
+	 * Devuelve una partida determinada por el id recibido
+	 * como parámtro.
+	 * 
+	 * @param id Partida que se busca
+	 * @return La partida solicitada o null si la partida no existe
+	 */
+	public Partida<?> getPartida(String id) {
+		
+		for (Apartado ap : getApartados()) {
+			
+			for (Componente com : ap.getContenido()) {
+				if (com instanceof Partida<?> && com.getId().equals(id)) {
+					return (Partida<?>) com;
+				}
+			}
+		}
+		
+		return null;
+	}
+	
+	/*
+	 * Getters y Setters.
 	 */
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
@@ -41,9 +88,6 @@ public class Formulario extends Componente {
 		return titulo;
 	}
 
-	/**
-	 * @param descripcion
-	 */
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 		
@@ -59,23 +103,6 @@ public class Formulario extends Componente {
 
 	public void setNombreControlador(String nombreControlador) {
 		this.nombreControlador = nombreControlador;
-	}
-
-	/**
-	 * @param string
-	 */
-	public Partida<?> getPartida(String id) {
-		
-		for (Apartado ap : getApartados()) {
-			
-			for (Componente com : ap.getContenido()) {
-				if (com instanceof Partida<?> && com.getId().equals(id)) {
-					return (Partida<?>) com;
-				}
-			}
-		}
-		
-		return null;
 	}
 	
 }

@@ -2,7 +2,6 @@
 
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
-
 	<xs:element name="formulario" type="TipoFormulario" />
 
 	<xs:element name="apartado" type="TipoApartado" />

@@ -161,8 +161,8 @@ public class FormworkServlet extends HttpServlet {
 
 	/**
 	 * Realiza la carga de la página fwp de la aplicación, la analiza y
-	 * construye el árbol de componentes. Después se renderiza a HTML y se
-	 * devuelve al cliente.
+	 * construye el árbol de componentes. Instancia el controlador y después 
+	 * se renderiza a HTML y devuelve al cliente el árbol de componentes renderizado.
 	 * 
 	 * @param req
 	 * @param resp
@@ -191,12 +191,7 @@ public class FormworkServlet extends HttpServlet {
 			logger.info("Controlador iniciado:"
 					+ theForm.getNombreControlador());
 
-			IRenderer renderer = new HTMLRenderer();
-			Writer writer = resp.getWriter();
-
-			renderer.render(theForm, writer);
-
-			logger.info("Pagina renderizada.");
+			doRender(resp, theForm);
 
 		} catch (JAXBException e) {
 			logger.error("Error cargando página.", e);
@@ -204,6 +199,22 @@ public class FormworkServlet extends HttpServlet {
 			logger.error("Error cargando página.", e);
 		}
 
+	}
+
+	/**
+	 * Se reañiza el renderizado del árbol de componentes a HTML
+	 * @param resp
+	 * @param theForm
+	 * @throws IOException
+	 */
+	private void doRender(HttpServletResponse resp, Formulario theForm)
+			throws IOException {
+		IRenderer renderer = new HTMLRenderer();
+		Writer writer = resp.getWriter();
+
+		renderer.render(theForm, writer);
+
+		logger.info("Pagina renderizada.");
 	}
 
 	/**

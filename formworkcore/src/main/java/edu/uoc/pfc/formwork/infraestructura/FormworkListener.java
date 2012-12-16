@@ -68,12 +68,12 @@ public class FormworkListener implements ServletContextListener {
 
 
 	private void loadFrameWorkConfig(ServletContext servletContext) {
-		InputStream thePage = servletContext
+		InputStream theConfigFile = servletContext
 				.getResourceAsStream("/WEB-INF/fw.xml");
 
 		// Cargar el fichero XML de configuración.
 		try {
-			TipoFW config = XMLLoader.parseFile(TipoFW.class, thePage);
+			TipoFW config = XMLLoader.parseFile(TipoFW.class, theConfigFile);
 			servletContext.setAttribute(Attributes.FWCONFIG, config);
 			logger.info("Configuración cargada");
 		} catch (JAXBException e) {
