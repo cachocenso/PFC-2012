@@ -40,19 +40,27 @@ public class TestController extends GenericController {
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void onEvent(FormworkEvent evt) {
+		
+		// Se extrae la partida y se le asigna el nuevo valoir
 		Partida componente = (Partida) evt.getTarget();
-
 		componente.setValue(evt.getValue());
+		
+		// Obtenemos y configuramos la base de conocimientos
 		KnowledgeBase knowledgeBase = ((FormworkContext) session
 				.getServletContext().getAttribute(Attributes.FWCONTEXT))
 				.getKnowledgeBase();
 
+		// Creamos una sesión de DROOLS y establecemos el árbol de componentes como
+		// variable global
 		StatelessKnowledgeSession ksession = knowledgeBase
 				.newStatelessKnowledgeSession();
 
+		
 		ksession.setGlobal("theForm",
 				session.getAttribute(Attributes.FWCOMPONENTS));
 
+		// Inicializamos las listas de mensajes de error y de partidas afectadas
+		// y las insertamos en el área de trabajo como variables globales.
 		List partidasAfectadas = (List) session
 				.getAttribute(Attributes.FWLISTAPARTIDAS);
 
@@ -73,6 +81,8 @@ public class TestController extends GenericController {
 
 		logger.info("Antes de aplicar las reglas: " + componente.getValue());
 
+		// Ejecutamos las reglas asociadas al componente cuyo valor ha cambiado.
+		// Al regresar de la ejecución de las reglas, una de las dos listas tendrá contenido.
 		ksession.execute(componente);
 		logger.info("DespuÃ©s de aplicar las reglas: " + componente.getValue());
 	}
