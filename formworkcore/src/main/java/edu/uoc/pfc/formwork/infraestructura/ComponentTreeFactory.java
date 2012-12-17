@@ -21,7 +21,9 @@ import edu.uoc.pfc.formwork.xml.TipoPartida;
 import edu.uoc.pfc.formwork.xml.TipoTipoPartida;
 
 /**
- * Factoría de objetos Component.
+ * Factoría de objetos Component. Se emplea para generar el 
+ * árbol de componentes de servidor a partir de los objetos
+ * JAXB extraídos en el procesado de la página fwp.
  * 
  * @author Alberto Díaz en 11/11/2012
  */
@@ -31,6 +33,13 @@ public class ComponentTreeFactory {
 
 	}
 
+	/**
+	 * Contruye un objeto @see Formulario a partir del objeto TipoFormulario obtenido del 
+	 * proceso de la página fwp.
+	 * @param jaxbFormulario
+	 * @return el objeto Formulario
+	 * @throws JAXBException
+	 */
 	public static Formulario createComponentsTree(TipoFormulario jaxbFormulario) throws JAXBException {
 		Formulario theForm = new Formulario();
 
@@ -55,11 +64,13 @@ public class ComponentTreeFactory {
 	}
 
 	/**
+	 * Crear las partidas de un apartado.
+	 * 
 	 * @param ap
 	 * @param apartado
 	 * @throws JAXBException 
 	 */
-	public static void createPartidas(Apartado apartado, 
+	private static void createPartidas(Apartado apartado, 
 			edu.uoc.pfc.formwork.xml.TipoApartado jaxbApartado) throws JAXBException {
 		
 		switch (apartado.getTipo()) {
@@ -84,6 +95,8 @@ public class ComponentTreeFactory {
 	}
 
 	/**
+	 * Crear las partidas de un apartado de tipo @see pago
+	 * 
 	 * @param apartado
 	 * @param jaxbApartado
 	 */
@@ -110,6 +123,8 @@ public class ComponentTreeFactory {
 	}
 
 	/**
+	 * Crear partidas de un apartado de tipo complementaria.
+	 * 
 	 * @param apartado
 	 * @param jaxbApartado
 	 */
@@ -138,6 +153,7 @@ public class ComponentTreeFactory {
 	}
 
 	/**
+	 * Crear partidas de un apartado de tipo partidas.
 	 * @param apartado
 	 * @param jaxbApartado
 	 */
@@ -229,6 +245,8 @@ public class ComponentTreeFactory {
 	}
 
 	/**
+	 * Crear las partidas de un apartado de tipo @see identificacion
+	 * 
 	 * @param apartado
 	 * @param jaxbApartado 
 	 * @throws JAXBException 
