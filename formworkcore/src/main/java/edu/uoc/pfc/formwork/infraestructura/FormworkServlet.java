@@ -236,8 +236,23 @@ public class FormworkServlet extends HttpServlet {
 		IController controller = (IController) Class.forName(
 				theForm.getNombreControlador()).newInstance();
 
-		// Busco en el objeto controller un atributo de tipo HttpSession
-		// que esté anotado con Session y le inyecto la sesión.
+		// inyectamos la sessión la sesión.
+		injectSession(session, controller);
+
+		// Guardo el controlador en la sesión.
+		session.setAttribute(Attributes.FWCONTROLLER, controller);
+	}
+
+	/**
+	 * Busca en la clase controller recibida como parámetro un attributo con la anotación
+	 * @see Session. Si está presente, le inyecta la sesión session que se recibe como parámetro.
+	 * 
+	 * @param session
+	 * @param controller
+	 * @throws IllegalAccessException
+	 */
+	private void injectSession(HttpSession session, IController controller)
+			throws IllegalAccessException {
 		Field[] fields = controller.getClass().getDeclaredFields();
 
 		for (Field field : fields) {
@@ -247,9 +262,6 @@ public class FormworkServlet extends HttpServlet {
 				field.set(controller, session);
 			}
 		}
-
-		// Guardo el controlador en la sesión.
-		session.setAttribute(Attributes.FWCONTROLLER, controller);
 	}
 
 }
