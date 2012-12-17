@@ -10,14 +10,13 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.drools.KnowledgeBase;
-//import org.drools.runtime.StatefulKnowledgeSession;
 import org.drools.runtime.StatelessKnowledgeSession;
 
 import edu.uoc.pfc.formwork.infraestructura.Attributes;
 import edu.uoc.pfc.formwork.infraestructura.FormworkContext;
 import edu.uoc.pfc.formwork.infraestructura.Mensaje;
 import edu.uoc.pfc.formwork.infraestructura.annotation.Session;
-import edu.uoc.pfc.formwork.ui.IController;
+import edu.uoc.pfc.formwork.ui.GenericController;
 import edu.uoc.pfc.formwork.ui.Partida;
 import edu.uoc.pfc.formwork.ui.event.FormworkEvent;
 
@@ -26,7 +25,7 @@ import edu.uoc.pfc.formwork.ui.event.FormworkEvent;
  * 
  * @author Alberto Díaz en 23/11/2012
  */
-public class TestController implements IController {
+public class TestController extends GenericController {
 	private static Logger logger = Logger.getLogger(TestController.class);
 
 	@Session

@@ -12,5 +12,6 @@ import edu.uoc.pfc.formwork.ui.event.FormworkEvent;
  * @author Alberto Díaz en 22/11/2012
  */
 public interface IController {
+	void presentar();
 	void onEvent(FormworkEvent evt);
 }
