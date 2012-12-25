@@ -1,7 +1,7 @@
 /**
  * 
  */
-package edu.uoc.pfc.formwork.ui;
+package edu.uoc.pfc.formwork.service;
 
 import edu.uoc.pfc.formwork.ui.event.FormworkEvent;
 

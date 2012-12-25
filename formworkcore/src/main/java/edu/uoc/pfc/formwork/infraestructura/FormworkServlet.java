@@ -22,9 +22,10 @@ import com.google.gson.Gson;
 
 import edu.uoc.pfc.formwork.infraestructura.ResponseJson.Resultado;
 import edu.uoc.pfc.formwork.infraestructura.annotation.Session;
+import edu.uoc.pfc.formwork.service.IController;
+import edu.uoc.pfc.formwork.service.Mensaje;
 import edu.uoc.pfc.formwork.ui.Formulario;
 import edu.uoc.pfc.formwork.ui.HTMLRenderer;
-import edu.uoc.pfc.formwork.ui.IController;
 import edu.uoc.pfc.formwork.ui.IRenderer;
 import edu.uoc.pfc.formwork.ui.Partida;
 import edu.uoc.pfc.formwork.ui.event.FormworkEvent;
@@ -104,36 +105,65 @@ public class FormworkServlet extends HttpServlet {
 			Partida<?> partida = formulario.getPartida(req.getParameter("id"));
 
 			if (partida != null) {
-				event.setTarget(partida);
-				event.setNewValue(req.getParameter("value"));
-				controller.onEvent(event);
+				fireBusinessRules(req, controller, event, partida);
 
-				// Recojo la lista de los posibles errores.
-				List<Mensaje> errores = (List<Mensaje>) session
-						.getAttribute(Attributes.FWLISTAERRORES);
-
-				Gson gson = new Gson();
-				String serializedResponse;
-
-				ResponseJson responseJson = new ResponseJson();
-				
-				if (errores.size() > 0) {
-					responseJson.setResultado(Resultado.ERROR);
-					responseJson.setResponseObjects(errores);
-				} else {
-					// No hubo errores. Recojo la lista de partidas afectadas.
-					List<?> partidasAfectadas = (List<?>) session
-							.getAttribute(Attributes.FWLISTAPARTIDAS);
-					responseJson.setResultado(Resultado.SUCCESS);
-					responseJson.setResponseObjects(partidasAfectadas);
-				}
-				
-				// Devolvemos la respuesta.
-				serializedResponse = gson.toJson(responseJson);
-				resp.setContentType("application/json");
-				resp.getWriter().print(serializedResponse);
+				renderResponse(resp, session);
 			}
 		}
+	}
+
+	/**
+	 * Este método implementa el caso de uso Fire business rules.
+	 * Se ejecutan las reglas de negocio.
+	 * 
+	 * @param req
+	 * @param controller
+	 * @param event
+	 * @param partida
+	 */
+	private void fireBusinessRules(HttpServletRequest req,
+			IController controller, FormworkEvent event, Partida<?> partida) {
+		event.setTarget(partida);
+		event.setNewValue(req.getParameter("value"));
+		controller.onEvent(event);
+	}
+
+	/**
+	 * Este método implementa el caso de uso Render response. Se recoge
+	 * el resultado de la ejecución de las reglas de negocio y se envía la
+	 * respuesta al cliente en el formato apropiado.
+	 * 
+	 * @param resp
+	 * @param session
+	 * @throws IOException
+	 */
+	@SuppressWarnings("unchecked")
+	private void renderResponse(HttpServletResponse resp, HttpSession session)
+			throws IOException {
+		// Recojo la lista de los posibles errores.
+		List<Mensaje> errores = (List<Mensaje>) session
+				.getAttribute(Attributes.FWLISTAERRORES);
+
+		Gson gson = new Gson();
+		String serializedResponse;
+
+		ResponseJson responseJson = new ResponseJson();
+		
+		if (errores.size() > 0) {
+			responseJson.setResultado(Resultado.ERROR);
+			responseJson.setResponseObjects(errores);
+		} else {
+			// No hubo errores. Recojo la lista de partidas afectadas.
+			List<?> partidasAfectadas = (List<?>) session
+					.getAttribute(Attributes.FWLISTAPARTIDAS);
+			responseJson.setResultado(Resultado.SUCCESS);
+			responseJson.setResponseObjects(partidasAfectadas);
+		}
+		
+		// Devolvemos la respuesta.
+		serializedResponse = gson.toJson(responseJson);
+		resp.setContentType("application/json");
+		resp.getWriter().print(serializedResponse);
 	}
 
 	/**

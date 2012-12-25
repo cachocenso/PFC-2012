@@ -14,9 +14,9 @@ import org.drools.runtime.StatelessKnowledgeSession;
 
 import edu.uoc.pfc.formwork.infraestructura.Attributes;
 import edu.uoc.pfc.formwork.infraestructura.FormworkContext;
-import edu.uoc.pfc.formwork.infraestructura.Mensaje;
 import edu.uoc.pfc.formwork.infraestructura.annotation.Session;
-import edu.uoc.pfc.formwork.ui.GenericController;
+import edu.uoc.pfc.formwork.service.GenericController;
+import edu.uoc.pfc.formwork.service.Mensaje;
 import edu.uoc.pfc.formwork.ui.Partida;
 import edu.uoc.pfc.formwork.ui.event.FormworkEvent;
 
@@ -50,7 +50,7 @@ public class TestController extends GenericController {
 				.getServletContext().getAttribute(Attributes.FWCONTEXT))
 				.getKnowledgeBase();
 
-		// Creamos una sesión de DROOLS y establecemos el árbol de componentes como
+		// Creamos una sesiï¿½n de DROOLS y establecemos el ï¿½rbol de componentes como
 		// variable global
 		StatelessKnowledgeSession ksession = knowledgeBase
 				.newStatelessKnowledgeSession();
@@ -60,7 +60,7 @@ public class TestController extends GenericController {
 				session.getAttribute(Attributes.FWCOMPONENTS));
 
 		// Inicializamos las listas de mensajes de error y de partidas afectadas
-		// y las insertamos en el área de trabajo como variables globales.
+		// y las insertamos en el ï¿½rea de trabajo como variables globales.
 		List partidasAfectadas = (List) session
 				.getAttribute(Attributes.FWLISTAPARTIDAS);
 
@@ -82,7 +82,7 @@ public class TestController extends GenericController {
 		logger.info("Antes de aplicar las reglas: " + componente.getValue());
 
 		// Ejecutamos las reglas asociadas al componente cuyo valor ha cambiado.
-		// Al regresar de la ejecución de las reglas, una de las dos listas tendrá contenido.
+		// Al regresar de la ejecuciï¿½n de las reglas, una de las dos listas tendrï¿½ contenido.
 		ksession.execute(componente);
 		logger.info("DespuÃ©s de aplicar las reglas: " + componente.getValue());
 	}
