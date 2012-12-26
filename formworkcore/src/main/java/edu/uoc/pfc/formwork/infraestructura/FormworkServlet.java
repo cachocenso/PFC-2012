@@ -89,7 +89,6 @@ public class FormworkServlet extends HttpServlet {
 	 * @param resp
 	 * @throws IOException
 	 */
-	@SuppressWarnings("unchecked")
 	private void processAjaxRequests(HttpServletRequest req,
 			HttpServletResponse resp) throws IOException {
 
