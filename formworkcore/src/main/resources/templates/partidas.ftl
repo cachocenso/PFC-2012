@@ -15,9 +15,9 @@
 							</td>
 							<td class="partida">
 								<#if comp.calculado>
-									<input id="${comp.id}" class="numberAlign" type="text" maxlength="18" size="18" disabled />
+									<input id="${comp.id}" class="numberAlign" type="text" maxlength="18" size="18" disabled dinero />
 								<#else>
-									<input id="${comp.id}" class="numberAlign" type="text" maxlength="18" size="18" />
+									<input id="${comp.id}" class="numberAlign" type="text" maxlength="18" size="18" dinero />
 								</#if>
 							</td>
 						</tr>

@@ -33,6 +33,7 @@ $(document).ready(function() {
 	// Inicializo los campos fecha con jQuery UI datepicker
 	$(function() {
 		$("[fecha]").datepicker();
+		$("[dinero]").format({type:'decimal',precision: {parteEntera:15,parteDecimal:2},autofix:false});
 	});
 
 	// Establezco un manejador para los eventos 
