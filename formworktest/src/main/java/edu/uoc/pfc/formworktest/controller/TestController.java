@@ -18,6 +18,7 @@ import edu.uoc.pfc.formwork.infraestructura.annotation.Session;
 import edu.uoc.pfc.formwork.service.GenericController;
 import edu.uoc.pfc.formwork.service.Mensaje;
 import edu.uoc.pfc.formwork.ui.Partida;
+import edu.uoc.pfc.formwork.ui.UIUtils;
 import edu.uoc.pfc.formwork.ui.event.FormworkEvent;
 
 /**
@@ -42,8 +43,14 @@ public class TestController extends GenericController {
 	public void onEvent(FormworkEvent evt) {
 		
 		// Se extrae la partida y se le asigna el nuevo valoir
-		Partida componente = (Partida) evt.getTarget();
-		componente.setValue(evt.getValue());
+		Partida partida = (Partida) evt.getTarget();
+//		componente.setValue(evt.getValue());
+		try {
+			UIUtils.setValue(partida, evt.getNewValue());
+		} catch (Exception e) {
+			logger.error("Valor err�neo para componente " + partida, e);
+			return;
+		} 
 		
 		// Obtenemos y configuramos la base de conocimientos
 		KnowledgeBase knowledgeBase = ((FormworkContext) session
@@ -79,12 +86,12 @@ public class TestController extends GenericController {
 		ksession.setGlobal("partidasAfectadas", partidasAfectadas);
 		ksession.setGlobal("errores", listaErrores);
 
-		logger.info("Antes de aplicar las reglas: " + componente.getValue());
+		logger.info("Antes de aplicar las reglas: " + partida.getValue());
 
 		// Ejecutamos las reglas asociadas al componente cuyo valor ha cambiado.
 		// Al regresar de la ejecuci�n de las reglas, una de las dos listas tendr� contenido.
-		ksession.execute(componente);
-		logger.info("Después de aplicar las reglas: " + componente.getValue());
+		ksession.execute(partida);
+		logger.info("Después de aplicar las reglas: " + partida.getValue());
 	}
 
 }

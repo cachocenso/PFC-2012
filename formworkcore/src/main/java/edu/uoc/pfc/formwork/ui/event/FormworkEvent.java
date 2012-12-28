@@ -14,7 +14,8 @@ import edu.uoc.pfc.formwork.ui.Componente;
 public class FormworkEvent {
 
 	private Componente target;
-	private String value;
+	private Object newValue;
+	private Object oldValue;
 	
 	/***  GETTERS Y SETTERS ***/
 	/**
@@ -34,12 +35,20 @@ public class FormworkEvent {
 	/**
 	 * @param parameter
 	 */
-	public void setNewValue(String value) {
-		this.value = value;
+	public void setNewValue(Object value) {
+		this.newValue = value;
 	}
 
-	public String getValue() {
-		return value;
+	public Object getNewValue() {
+		return newValue;
+	}
+
+	public Object getOldValue() {
+		return oldValue;
+	}
+
+	public void setOldValue(Object oldValue) {
+		this.oldValue = oldValue;
 	}
 
 }

@@ -91,24 +91,9 @@ public class FormworkServlet extends HttpServlet {
 	 */
 	private void processAjaxRequests(HttpServletRequest req,
 			HttpServletResponse resp) throws IOException {
+		fireBusinessRules(req);
 
-		HttpSession session = req.getSession();
-		IController controller = (IController) session
-				.getAttribute(Attributes.FWCONTROLLER);
-
-		if (controller != null) {
-			FormworkEvent event = new FormworkEvent();
-			Formulario formulario = (Formulario) session
-					.getAttribute(Attributes.FWCOMPONENTS);
-
-			Partida<?> partida = formulario.getPartida(req.getParameter("id"));
-
-			if (partida != null) {
-				fireBusinessRules(req, controller, event, partida);
-
-				renderResponse(resp, session);
-			}
-		}
+		renderResponse(req, resp);
 	}
 
 	/**
@@ -120,11 +105,22 @@ public class FormworkServlet extends HttpServlet {
 	 * @param event
 	 * @param partida
 	 */
-	private void fireBusinessRules(HttpServletRequest req,
-			IController controller, FormworkEvent event, Partida<?> partida) {
-		event.setTarget(partida);
-		event.setNewValue(req.getParameter("value"));
-		controller.onEvent(event);
+	private void fireBusinessRules(HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		
+		IController controller = (IController) session
+				.getAttribute(Attributes.FWCONTROLLER);
+		
+		if (controller != null) {
+			FormworkEvent event = new FormworkEvent();
+			Formulario formulario = (Formulario) session
+					.getAttribute(Attributes.FWCOMPONENTS);		
+			Partida<?> partida = formulario.getPartida(req.getParameter("id"));
+			event.setTarget(partida);
+			event.setOldValue(partida.getValue());
+			event.setNewValue(req.getParameter("value"));
+			controller.onEvent(event);
+		}
 	}
 
 	/**
@@ -132,13 +128,15 @@ public class FormworkServlet extends HttpServlet {
 	 * el resultado de la ejecución de las reglas de negocio y se envía la
 	 * respuesta al cliente en el formato apropiado.
 	 * 
-	 * @param resp
-	 * @param session
+	 * @param req
+	 * @param rep
 	 * @throws IOException
 	 */
 	@SuppressWarnings("unchecked")
-	private void renderResponse(HttpServletResponse resp, HttpSession session)
+	private void renderResponse(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
+		HttpSession session = req.getSession();
+		
 		// Recojo la lista de los posibles errores.
 		List<Mensaje> errores = (List<Mensaje>) session
 				.getAttribute(Attributes.FWLISTAERRORES);

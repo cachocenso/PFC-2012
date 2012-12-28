@@ -17,4 +17,15 @@ public class PartidaBoolean extends Partida<Boolean> {
 		return null;
 	}
 
+	@Override
+	public String getFormattedValue() {
+		return getValue().toString();
+	}
+
+	@Override
+	protected void formatValue() {
+		setFormattedValue(getValue().toString());
+	}
+
+	
 }

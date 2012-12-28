@@ -1,10 +1,12 @@
 package edu.uoc.pfc.formwork.ui;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 
 public class PartidaCantidad extends Partida<BigDecimal> {
 	private boolean admiteNegativos;
 
+	
 	/**
 	 * 
 	 */
@@ -20,11 +22,19 @@ public class PartidaCantidad extends Partida<BigDecimal> {
 		this.admiteNegativos = admiteNegativos;
 	}
 
+	
+	
 	@Override
 	public String render() {
-		return "Soy la partida" + getId();
-		
+		return null;
 	}
+
 	
-	
+	@Override
+	protected void formatValue() {
+		BigDecimal value = getValue();
+		
+		DecimalFormat decimalFormat = new DecimalFormat("#,##0.00");
+		setFormattedValue(decimalFormat.format(value));
+	}
 }

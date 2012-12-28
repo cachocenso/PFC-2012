@@ -40,4 +40,8 @@ public class PartidaLista extends Partida<String> {
 		return values.get(indexSeleccionado);
 	}
 
+	@Override
+	protected void formatValue() {
+		setFormattedValue(getValue());
+	}
 }

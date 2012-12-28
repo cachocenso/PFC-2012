@@ -4,8 +4,15 @@ public class PartidaCadena extends Partida<String> {
 
 	@Override
 	public String render() {
-		return "Soy la partida " + getId();
+		return null;
 		
 	}
 
+	@Override
+	protected void formatValue() {
+		setFormattedValue(getValue());
+		
+	}
+
+	
 }
