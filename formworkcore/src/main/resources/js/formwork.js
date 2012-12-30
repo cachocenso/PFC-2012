@@ -30,15 +30,25 @@ jQuery(function($) {
 // mediante jQuery
 $(document).ready(function() {
 
-	// Inicializo los campos fecha con jQuery UI datepicker
+	// Inicializo los campos fecha con jQuery UI datepicker y pongo formateos.
 	$(function() {
-		$("[fecha]").datepicker();
+		$("[fecha]").datepicker({changeMonth: true, 
+								 changeYear: true,
+								 showWeek: true,
+								 showOn: "button",
+								 buttonImage: "au/~/img/calendar.gif",
+								 buttonImageOnly: true,
+								 buttonText: "Pulse para mostrar el calendario",
+								 dateFormat: "dd/mm/yy",
+								 appendText: "(dd/mm/aaaa)"});
+		
 		$("[dinero]").format({type:'decimal',precision: {parteEntera:15,parteDecimal:2},autofix:false});
+		$("[cadnum]").format({type:'cadnum'});
 	});
 
 	// Establezco un manejador para los eventos 
 	// onChange de los elementos input
-	$("input").change(function() {
+	$("input,select").change(function() {
 		// Cada vez que un input cambie su valor
 		// se hace una llamada AJAX al servidor.
 		$.ajax({
@@ -47,7 +57,7 @@ $(document).ready(function() {
 			dataType : "json",
 			data : {
 				"id" : this.id,
-				"value" : this.value
+				"value" : this.type == "checkbox" ? this.checked : this.value
 			},
 			success : function(result) {
 				if (result.resultado == "ERROR") {

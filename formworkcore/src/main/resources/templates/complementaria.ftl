@@ -14,7 +14,7 @@
 				${ap.contenido[1].etiqueta}				
 			</td>
 			<td class="partida">
-				<input id="${ap.contenido[1].id}" type="text" maxlength="13" size="13"/>
+				<input id="${ap.contenido[1].id}" type="text" maxlength="13" size="13" cadnum/>
 			</td>
 		</tr>
 	</table>

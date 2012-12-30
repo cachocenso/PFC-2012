@@ -11,8 +11,7 @@ public class PartidaLista extends Partida<String> {
 	
 	@Override
 	public String render() {
-		return "Soy la partida" + getId();
-		
+		return null;
 	}
 
 	public int getIndexSeleccionado() {
@@ -40,6 +39,20 @@ public class PartidaLista extends Partida<String> {
 		return values.get(indexSeleccionado);
 	}
 
+	/* (non-Javadoc)
+	 * @see edu.uoc.pfc.formwork.ui.Partida#setValue(java.lang.Object)
+	 */
+	@Override
+	public void setValue(String value) {
+		if (values.contains(value)) {
+			setIndexSeleccionado(values.indexOf(value));
+		}
+		else {
+			throw new IllegalArgumentException("El valor " + value + " no es válido.");
+		}
+		formatValue();
+	}
+	
 	@Override
 	protected void formatValue() {
 		setFormattedValue(getValue());

@@ -14,7 +14,7 @@ public class UIUtils {
 			String v = ((String)valor).replace(',', '.');
 			typedValue = new BigDecimal(v);
 		}
-		else if (partida instanceof PartidaCadena) {
+		else if (partida instanceof PartidaCadena || partida instanceof PartidaLista) {
 			typedValue = valor.toString();
 		}
 		else if (partida instanceof PartidaBoolean) {

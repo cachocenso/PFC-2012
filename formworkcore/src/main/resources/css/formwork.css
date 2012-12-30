@@ -41,6 +41,11 @@ input:focus {
 	background-color: #DBFFB8;
 }
 
+input[disabled] {
+	background-color: #F0E68C;
+	color: black !important;
+	border: 2px solid black;
+}
 .subtitulo {
 	font-weight: bold;
 }

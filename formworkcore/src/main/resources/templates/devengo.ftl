@@ -6,7 +6,7 @@
 			    <div style="float: left; width: 33%;">
 				      <div style="margin-left: 2px">${comp.etiqueta}</div>
 				      <div style="margin-left: 2px">
-				        <input id="${comp.id}" type="text" maxlength="4" size="4"/>
+				        <input id="${comp.id}" type="text" maxlength="4" size="4" cadnum/>
 				      </div>
 			    </div>
 			<#elseif comp.id == "periodo">
@@ -14,7 +14,7 @@
 				      <div style="margin-left: 2px">${comp.etiqueta}</div>
 				      <div style="margin-left: 2px">
 				        <select id="${comp.id}">
-				        	<#list comp.periodos as per>
+				        	<#list comp.values as per>
 				        		<option value="${per}">${per}</option>
 				        	</#list>
 				        </select>

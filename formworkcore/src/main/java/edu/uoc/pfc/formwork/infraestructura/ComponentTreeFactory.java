@@ -11,6 +11,7 @@ import edu.uoc.pfc.formwork.ui.Formulario;
 import edu.uoc.pfc.formwork.ui.PartidaBoolean;
 import edu.uoc.pfc.formwork.ui.PartidaCadena;
 import edu.uoc.pfc.formwork.ui.PartidaCantidad;
+import edu.uoc.pfc.formwork.ui.PartidaLista;
 import edu.uoc.pfc.formwork.ui.PartidaPeriodo;
 import edu.uoc.pfc.formwork.ui.TipoApartado;
 import edu.uoc.pfc.formwork.xml.TipoCalculado;
@@ -232,10 +233,11 @@ public class ComponentTreeFactory {
 			else if (c.trim().matches("periodo(.+)")) {
 				String periodo = c.substring(c.indexOf('(') + 1, c.indexOf(')'));
 				
-				PartidaPeriodo per = new PartidaPeriodo();
+				PartidaLista per = new PartidaLista();
 				per.setId("periodo");
 				per.setEtiqueta("Periodo");
-				per.setPeriodos(Arrays.asList(periodo.split(" ")));
+				per.setValues(Arrays.asList(periodo.split(" ")));
+				per.setIndexSeleccionado(0);
 				apartado.addComponente(per);
 			}
 			else {
