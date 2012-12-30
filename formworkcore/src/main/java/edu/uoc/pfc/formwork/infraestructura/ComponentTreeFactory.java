@@ -12,7 +12,6 @@ import edu.uoc.pfc.formwork.ui.PartidaBoolean;
 import edu.uoc.pfc.formwork.ui.PartidaCadena;
 import edu.uoc.pfc.formwork.ui.PartidaCantidad;
 import edu.uoc.pfc.formwork.ui.PartidaLista;
-import edu.uoc.pfc.formwork.ui.PartidaPeriodo;
 import edu.uoc.pfc.formwork.ui.TipoApartado;
 import edu.uoc.pfc.formwork.xml.TipoCalculado;
 import edu.uoc.pfc.formwork.xml.TipoComponente;
