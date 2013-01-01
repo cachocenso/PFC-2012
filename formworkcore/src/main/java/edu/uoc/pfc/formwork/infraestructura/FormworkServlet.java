@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Writer;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -22,6 +24,7 @@ import com.google.gson.Gson;
 
 import edu.uoc.pfc.formwork.infraestructura.ResponseJson.Resultado;
 import edu.uoc.pfc.formwork.infraestructura.annotation.Session;
+import edu.uoc.pfc.formwork.service.GenericController;
 import edu.uoc.pfc.formwork.service.IController;
 import edu.uoc.pfc.formwork.service.Mensaje;
 import edu.uoc.pfc.formwork.ui.Formulario;
@@ -280,7 +283,9 @@ public class FormworkServlet extends HttpServlet {
 	 */
 	private void injectSession(HttpSession session, IController controller)
 			throws IllegalAccessException {
-		Field[] fields = controller.getClass().getDeclaredFields();
+		
+		
+		List<Field> fields = getAllFields(controller.getClass());
 
 		for (Field field : fields) {
 			if (field.isAnnotationPresent(Session.class)
@@ -291,4 +296,23 @@ public class FormworkServlet extends HttpServlet {
 		}
 	}
 
+	/**
+	 * Mediante este sencillo método recursivo, devolvemos todos
+	 * los atributos de la clase recibida como parámetro y de todas
+	 * sus superclases.
+	 * 
+	 * @param type
+	 * @return la lista de atributos de la clase.
+	 */
+	public List<Field> getAllFields(Class<?> type) {
+		List<Field> fields = new ArrayList<Field>();
+		
+	    if (type.getSuperclass() != null) {
+	        fields.addAll(getAllFields(type.getSuperclass()));
+	    }
+	    
+	    fields.addAll(Arrays.asList(type.getDeclaredFields()));
+	    return fields;
+	}
+	
 }

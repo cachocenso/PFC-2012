@@ -3,10 +3,7 @@
  */
 package edu.uoc.pfc.formworktest.controller;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.drools.KnowledgeBase;
@@ -14,7 +11,6 @@ import org.drools.runtime.StatelessKnowledgeSession;
 
 import edu.uoc.pfc.formwork.infraestructura.Attributes;
 import edu.uoc.pfc.formwork.infraestructura.FormworkContext;
-import edu.uoc.pfc.formwork.infraestructura.annotation.Session;
 import edu.uoc.pfc.formwork.service.GenericController;
 import edu.uoc.pfc.formwork.service.Mensaje;
 import edu.uoc.pfc.formwork.ui.Partida;
@@ -29,8 +25,6 @@ import edu.uoc.pfc.formwork.ui.event.FormworkEvent;
 public class TestController extends GenericController {
 	private static Logger logger = Logger.getLogger(TestController.class);
 
-	@Session
-	private HttpSession session;
 
 	/*
 	 * (non-Javadoc)
@@ -39,16 +33,15 @@ public class TestController extends GenericController {
 	 * edu.uoc.pfc.formwork.ui.GenericController#onEvent(edu.uoc.pfc.formwork
 	 * .ui.event.FormworkEvent)
 	 */
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({ "rawtypes"})
 	public void onEvent(FormworkEvent evt) {
 		
 		// Se extrae la partida y se le asigna el nuevo valoir
 		Partida partida = (Partida) evt.getTarget();
-//		componente.setValue(evt.getValue());
 		try {
 			UIUtils.setValue(partida, evt.getNewValue());
 		} catch (Exception e) {
-			logger.error("Valor err—neo para componente " + partida, e);
+			logger.error("Valor errï¿½neo para componente " + partida, e);
 			return;
 		} 
 		
@@ -68,20 +61,9 @@ public class TestController extends GenericController {
 
 		// Inicializamos las listas de mensajes de error y de partidas afectadas
 		// y las insertamos en el ï¿½rea de trabajo como variables globales.
-		List partidasAfectadas = (List) session
-				.getAttribute(Attributes.FWLISTAPARTIDAS);
+		List<Partida<?>> partidasAfectadas = getListaPartidas();
 
-		if (partidasAfectadas == null) {
-			partidasAfectadas = new ArrayList<Object>();
-			session.setAttribute(Attributes.FWLISTAPARTIDAS, partidasAfectadas);
-		}
-
-		List<Mensaje> listaErrores = (List<Mensaje>) session
-				.getAttribute(Attributes.FWLISTAERRORES);
-		if (listaErrores == null) {
-			listaErrores = new ArrayList<Mensaje>();
-			session.setAttribute(Attributes.FWLISTAERRORES, listaErrores);
-		}
+		List<Mensaje> listaErrores = getListaMensajes();
 
 		ksession.setGlobal("partidasAfectadas", partidasAfectadas);
 		ksession.setGlobal("errores", listaErrores);
@@ -92,6 +74,15 @@ public class TestController extends GenericController {
 		// Al regresar de la ejecuciï¿½n de las reglas, una de las dos listas tendrï¿½ contenido.
 		ksession.execute(partida);
 		logger.info("DespuÃ©s de aplicar las reglas: " + partida.getValue());
+	}
+
+
+	/* (non-Javadoc)
+	 * @see edu.uoc.pfc.formwork.service.IController#prepararRegistro()
+	 */
+	public String prepararRegistro() {
+		// TODO Auto-generated method stub
+		return "";
 	}
 
 }

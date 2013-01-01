@@ -21,24 +21,22 @@ global List partidasAfectadas;
 global List errores;
 
 rule "initial-rule"
-	salience 20
+	salience 15
 	no-loop 
 	when
 		Partida();
 	then
 		partidasAfectadas.clear();
 		errores.clear();
-		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>> LISTAS VACIAS");
 end
 
 rule "nif-error"
-	salience 15
+	salience 10
 	when
 		$p : Partida((id == "nif" || id == "nifr"), $v:value, !isNifNie(value))
 	then
 		Mensaje $m = new Mensaje(Mensaje.TipoMensaje.ERROR, "Nif incorrecto: " + $v, $p.getId());
 		errores.add($m);
-		System.out.println(">>>> Oh que error: " + $v);
 end
 
 rule "nif-ok"
@@ -47,39 +45,29 @@ rule "nif-ok"
     when
         $p : Partida((id == "nif" || id == "nifr"), $v:value, isNifNie(value))
     then
-        //actions
-		// modify($p) { setValue(formatNif((String)$v)) };
 		$p.setValue(formatNif((String)$v));
 		partidasAfectadas.add($p);
-		System.out.println(">>>>>>>>> Valor cambiado." + $p.getValue());
 end
+
 
 rule "Partidas"
 	salience 10
     when
 	    $p : Partida(id == "p01" || id == "p02" || id == "p03" || id == "p04")
     then
-	    BigDecimal $val1 = new BigDecimal(theForm.getPartida("p01").getValue().toString());
-    	BigDecimal $val2 = new BigDecimal(theForm.getPartida("p02").getValue().toString());
-    	BigDecimal $val3 = new BigDecimal(theForm.getPartida("p03").getValue().toString());
-    	BigDecimal $val4 = new BigDecimal(theForm.getPartida("p04").getValue().toString());
+	    BigDecimal $val1 = (BigDecimal)theForm.getPartida("p01").getValue();
+    	BigDecimal $val2 = (BigDecimal)theForm.getPartida("p02").getValue();
+    	BigDecimal $val3 = (BigDecimal)theForm.getPartida("p03").getValue();
+    	BigDecimal $val4 = (BigDecimal)theForm.getPartida("p04").getValue();
     	
     	PartidaCantidad $p5 = (PartidaCantidad) theForm.getPartida("p05");
     	PartidaCantidad $i = (PartidaCantidad) theForm.getPartida("imp");
     	
     	BigDecimal $porcentaje =  new BigDecimal("0.01");
 
-        System.out.println(">>>>>>>>>>>>>>> val1: " + $val1 );
-        System.out.println(">>>>>>>>>>>>>>> val2 " + $val2 );
-        System.out.println(">>>>>>>>>>>>>>> val3: " + $val3 );
-        System.out.println(">>>>>>>>>>>>>>> val4 " + $val4 );
-        
     	$p5.setValue( $val1.multiply($val2).multiply($porcentaje).add($val3.multiply($val4).multiply($porcentaje)));
     	$i.setValue($p5.getValue());
     	partidasAfectadas.add($p);
         partidasAfectadas.add($p5);
         partidasAfectadas.add($i);
-        System.out.println(">>>>>>>>>>>>>>> p05 valor: " + $p5.getValue() );
-        System.out.println(">>>>>>>>>>>>>>> i valor: " + $i.getValue() );
-
 end

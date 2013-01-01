@@ -403,10 +403,13 @@ var email = {
 										var numNif = "0123456789";
 										var barra = "/";
 									
-										var selRango = zk(this).getSelectionRange();
+//										var selRango = zk(this).getSelectionRange();
 //										log(selRango);
-										selStart = selRango[0] ;
-										selEnd = selRango[1] ;
+//										selStart = selRango[0] ;
+//										selEnd = selRango[1] ;
+										var selRango = $(this).selection();
+										selStart = selRango.start;
+										selEnd = selRango.end;
 
 										var a=d.which;
 									    /*IE and Chrome set ctrlKey to true and altKey to true when you press the ALTGR modifier.

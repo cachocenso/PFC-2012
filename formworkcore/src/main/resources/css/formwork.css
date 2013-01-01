@@ -41,10 +41,12 @@ input:focus {
 	background-color: #DBFFB8;
 }
 
-input[disabled] {
+input:disabled {
 	background-color: #F0E68C;
-	color: black !important;
+	color: black; /*No funciona ni en IE ni en Opera*/
 	border: 2px solid black;
+	opacity: 1 !important;
+	
 }
 .subtitulo {
 	font-weight: bold;
