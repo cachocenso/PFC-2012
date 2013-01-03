@@ -16,6 +16,7 @@ import edu.uoc.pfc.formwork.ui.TipoApartado;
 import edu.uoc.pfc.formwork.xml.TipoCalculado;
 import edu.uoc.pfc.formwork.xml.TipoComponente;
 import edu.uoc.pfc.formwork.xml.TipoEtiqueta;
+import edu.uoc.pfc.formwork.xml.TipoFW;
 import edu.uoc.pfc.formwork.xml.TipoFormulario;
 import edu.uoc.pfc.formwork.xml.TipoPartida;
 import edu.uoc.pfc.formwork.xml.TipoTipoPartida;
@@ -40,7 +41,7 @@ public class ComponentTreeFactory {
 	 * @return el objeto Formulario
 	 * @throws JAXBException
 	 */
-	public static Formulario createComponentsTree(TipoFormulario jaxbFormulario) throws JAXBException {
+	public static Formulario createComponentsTree(TipoFormulario jaxbFormulario, TipoFW conf) throws JAXBException {
 		Formulario theForm = new Formulario();
 
 		theForm.setId(jaxbFormulario.getId());
@@ -60,6 +61,8 @@ public class ComponentTreeFactory {
 			theForm.addApartado(apartado);
 		}
 
+		theForm.setPresentacion(conf.getPresentation());
+		
 		return theForm;
 	}
 

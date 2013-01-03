@@ -10,23 +10,22 @@ package edu.uoc.pfc.formwork.xml;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for TipoFW complex type.
+ * <p>Java class for TipoPresentacion complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="TipoFW">
+ * &lt;complexType name="TipoPresentacion">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;all>
- *         &lt;element ref="{}rules"/>
- *         &lt;element ref="{}presentation" minOccurs="0"/>
- *       &lt;/all>
+ *       &lt;sequence minOccurs="0">
+ *         &lt;element name="signed" type="{http://www.w3.org/2001/XMLSchema}boolean"/>
+ *         &lt;element name="url" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -35,61 +34,64 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TipoFW", propOrder = {
-
+@XmlType(name = "TipoPresentacion", propOrder = {
+    "signed",
+    "url"
 })
-public class TipoFW {
+public class TipoPresentacion {
 
-    @XmlElement(required = true)
-    protected TipoRules rules;
-    protected TipoPresentacion presentation;
+    protected Boolean signed;
+    protected String url;
 
     /**
-     * Gets the value of the rules property.
+     * Gets the value of the signed property.
      * 
      * @return
      *     possible object is
-     *     {@link TipoRules }
+     *     {@link Boolean }
      *     
      */
-    public TipoRules getRules() {
-        return rules;
+    public Boolean isSigned() {
+        return signed;
     }
 
+    public boolean getSigned() {
+    	return signed;
+    }
     /**
-     * Sets the value of the rules property.
+     * Sets the value of the signed property.
      * 
      * @param value
      *     allowed object is
-     *     {@link TipoRules }
+     *     {@link Boolean }
      *     
      */
-    public void setRules(TipoRules value) {
-        this.rules = value;
+    public void setSigned(Boolean value) {
+        this.signed = value;
     }
 
     /**
-     * Gets the value of the presentation property.
+     * Gets the value of the url property.
      * 
      * @return
      *     possible object is
-     *     {@link TipoPresentacion }
+     *     {@link String }
      *     
      */
-    public TipoPresentacion getPresentation() {
-        return presentation;
+    public String getUrl() {
+        return url;
     }
 
     /**
-     * Sets the value of the presentation property.
+     * Sets the value of the url property.
      * 
      * @param value
      *     allowed object is
-     *     {@link TipoPresentacion }
+     *     {@link String }
      *     
      */
-    public void setPresentation(TipoPresentacion value) {
-        this.presentation = value;
+    public void setUrl(String value) {
+        this.url = value;
     }
 
 }

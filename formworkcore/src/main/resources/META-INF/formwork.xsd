@@ -92,17 +92,25 @@
 	<xs:element name="fw" type="TipoFW" />
 
 	<xs:element name="rules" type="TipoRules" />
-
+	<xs:element name="presentation" type="TipoPresentacion"/>
 
 	<xs:complexType name="TipoFW">
-		<xs:sequence>
+		<xs:all>
 			<xs:element ref="rules" />
-		</xs:sequence>
+			<xs:element ref="presentation" minOccurs="0" />
+		</xs:all>
 	</xs:complexType>
 
 	<xs:complexType name="TipoRules">
 		<xs:sequence maxOccurs="1" minOccurs="1">
 			<xs:element name="rules-file" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	
+	<xs:complexType name="TipoPresentacion">
+		<xs:sequence maxOccurs="1" minOccurs="0">
+			<xs:element name="signed" type="xs:boolean"/>
+			<xs:element name="url" type="xs:string"/>
 		</xs:sequence>
 	</xs:complexType>
 </xs:schema>

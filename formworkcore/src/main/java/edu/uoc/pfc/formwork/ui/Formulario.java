@@ -3,6 +3,8 @@ package edu.uoc.pfc.formwork.ui;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.uoc.pfc.formwork.xml.TipoPresentacion;
+
 /**
  * Componente que representa el formulario completo
  * de la aplicación. Es el objeto raíz del árbol de componntes
@@ -28,6 +30,7 @@ public class Formulario extends Componente {
 	 * Nombre de la clase controladora de la aplicación
 	 */
 	private String nombreControlador;
+	private TipoPresentacion presentacion;
 	
 	/* (non-Javadoc)
 	 * @see edu.uoc.pfc.formwork.ui.Componente#render()
@@ -103,6 +106,18 @@ public class Formulario extends Componente {
 
 	public void setNombreControlador(String nombreControlador) {
 		this.nombreControlador = nombreControlador;
+	}
+
+	/**
+	 * Establece el tipo de presentación del formulario
+	 * @param presentacion
+	 */
+	public void setPresentacion(TipoPresentacion presentacion) {
+		this.presentacion = presentacion;	
+	}
+
+	public TipoPresentacion getPresentacion() {
+		return presentacion;
 	}
 	
 }

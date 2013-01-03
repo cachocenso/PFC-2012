@@ -46,6 +46,10 @@ $(document).ready(function() {
 		$("[cadnum]").format({type:'cadnum'});
 	});
 
+	// Esteblezco manejador para el evento onClick del botón de enviar
+	$("button").click(function() {
+		alert("Presentado");
+	});
 	// Establezco un manejador para los eventos 
 	// onChange de los elementos input
 	$("input,select").change(function() {

@@ -5,4 +5,9 @@
 	<rules>
 		<rules-file>/WEB-INF/reglas.drl</rules-file>
 	</rules>
+	
+	<presentation>
+		<signed>true</signed>
+		<url>http://localhost:8080/dummypres</url>
+	</presentation>
 </fw>

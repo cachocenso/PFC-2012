@@ -1,3 +1,4 @@
+<#assign pr = form.presentacion>
 <!DOCTYPE html>
 <head>
   <title>${form.titulo}</title>
@@ -17,14 +18,19 @@
 	<#list form.apartados as ap>
 		${ap.render()}
 	</#list>
-    
+    <#if pr??>
 	<p/>
 	<div id="envio" class="apartado">
 		<div style ="margin: 5px">
-			<center><button>Firmar y enviar</button></center>
+			<#if pr.signed>
+			<center><button id="firmarEnviar">Firmar y enviar</button></center>
+			<#else>
+			<center><button id="enviar">Enviar</button></center>
+			</#if>
 		</div>
 	</div>
   </div>
+  </#if>
 </body>
  
  

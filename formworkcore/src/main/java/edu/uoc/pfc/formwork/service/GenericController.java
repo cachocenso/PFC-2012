@@ -53,12 +53,6 @@ public abstract class GenericController implements IController {
 			
 			// Insertamos todo el formulario para las validaciones globales
 			ksession.execute(theForm);
-			
-			if (listaErrores.size() == 0) {
-				// Obtener el registro
-				
-				// Realizar la presenteción
-			}
 		}
 	}
 

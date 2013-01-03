@@ -24,7 +24,6 @@ import com.google.gson.Gson;
 
 import edu.uoc.pfc.formwork.infraestructura.ResponseJson.Resultado;
 import edu.uoc.pfc.formwork.infraestructura.annotation.Session;
-import edu.uoc.pfc.formwork.service.GenericController;
 import edu.uoc.pfc.formwork.service.IController;
 import edu.uoc.pfc.formwork.service.Mensaje;
 import edu.uoc.pfc.formwork.ui.Formulario;
@@ -32,16 +31,17 @@ import edu.uoc.pfc.formwork.ui.HTMLRenderer;
 import edu.uoc.pfc.formwork.ui.IRenderer;
 import edu.uoc.pfc.formwork.ui.Partida;
 import edu.uoc.pfc.formwork.ui.event.FormworkEvent;
+import edu.uoc.pfc.formwork.xml.TipoFW;
 import edu.uoc.pfc.formwork.xml.TipoFormulario;
 import edu.uoc.pfc.formwork.xml.XMLLoader;
 
 /**
- * Servlet central del framework. Recibe y trata todas las peticiones,
- * AJAX o de carga de recursos, que se le hagan desde el cliente.
+ * Servlet central del framework. Recibe y trata todas las peticiones, AJAX o de
+ * carga de recursos, que se le hagan desde el cliente.
  * 
  * 
  * @author Alberto Díaz en 05/12/2012
- *
+ * 
  */
 @SuppressWarnings("serial")
 public class FormworkServlet extends HttpServlet {
@@ -100,8 +100,8 @@ public class FormworkServlet extends HttpServlet {
 	}
 
 	/**
-	 * Este método implementa el caso de uso Fire business rules.
-	 * Se ejecutan las reglas de negocio.
+	 * Este método implementa el caso de uso Fire business rules. Se ejecutan
+	 * las reglas de negocio.
 	 * 
 	 * @param req
 	 * @param controller
@@ -110,14 +110,14 @@ public class FormworkServlet extends HttpServlet {
 	 */
 	private void fireBusinessRules(HttpServletRequest req) {
 		HttpSession session = req.getSession();
-		
+
 		IController controller = (IController) session
 				.getAttribute(Attributes.FWCONTROLLER);
-		
+
 		if (controller != null) {
 			FormworkEvent event = new FormworkEvent();
 			Formulario formulario = (Formulario) session
-					.getAttribute(Attributes.FWCOMPONENTS);		
+					.getAttribute(Attributes.FWCOMPONENTS);
 			Partida<?> partida = formulario.getPartida(req.getParameter("id"));
 			event.setTarget(partida);
 			event.setOldValue(partida.getValue());
@@ -127,8 +127,8 @@ public class FormworkServlet extends HttpServlet {
 	}
 
 	/**
-	 * Este método implementa el caso de uso Render response. Se recoge
-	 * el resultado de la ejecución de las reglas de negocio y se envía la
+	 * Este método implementa el caso de uso Render response. Se recoge el
+	 * resultado de la ejecución de las reglas de negocio y se envía la
 	 * respuesta al cliente en el formato apropiado.
 	 * 
 	 * @param req
@@ -139,7 +139,7 @@ public class FormworkServlet extends HttpServlet {
 	private void renderResponse(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
 		HttpSession session = req.getSession();
-		
+
 		// Recojo la lista de los posibles errores.
 		List<Mensaje> errores = (List<Mensaje>) session
 				.getAttribute(Attributes.FWLISTAERRORES);
@@ -148,7 +148,7 @@ public class FormworkServlet extends HttpServlet {
 		String serializedResponse;
 
 		ResponseJson responseJson = new ResponseJson();
-		
+
 		if (errores.size() > 0) {
 			responseJson.setResultado(Resultado.ERROR);
 			responseJson.setResponseObjects(errores);
@@ -159,7 +159,7 @@ public class FormworkServlet extends HttpServlet {
 			responseJson.setResultado(Resultado.SUCCESS);
 			responseJson.setResponseObjects(partidasAfectadas);
 		}
-		
+
 		// Devolvemos la respuesta.
 		serializedResponse = gson.toJson(responseJson);
 		resp.setContentType("application/json");
@@ -180,8 +180,7 @@ public class FormworkServlet extends HttpServlet {
 		// si la respuesta no lleva el tipO MIME adecuado.
 		if (uri.endsWith(".css")) {
 			resp.setContentType("text/css");
-		}
-		else if (uri.endsWith(".js")){
+		} else if (uri.endsWith(".js")) {
 			resp.setContentType("text/javascript");
 		}
 		ServletOutputStream respStream = resp.getOutputStream();
@@ -191,8 +190,9 @@ public class FormworkServlet extends HttpServlet {
 
 	/**
 	 * Realiza la carga de la página fwp de la aplicación, la analiza y
-	 * construye el árbol de componentes. Instancia el controlador y después 
-	 * se renderiza a HTML y devuelve al cliente el árbol de componentes renderizado.
+	 * construye el árbol de componentes. Instancia el controlador y después se
+	 * renderiza a HTML y devuelve al cliente el árbol de componentes
+	 * renderizado.
 	 * 
 	 * @param req
 	 * @param resp
@@ -209,8 +209,9 @@ public class FormworkServlet extends HttpServlet {
 		try {
 			TipoFormulario tipoFormulario = XMLLoader.parseFile(
 					TipoFormulario.class, resource);
-			Formulario theForm = ComponentTreeFactory
-					.createComponentsTree(tipoFormulario);
+			Formulario theForm = ComponentTreeFactory.createComponentsTree(
+					tipoFormulario, (TipoFW) req.getServletContext()
+							.getAttribute(Attributes.FWCONFIG));
 
 			HttpSession session = req.getSession(true);
 			session.setAttribute(Attributes.FWCOMPONENTS, theForm);
@@ -232,7 +233,8 @@ public class FormworkServlet extends HttpServlet {
 	}
 
 	/**
-	 * Se reañiza el renderizado del árbol de componentes a HTML
+	 * Se realiza el renderizado del árbol de componentes a HTML
+	 * 
 	 * @param resp
 	 * @param theForm
 	 * @throws IOException
@@ -274,8 +276,11 @@ public class FormworkServlet extends HttpServlet {
 	}
 
 	/**
-	 * Busca en la clase controller recibida como parámetro un attributo con la anotación
-	 * @see Session. Si está presente, le inyecta la sesión session que se recibe como parámetro.
+	 * Busca en la clase controller recibida como parámetro un attributo con la
+	 * anotación
+	 * 
+	 * @see Session. Si está presente, le inyecta la sesión session que se
+	 *      recibe como parámetro.
 	 * 
 	 * @param session
 	 * @param controller
@@ -283,8 +288,7 @@ public class FormworkServlet extends HttpServlet {
 	 */
 	private void injectSession(HttpSession session, IController controller)
 			throws IllegalAccessException {
-		
-		
+
 		List<Field> fields = getAllFields(controller.getClass());
 
 		for (Field field : fields) {
@@ -297,22 +301,21 @@ public class FormworkServlet extends HttpServlet {
 	}
 
 	/**
-	 * Mediante este sencillo método recursivo, devolvemos todos
-	 * los atributos de la clase recibida como parámetro y de todas
-	 * sus superclases.
+	 * Mediante este sencillo método recursivo, devolvemos todos los atributos
+	 * de la clase recibida como parámetro y de todas sus superclases.
 	 * 
 	 * @param type
 	 * @return la lista de atributos de la clase.
 	 */
 	public List<Field> getAllFields(Class<?> type) {
 		List<Field> fields = new ArrayList<Field>();
-		
-	    if (type.getSuperclass() != null) {
-	        fields.addAll(getAllFields(type.getSuperclass()));
-	    }
-	    
-	    fields.addAll(Arrays.asList(type.getDeclaredFields()));
-	    return fields;
+
+		if (type.getSuperclass() != null) {
+			fields.addAll(getAllFields(type.getSuperclass()));
+		}
+
+		fields.addAll(Arrays.asList(type.getDeclaredFields()));
+		return fields;
 	}
-	
+
 }
