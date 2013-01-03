@@ -61,6 +61,7 @@ public abstract class GenericController implements IController {
 	/**
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	protected List<Mensaje> getListaMensajes() {
 		List<Mensaje> listaErrores = (List<Mensaje>) session
 				.getAttribute(Attributes.FWLISTAERRORES);
