@@ -73,11 +73,18 @@ $(document).ready(function() {
 						var reg = result.responseObjects[0];
 						
 						if ($("#firmarEnviar") != null) {
-							alert("A firmar");
+							alert("A firmar:\n" + reg);
 						}
-						else {
-							alert("A presentar")
-						}
+						
+						$.get("dummypres", function(result) {
+							if (result == "SUCCESS") {
+								alert("Presentación correcta");
+							}
+							else {
+								alert("Error en la presentación");
+							}
+						});
+						
 				}
 			}
 		});

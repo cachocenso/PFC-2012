@@ -14,7 +14,8 @@ public class DummyPresentationServlet extends HttpServlet {
 	protected void service(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		
-		if (Math.random() > 0.5) {
+		resp.setContentType("text/plain");
+		if (Math.random() > 0.3) {
 			resp.getWriter().print("SUCCESS");
 		}
 		else {
