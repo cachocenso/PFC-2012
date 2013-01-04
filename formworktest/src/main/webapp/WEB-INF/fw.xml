@@ -8,6 +8,6 @@
 	
 	<presentation>
 		<signed>true</signed>
-		<url>http://localhost:8080/dummypres</url>
+		<url>dummypres</url>
 	</presentation>
 </fw>

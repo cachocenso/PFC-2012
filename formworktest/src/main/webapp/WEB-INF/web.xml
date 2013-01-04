@@ -22,6 +22,18 @@
 		<servlet-name>FormworkServlet</servlet-name>
 		<url-pattern>/au/*</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<description></description>
+		<display-name>DummyPresentationServlet</display-name>
+		<servlet-name>DummyPresentationServlet</servlet-name>
+		<servlet-class>edu.uoc.pfc.formworktest.servlet.DummyPresentationServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DummyPresentationServlet</servlet-name>
+		<url-pattern>/dummypres</url-pattern>
+	</servlet-mapping>
+	
 	<listener>
 		<description>Inicio de la aplicación</description>
 		<listener-class>edu.uoc.pfc.formwork.infraestructura.FormworkListener</listener-class>
