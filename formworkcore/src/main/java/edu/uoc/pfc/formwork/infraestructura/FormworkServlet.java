@@ -76,15 +76,53 @@ public class FormworkServlet extends HttpServlet {
 
 		String uri = req.getRequestURI();
 
-		int index = uri.indexOf("~/");
-		if (index != -1) {
+		if (uri.indexOf("~/") != -1) {
 			// Se está solicitando un recurso
-			processResourceRequest(uri.substring(index + 1), resp);
-		} else {
+			processResourceRequest(uri.substring(uri.indexOf("~/") + 1), resp);
+		} else if (uri.indexOf("update") != -1) {
 			// Se trata de una petición de actualización AJAX de la aplicación.
 			processAjaxRequests(req, resp);
+		} else if (uri.indexOf("submit") != -1) {
+			// Se trata de una petición de presentación de la declaracion.
+			processSubmitRequest(req, resp);
 		}
 
+	}
+
+	/**
+	 * Procesa una petición de submit del formulario.
+	 * 
+	 * @param req
+	 * @param resp
+	 * @throws IOException
+	 */
+	private void processSubmitRequest(HttpServletRequest req,
+			HttpServletResponse resp) throws IOException {
+		HttpSession session = req.getSession();
+
+		IController controller = (IController) session
+				.getAttribute(Attributes.FWCONTROLLER);
+
+		controller.onPresentar();
+
+		// Recojo la lista de los posibles errores.
+		@SuppressWarnings("unchecked")
+		List<Mensaje> errores = (List<Mensaje>) session
+				.getAttribute(Attributes.FWLISTAERRORES);
+		
+		ResponseJson json = new ResponseJson();
+		if (errores.size() == 0) {			
+			json.setResultado(Resultado.SUCCESS);
+			json.setResponseObjects(Arrays.asList(controller.getRegistro()));
+		}
+		else {
+			
+		}
+		
+		// Devolvemos la respuesta.
+		String serializedResponse = new Gson().toJson(json);
+		resp.setContentType("application/json");
+		resp.getWriter().print(serializedResponse);		
 	}
 
 	/**
@@ -167,6 +205,8 @@ public class FormworkServlet extends HttpServlet {
 	}
 
 	/**
+	 * Procesa una petición de carga de recursos.
+	 * 
 	 * @param uri
 	 * @param resp
 	 * @throws IOException

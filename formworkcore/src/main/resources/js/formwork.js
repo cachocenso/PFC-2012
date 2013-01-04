@@ -39,7 +39,6 @@ $(document).ready(function() {
 								 buttonImage: "au/~/img/calendar.gif",
 								 buttonImageOnly: true,
 								 buttonText: "Pulse para mostrar el calendario",
-								 dateFormat: "dd/mm/yy",
 								 appendText: "(dd/mm/aaaa)"});
 		
 		$("[dinero]").format({type:'decimal',precision: {parteEntera:15,parteDecimal:2},autofix:false});
@@ -47,9 +46,44 @@ $(document).ready(function() {
 	});
 
 	// Esteblezco manejador para el evento onClick del botón de enviar
-	$("button").click(function() {
-		alert("Presentado");
+	$("button#firmarEnviar, button#enviar").click(function() {
+		$.ajax({
+			url : "au/submit",
+			type : "post",
+			dataType : "json",
+			data : {
+				"id" : this.id				 
+			},
+			success : function(result) {
+				if (result.resultado == "ERROR") {
+					$.each(result.responseObjects, function(j, error) {
+						var partida = "#" + error.idPartida;
+
+						$(partida).tooltip({
+							content : error.mensaje,
+							items : "input",
+							tooltipClass : "ui-state-error",
+							show : true
+						});
+
+						$(partida).tooltip("open");
+
+					});
+				} else if (result.resultado == "SUCCESS") {
+						var reg = result.responseObjects[0];
+						
+						if ($("#firmarEnviar") != null) {
+							alert("A firmar");
+						}
+						else {
+							alert("A presentar")
+						}
+				}
+			}
+		});
 	});
+	
+	
 	// Establezco un manejador para los eventos 
 	// onChange de los elementos input
 	$("input,select").change(function() {

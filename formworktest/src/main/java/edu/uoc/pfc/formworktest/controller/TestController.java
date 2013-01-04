@@ -76,13 +76,4 @@ public class TestController extends GenericController {
 		logger.info("Después de aplicar las reglas: " + partida.getValue());
 	}
 
-
-	/* (non-Javadoc)
-	 * @see edu.uoc.pfc.formwork.service.IController#prepararRegistro()
-	 */
-	public String prepararRegistro() {
-		// TODO Auto-generated method stub
-		return "";
-	}
-
 }
