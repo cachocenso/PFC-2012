@@ -77,11 +77,11 @@ $(document).ready(function() {
 						}
 						
 						$.get("dummypres", function(result) {
-							if (result == "SUCCESS") {
-								alert("Presentación correcta");
+							if (result == "ERROR") {
+								alert("ERROR: No se pudo completar la presentación");
 							}
 							else {
-								alert("Error en la presentación");
+								alert("Presentación realizada con éxito:\nNúmero de justificante: " + result);
 							}
 						});
 						
