@@ -17,12 +17,14 @@ public class DummyPresentationServlet extends HttpServlet {
 		
 		resp.setContentType("text/plain");
 		if (Math.random() > 0.3) {
-			// Simulamos una presentación correcta.
-			// Creamos un número de justificante para la declaración
+			// Simulamos una presentaci√≥n correcta.
+			// Creamos un n√∫mero de justificante para la declaraci√≥n
 			// presentada.
 			Date now = new Date();
 			
-			resp.getWriter().print(String.format("666%d", now.getTime()));
+			String sNow = Long.toString(now.getTime());
+			
+			resp.getWriter().print(String.format("666%s", sNow.substring(sNow.length() - 10)));
 		}
 		else {
 			resp.getWriter().print("ERROR");

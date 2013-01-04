@@ -282,6 +282,7 @@ public class FormworkServlet extends HttpServlet {
 	private void doRender(HttpServletResponse resp, Formulario theForm)
 			throws IOException {
 		IRenderer renderer = new HTMLRenderer();
+		resp.setCharacterEncoding("UTF-8");
 		Writer writer = resp.getWriter();
 
 		renderer.render(theForm, writer);

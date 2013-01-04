@@ -78,7 +78,7 @@ $(document).ready(function() {
 						
 						$.get("dummypres", function(result) {
 							if (result == "ERROR") {
-								alert("ERROR: No se pudo completar la presentación");
+								alert("ERROR: Se produjo un error al presentar la declaración");
 							}
 							else {
 								alert("Presentación realizada con éxito:\nNúmero de justificante: " + result);

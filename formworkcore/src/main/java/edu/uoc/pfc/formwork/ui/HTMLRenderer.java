@@ -34,7 +34,9 @@ public class HTMLRenderer implements IRenderer {
 					"Se esperaba un objeto Formulario");
 		}
 
+		
 		Configuration configuration = new Configuration();
+		configuration.setDefaultEncoding("UTF-8");
 		configuration.setClassForTemplateLoading(getClass(), "/");
 
 		try {
