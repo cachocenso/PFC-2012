@@ -72,11 +72,20 @@ $(document).ready(function() {
 				} else if (result.resultado == "SUCCESS") {
 						var reg = result.responseObjects[0];
 						
+						var firmado;
 						if ($("#firmarEnviar") != null) {
-							alert("A firmar:\n" + reg);
+							
+							firmado = firmar(reg);
+							if (firmado == "no soportado") {
+								alert("Firma no soportada para esta navegador");
+								return;
+							}
+						}
+						else {
+							firmado = original;
 						}
 						
-						$.get("dummypres", function(result) {
+						$.get("dummypres", firmado, function(result) {
 							if (result == "ERROR") {
 								alert("ERROR: Se produjo un error al presentar la declaración");
 							}
@@ -84,7 +93,6 @@ $(document).ready(function() {
 								alert("Presentación realizada con éxito:\nNúmero de justificante: " + result);
 							}
 						});
-						
 				}
 			}
 		});
@@ -136,3 +144,41 @@ $(document).ready(function() {
 		});
 	});
 });
+
+
+
+// Firma con JavaScript. Sólo para FF y CH
+// Código obtenido del tutorial "Firmas Digitales muy Fácil con Firefox"
+// en la web de Adictos al Trabajo
+// http://www.adictosaltrabajo.com/tutoriales/tutoriales.php?pagina=FirmasFirefox
+
+function firmar(original) {
+	if (navigator.appName == "Microsoft Internet Explorer") {
+		// Implementar la firma digital con MS IE con CAPICOM
+		// TODO
+		return original;
+	} else if (navigator.appName == "Netscape" && navigator.vendor != "Google Inc."){
+		return firmarFirefox(original);
+	}
+	else {
+		return "no soportado";
+	}
+}
+
+function firmarFirefox(original) {
+	var firmado = window.crypto.signText(original, "ask");
+	if (firmado.substring(0, 5) == "error") {
+		alert("Su navegador no ha generado una firma valida");
+		return "";
+	} else if (firmado == "no generada") {
+		alert("No ha generado la firma.");
+		return "";
+	} else {
+		return firmado;
+	}
+} 
+
+
+
+
+
